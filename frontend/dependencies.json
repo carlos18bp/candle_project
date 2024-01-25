@@ -1,0 +1,76 @@
+{
+  "version": "0.0.0",
+  "name": "frontend",
+  "dependencies": {
+    "@headlessui/vue": {
+      "version": "1.7.17",
+      "resolved": "https://registry.npmjs.org/@headlessui/vue/-/vue-1.7.17.tgz",
+      "overridden": false
+    },
+    "@heroicons/vue": {
+      "version": "2.1.1",
+      "resolved": "https://registry.npmjs.org/@heroicons/vue/-/vue-2.1.1.tgz",
+      "overridden": false
+    },
+    "@tailwindcss/aspect-ratio": {
+      "version": "0.4.2",
+      "resolved": "https://registry.npmjs.org/@tailwindcss/aspect-ratio/-/aspect-ratio-0.4.2.tgz",
+      "overridden": false
+    },
+    "@tailwindcss/forms": {
+      "version": "0.5.7",
+      "resolved": "https://registry.npmjs.org/@tailwindcss/forms/-/forms-0.5.7.tgz",
+      "overridden": false
+    },
+    "@tailwindcss/typography": {
+      "version": "0.5.10",
+      "resolved": "https://registry.npmjs.org/@tailwindcss/typography/-/typography-0.5.10.tgz",
+      "overridden": false
+    },
+    "@vitejs/plugin-vue": {
+      "version": "4.6.2",
+      "resolved": "https://registry.npmjs.org/@vitejs/plugin-vue/-/plugin-vue-4.6.2.tgz",
+      "overridden": false
+    },
+    "autoprefixer": {
+      "version": "10.4.17",
+      "resolved": "https://registry.npmjs.org/autoprefixer/-/autoprefixer-10.4.17.tgz",
+      "overridden": false
+    },
+    "axios": {
+      "version": "1.6.5",
+      "resolved": "https://registry.npmjs.org/axios/-/axios-1.6.5.tgz",
+      "overridden": false
+    },
+    "pinia": {
+      "version": "2.1.7",
+      "resolved": "https://registry.npmjs.org/pinia/-/pinia-2.1.7.tgz",
+      "overridden": false
+    },
+    "postcss": {
+      "version": "8.4.33",
+      "resolved": "https://registry.npmjs.org/postcss/-/postcss-8.4.33.tgz",
+      "overridden": false
+    },
+    "tailwindcss": {
+      "version": "3.4.1",
+      "resolved": "https://registry.npmjs.org/tailwindcss/-/tailwindcss-3.4.1.tgz",
+      "overridden": false
+    },
+    "vite": {
+      "version": "5.0.12",
+      "resolved": "https://registry.npmjs.org/vite/-/vite-5.0.12.tgz",
+      "overridden": false
+    },
+    "vue-router": {
+      "version": "4.2.5",
+      "resolved": "https://registry.npmjs.org/vue-router/-/vue-router-4.2.5.tgz",
+      "overridden": false
+    },
+    "vue": {
+      "version": "3.4.15",
+      "resolved": "https://registry.npmjs.org/vue/-/vue-3.4.15.tgz",
+      "overridden": false
+    }
+  }
+}
