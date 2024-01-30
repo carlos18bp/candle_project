@@ -4,20 +4,20 @@
       <div class="flex flex-1">
         <div class="hidden lg:flex lg:gap-x-12">
           <a class="text-sm uppercase font-regular leading-6 text-black_p">
-            <RouterLink :to="{ name: 'list_products' }" 
-              class="btn btn-primary btn-lg test-list-customer-link">
+            <RouterLink :to="{ name: 'products' }" 
+              class="btn btn-primary btn-lg">
               Shop
             </RouterLink>
           </a>
           <a class="text-sm uppercase font-regular leading-6 text-black_p">
             <RouterLink :to="{ name: 'about_us' }" 
-              class="btn btn-primary btn-lg test-list-customer-link">
+              class="btn btn-primary btn-lg">
               About
             </RouterLink>
           </a>
           <a class="text-sm uppercase font-regular leading-6 text-black_p">
-            <RouterLink :to="{ name: 'list_blogs' }" 
-              class="btn btn-primary btn-lg test-list-customer-link">
+            <RouterLink :to="{ name: 'blogs' }" 
+              class="btn btn-primary btn-lg">
               Blog
             </RouterLink> 
           </a>

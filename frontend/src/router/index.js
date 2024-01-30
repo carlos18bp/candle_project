@@ -9,23 +9,23 @@ routes: [
         component: () => import('@/views/Home.vue')
     },
     {
-        path: '/detail_blog/:blog',
-        name: 'detail_blog',
+        path: '/blog/:blog_id',
+        name: 'blog',
         component: () => import('@/views/blog/Detail.vue')
     },
     {
-        path: '/list_blogs',
-        name: 'list_blogs',
+        path: '/blogs',
+        name: 'blogs',
         component: () => import('@/views/blog/List.vue')
     },
     {
-        path: '/detail_product/:product',
-        name: 'detail_product',
+        path: '/product/:product_id',
+        name: 'product',
         component: () => import('@/views/product/Detail.vue')
     },
     {
-        path: '/list_products',
-        name: 'list_products',
+        path: '/products',
+        name: 'products',
         component: () => import('@/views/product/List.vue')
     },
     {

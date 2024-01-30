@@ -1,106 +1,37 @@
 <template>  
     <Header></Header>
-    <div class="relative isolate px-6 lg:px-8">
-        <div class="bg-white py-24 sm:py-32">
-            <div class="mx-auto max-w-7xl px-6 lg:px-8">
-            <div class="mx-auto max-w-2xl space-y-16 divide-y divide-gray-100 lg:mx-0 lg:max-w-none">
-                <div class="grid grid-cols-1 gap-x-8 gap-y-10 lg:grid-cols-3">
-                <div>
-                    <h2 class="text-3xl font-bold tracking-tight text-gray-900">Get in touch</h2>
-                    <p class="mt-4 leading-7 text-gray-600">Quam nunc nunc eu sed. Sed rhoncus quis ultricies ac pellentesque.</p>
-                </div>
-                <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:col-span-2 lg:gap-8">
-                    <div class="rounded-2xl bg-gray-50 p-10">
-                    <h3 class="text-base font-semibold leading-7 text-gray-900">Collaborate</h3>
-                    <dl class="mt-3 space-y-1 text-sm leading-6 text-gray-600">
-                        <div>
-                        <dt class="sr-only">Email</dt>
-                        <dd><a class="font-semibold text-indigo-600" href="mailto:collaborate@example.com">collaborate@example.com</a></dd>
-                        </div>
-                        <div class="mt-1">
-                        <dt class="sr-only">Phone number</dt>
-                        <dd>+1 (555) 905-2345</dd>
-                        </div>
-                    </dl>
-                    </div>
-                    <div class="rounded-2xl bg-gray-50 p-10">
-                    <h3 class="text-base font-semibold leading-7 text-gray-900">Press</h3>
-                    <dl class="mt-3 space-y-1 text-sm leading-6 text-gray-600">
-                        <div>
-                        <dt class="sr-only">Email</dt>
-                        <dd><a class="font-semibold text-indigo-600" href="mailto:press@example.com">press@example.com</a></dd>
-                        </div>
-                        <div class="mt-1">
-                        <dt class="sr-only">Phone number</dt>
-                        <dd>+1 (555) 905-3456</dd>
-                        </div>
-                    </dl>
-                    </div>
-                    <div class="rounded-2xl bg-gray-50 p-10">
-                    <h3 class="text-base font-semibold leading-7 text-gray-900">Join our team</h3>
-                    <dl class="mt-3 space-y-1 text-sm leading-6 text-gray-600">
-                        <div>
-                        <dt class="sr-only">Email</dt>
-                        <dd><a class="font-semibold text-indigo-600" href="mailto:careers@example.com">careers@example.com</a></dd>
-                        </div>
-                        <div class="mt-1">
-                        <dt class="sr-only">Phone number</dt>
-                        <dd>+1 (555) 905-4567</dd>
-                        </div>
-                    </dl>
-                    </div>
-                    <div class="rounded-2xl bg-gray-50 p-10">
-                    <h3 class="text-base font-semibold leading-7 text-gray-900">Say hello</h3>
-                    <dl class="mt-3 space-y-1 text-sm leading-6 text-gray-600">
-                        <div>
-                        <dt class="sr-only">Email</dt>
-                        <dd><a class="font-semibold text-indigo-600" href="mailto:hello@example.com">hello@example.com</a></dd>
-                        </div>
-                        <div class="mt-1">
-                        <dt class="sr-only">Phone number</dt>
-                        <dd>+1 (555) 905-5678</dd>
-                        </div>
-                    </dl>
-                    </div>
-                </div>
-                </div>
-                <div class="grid grid-cols-1 gap-x-8 gap-y-10 pt-16 lg:grid-cols-3">
-                <div>
-                    <h2 class="text-3xl font-bold tracking-tight text-gray-900">Locations</h2>
-                    <p class="mt-4 leading-7 text-gray-600">Consequat sunt cillum cillum elit sint. Qui occaecat nisi in ipsum commodo.</p>
-                </div>
-                <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:col-span-2 lg:gap-8">
-                    <div class="rounded-2xl bg-gray-50 p-10">
-                    <h3 class="text-base font-semibold leading-7 text-gray-900">Los Angeles</h3>
-                    <address class="mt-3 space-y-1 text-sm not-italic leading-6 text-gray-600">
-                        <p>4556 Brendan Ferry</p>
-                        <p>Los Angeles, CA 90210</p>
-                    </address>
-                    </div>
-                    <div class="rounded-2xl bg-gray-50 p-10">
-                    <h3 class="text-base font-semibold leading-7 text-gray-900">New York</h3>
-                    <address class="mt-3 space-y-1 text-sm not-italic leading-6 text-gray-600">
-                        <p>886 Walter Street</p>
-                        <p>New York, NY 12345</p>
-                    </address>
-                    </div>
-                    <div class="rounded-2xl bg-gray-50 p-10">
-                    <h3 class="text-base font-semibold leading-7 text-gray-900">Toronto</h3>
-                    <address class="mt-3 space-y-1 text-sm not-italic leading-6 text-gray-600">
-                        <p>7363 Cynthia Pass</p>
-                        <p>Toronto, ON N3Y 4H8</p>
-                    </address>
-                    </div>
-                    <div class="rounded-2xl bg-gray-50 p-10">
-                    <h3 class="text-base font-semibold leading-7 text-gray-900">Chicago</h3>
-                    <address class="mt-3 space-y-1 text-sm not-italic leading-6 text-gray-600">
-                        <p>726 Mavis Island</p>
-                        <p>Chicago, IL 60601</p>
-                    </address>
-                    </div>
-                </div>
-                </div>
+    <div class="mx-auto relative flex flex-col max-w-7xl px-8">
+        <img src="@/assets/images/contact/banner_1.jpg" class="w-full h-full">
+        <div class="rounded-3xl absolute bg-white flex flex-col w-1/4 p-8 top-28 left-28">
+            <p class="font-bold pb-8">Get In Touch</p>
+            <p class="font-bold pb-6">Contact</p>
+            <div class="flex">
+                <img src="@/assets/images/icons/phone_call.png" class="size-6">
+                <p class="pl-2 pb-4">+1 (252) 591-6930</p>
             </div>
+            <div class="flex">
+                <img src="@/assets/images/icons/sharp_email.png" class="size-6">
+                <p class="pl-2 pb-4">info@hello.com</p>
+            </div>
+            <div class="flex">
+                <img src="@/assets/images/icons/location.png" class="size-6">
+                <p class="pl-2 pb-4">Charlotte | NC-SC</p>
+            </div>
+            <!-- Map Container -->
+            <div class="w-full h-40 relative">
+                <GoogleMap
+                api-key="AIzaSyD7cf5pD4u32w9k2zEnjq19nd8WlGmm-ls"
+                class="h-full"
+                :center="center"
+                :zoom="15"
+                >
+                <Marker :options="{ position: center }" />
+                </GoogleMap>
+            </div>
+            <div class="flex justify-between pt-8">
+                <img src="@/assets/images/icons/social_media/facebook.png" class="size-9">
+                <img src="@/assets/images/icons/social_media/instagram.png" class="size-9">
+                <img src="@/assets/images/icons/social_media/twitter.png" class="size-9">
             </div>
         </div>
     </div>
@@ -108,7 +39,9 @@
 </template>
 
 <script setup>
+    import { GoogleMap, Marker } from 'vue3-google-map';
     import Header from "@/components/layouts/Header.vue";
     import Footer from "@/components/layouts/Footer.vue";
 
+    const center = { lat: 35.2270900, lng: -80.8431300 }
 </script>

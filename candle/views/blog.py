@@ -14,5 +14,5 @@ def index(request):
     :rtype: django.http.JsonResponse
     """
     blogs = Blog.objects.all().order_by('-id')
-    
+
     return JsonResponse(blog_serializer(blogs), safe=False)

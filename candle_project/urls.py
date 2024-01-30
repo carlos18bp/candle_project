@@ -20,6 +20,6 @@ from candle.views import blog, product
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('list_blogs/', blog.index, name='list_products'),
-    path('list_products/', product.index, name='list_products'),     
+    path('blogs/', blog.index, name='products'),
+    path('products/', product.index, name='products'),     
 ]
