@@ -29,7 +29,7 @@ export const useBlogStore = defineStore("blog", {
     async fetchBlogsData() {
       if(this.areUpdateBlogs) return;
 
-      let jsonData = await get_request('list_blogs/');
+      let jsonData = await get_request('blogs/');
 
       if (jsonData && typeof jsonData === 'string') {
         try {

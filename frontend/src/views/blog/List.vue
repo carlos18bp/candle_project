@@ -1,13 +1,135 @@
 <template>  
     <Header></Header>
-    <div class="relative isolate px-6 pt-14 lg:px-8">
-        BODY LIST BLOGS
+    <div class="mx-auto flex flex-col max-w-7xl px-8">
+        <div class="flex pb-12">
+            <div class="w-1/2">
+                <img src="@/assets/images/home/banner_1.jpg" class="w-full h-96">
+            </div>
+            <div class="w-1/2 flex flex-col justify-center px-8">
+                <p class="text-gray-400 uppercase pb-2">{{ firstBlog.category }}</p>
+                <p class="pb-3">{{ firstBlog.title }}</p>
+                <p>{{firstBlog.brief_description }}</p>
+                <div class="flex pt-4">
+                    <img src="@/assets/images/home/banner_1.jpg" class="rounded-full size-14">
+                    <div class="pl-3">
+                        <p>{{ firstBlog.owner_full_name }}</p>
+                        <p>{{firstBlog.publication_date }}</p>
+                    </div>                    
+                </div>
+            </div>
+        </div>
+
+        <div>
+            <div class="grid grid-cols-3 gap-3 pb-8">
+                <BlogPresentation
+                    v-for="blog in paginatedBlogs"
+                    :blog="blog"
+                ></BlogPresentation>
+            </div>
+            <nav class="flex items-center justify-between border-t border-gray-200 px-4 sm:px-0">
+                <!-- Previous page button -->
+                <a
+                    href="#"
+                    class="inline-flex items-center border-t-2 border-transparent pr-1 pt-4 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700"
+                    @click="goToPage(currentPage - 1)"
+                    :disabled="currentPage === 1"
+                >
+                    <ArrowLongLeftIcon class="mr-3 h-5 w-5 text-gray-400" aria-hidden="true" />
+                    Previous
+                </a>
+
+                <!-- Show page numbers -->
+                <div>
+                    <template v-for="page in totalPages" :key="page">
+                        <a
+                        href="#"                
+                        class="inline-flex items-center border-t-2 border-transparent px-4 pt-4 text-sm font-medium"
+                        :class="{ 'border-indigo-500 text-indigo-600': currentPage === page, 'text-gray-500 hover:text-gray-700 hover:border-gray-300': currentPage !== page }"
+                        @click="goToPage(page)"
+                        >
+                        {{ page }}
+                        </a>
+                    </template>
+                </div>
+
+                <!-- Next page button -->
+                <a
+                    href="#"
+                    class="inline-flex items-center border-t-2 border-transparent pl-1 pt-4 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700"
+                    @click="goToPage(currentPage + 1)"
+                    :disabled="currentPage === totalPages"
+                >
+                    Next
+                    <ArrowLongRightIcon class="ml-3 h-5 w-5 text-gray-400" aria-hidden="true" />
+                </a>
+            </nav>
+        </div>
     </div>
     <Footer></Footer>
 </template>
 
 <script setup>
+    import { computed, reactive, ref, onMounted,  } from 'vue';
     import Header from "@/components/layouts/Header.vue";
     import Footer from "@/components/layouts/Footer.vue";
+    import { useBlogStore } from '@/stores/blog';
+    import BlogPresentation from "@/components/blog/BlogPresentation.vue";
+    import { ArrowLongLeftIcon, ArrowLongRightIcon } from '@heroicons/vue/20/solid';
 
+    const blogStore = useBlogStore();
+    const blogs = ref([]);
+    const firstBlog = reactive({}); 
+    const currentPage = ref(1);
+    const blogsPerPage = 6;
+    const isBlogsLoaded = ref(false);
+
+    onMounted(async () => fetchBlogs());
+
+    /**
+     * Fetch and update blogs data.
+     */
+    async function fetchBlogs() {
+        await blogStore.fetchBlogsData();
+        blogs.value = blogStore.blogs;
+        
+        isBlogsLoaded.value = true;
+
+        if (blogStore.blogs.length > 0) {
+            Object.assign(firstBlog, blogStore.blogs[0]);
+        }
+    }
+
+    // Calculate the total number of pages
+    const totalPages = computed(() => {
+        if (isBlogsLoaded.value) {
+        return Math.ceil(blogs.value.length / blogsPerPage);
+        }
+        return 0;
+    });
+
+    // Calculate the blogs to display on the current page
+    const paginatedBlogs = computed(() => {
+        if (isBlogsLoaded.value) {
+        const start = (currentPage.value - 1) * blogsPerPage;
+        const end = start + blogsPerPage;
+        return blogs.value.slice(start, end);
+        }
+        return [];
+    });
+
+    // Property to store the scroll position
+    const scrollPosition = ref(0);
+
+    // Function to go to a specific page
+    const goToPage = (page) => {
+        if (isBlogsLoaded.value && page >= 1 && page <= totalPages.value) {
+            // Save current scroll position
+            scrollPosition.value = window.scrollY;
+            currentPage.value = page;
+
+            setTimeout(() => {
+                window.scrollTo(0, scrollPosition.value);
+            }, 0);
+        }
+    };
 </script>

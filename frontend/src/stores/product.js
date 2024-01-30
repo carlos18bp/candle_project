@@ -29,7 +29,7 @@ export const useProductStore = defineStore("product", {
     async fetchProductsData() {
       if(this.areUpdateProducts) return;
 
-      let jsonData = await get_request('list_products/');
+      let jsonData = await get_request('products/');
       if (jsonData && typeof jsonData === 'string') {
         try {
           jsonData = JSON.parse(jsonData)
