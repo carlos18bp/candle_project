@@ -1,59 +1,46 @@
 <template>
-  <footer class="bg-white" aria-labelledby="footer-heading">
+  <footer class="bg-black_p" aria-labelledby="footer-heading">
     <h2 id="footer-heading" class="sr-only">Footer</h2>
     <div class="mx-auto max-w-7xl px-6 pb-8 pt-16 sm:pt-8 lg:px-8">
       <div class="xl:grid xl:grid-cols-3 xl:gap-8">
         <div class="space-y-8">
-          <img src="@/assets/images/logo.jpg" class="w-auto h-auto">
-          <p class="text-sm leading-6 text-gray-600">Making the world a better place through constructing elegant hierarchies.</p>
+          <img src="@/assets/images/logo.png" class="w-auto h-20">
+          <p class="text-sm leading-6 text-second_p font-regular">Making the world a better place through constructing elegant hierarchies.</p>
           <div class="flex space-x-6">
-            <a v-for="item in navigation.social" :key="item.name" :href="item.href" class="text-gray-400 hover:text-gray-500">
+            <a v-for="item in navigation.social" :key="item.name" :href="item.href" class="text-second_p hover:text-primary_p">
               <span class="sr-only">{{ item.name }}</span>
               <component :is="item.icon" class="h-6 w-6" aria-hidden="true" />
             </a>
           </div>
         </div>
         <div class="mt-16 grid grid-cols-2 gap-8 xl:col-span-2 xl:mt-0">
+         
           <div class="md:grid md:grid-cols-2 md:gap-8">
             <div>
-              <h3 class="text-sm font-semibold leading-6 text-gray-900">Solutions</h3>
-              <ul role="list" class="mt-6 space-y-4">
-                <li v-for="item in navigation.solutions" :key="item.name">
-                  <a :href="item.href" class="text-sm leading-6 text-gray-600 hover:text-gray-900">{{ item.name }}</a>
-                </li>
-              </ul>
-            </div>
-            <div class="mt-10 md:mt-0">
-              <h3 class="text-sm font-semibold leading-6 text-gray-900">Support</h3>
-              <ul role="list" class="mt-6 space-y-4">
-                <li v-for="item in navigation.support" :key="item.name">
-                  <a :href="item.href" class="text-sm leading-6 text-gray-600 hover:text-gray-900">{{ item.name }}</a>
-                </li>
-              </ul>
-            </div>
-          </div>
-          <div class="md:grid md:grid-cols-2 md:gap-8">
-            <div>
-              <h3 class="text-sm font-semibold leading-6 text-gray-900">Company</h3>
+              <h3 class="text-sm font-semibold leading-6 text-second_p">Company</h3>
               <ul role="list" class="mt-6 space-y-4">
                 <li v-for="item in navigation.company" :key="item.name">
-                  <a :href="item.href" class="text-sm leading-6 text-gray-600 hover:text-gray-900">{{ item.name }}</a>
+                  <a :href="item.href" class="text-sm font-regular leading-6 text-second_p hover:text-primary_p">{{ item.name }}</a>
                 </li>
               </ul>
             </div>
             <div class="mt-10 md:mt-0">
-              <h3 class="text-sm font-semibold leading-6 text-gray-900">Legal</h3>
+              <h3 class="text-sm font-semibold leading-6 text-second_p">Legal</h3>
               <ul role="list" class="mt-6 space-y-4">
                 <li v-for="item in navigation.legal" :key="item.name">
-                  <a :href="item.href" class="text-sm leading-6 text-gray-600 hover:text-gray-900">{{ item.name }}</a>
+                  <a :href="item.href" class="text-sm font-regular leading-6 text-second_p hover:text-primary_p">{{ item.name }}</a>
                 </li>
               </ul>
             </div>
           </div>
         </div>
       </div>
-      <div class="mt-16 border-t border-gray-900/10 pt-8 sm:mt-20 lg:mt-24">
-        <p class="text-xs leading-5 text-gray-500">&copy; 2020 Your Company, Inc. All rights reserved.</p>
+      <div class="mt-16 border-t border-gray_p pt-8 sm:mt-20 lg:mt-24 grid grid-cols-2 gap-4">
+        <p class="text-xs leading-5 text-second_p ">&copy; 2024 Senses Candles By Kate, Inc. All rights reserved.</p>
+        <div class="grid grid-cols-2 gap-2">
+          <p class="text-xs leading-5 text-second_p">&copy; Designed And Development By Páginas Webs Colombia.</p>
+          <img class="w-auto h-10" src="@/assets/images/logo_pwc.png" alt="Logo o icono o presentación de Páginas Webs Colombia Oficial.">
+        </div>
       </div>
     </div>
   </footer>
@@ -63,29 +50,16 @@
   import { defineComponent, h } from 'vue'
   
   const navigation = {
-    solutions: [
-    { name: 'Marketing', href: '#' },
-    { name: 'Analytics', href: '#' },
-    { name: 'Commerce', href: '#' },
-    { name: 'Insights', href: '#' },
-    ],
-    support: [
-    { name: 'Pricing', href: '#' },
-    { name: 'Documentation', href: '#' },
-    { name: 'Guides', href: '#' },
-    { name: 'API Status', href: '#' },
-    ],
     company: [
-    { name: 'About', href: '#' },
-    { name: 'Blog', href: '#' },
-    { name: 'Jobs', href: '#' },
-    { name: 'Press', href: '#' },
-    { name: 'Partners', href: '#' },
+    { name: 'SHOP', href: '#' },
+    { name: 'ABOUT', href: '#' },
+    { name: 'BLOG', href: '#' },
+    { name: 'CONTACT', href: '#' },
     ],
     legal: [
-    { name: 'Claim', href: '#' },
-    { name: 'Privacy', href: '#' },
-    { name: 'Terms', href: '#' },
+    { name: 'CLAIM', href: '#' },
+    { name: 'PRIVACY', href: '#' },
+    { name: 'TERMS', href: '#' },
     ],
     
     social: [
