@@ -6,10 +6,8 @@ class Review(models.Model):
     """
     UserProduct model.
 
-    :ivar rate: title product.
+    :ivar rate: rating by product.
     :vartype rate: int
-    :ivar title: title product.
-    :vartype title: str
     :ivar description: description product.
     :vartype description: str
     :ivar user: review by user.
@@ -29,4 +27,4 @@ class Review(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.title
+        return self.product.title

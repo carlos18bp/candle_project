@@ -4,7 +4,7 @@ import { get_request } from "./services/request_http";
 export const useReviewStore = defineStore("review", {
   state: () => ({
     reviews: [],
-    areUpdatereviews: false,
+    areUpdateReviews: false,
   }),
   getters: {
     /**
@@ -21,13 +21,13 @@ export const useReviewStore = defineStore("review", {
      * Fetch data from backend.
      */
     async init() {
-      if(!this.areUpdatereviews) this.fetchreviewsData();
+      if(!this.areUpdateReviews) this.fetchReviewsData();
     },
     /**
      * Fetch reviews from backend.
      */
     async fetchReviewsData() {
-      if(this.areUpdatereviews) return;
+      if(this.areUpdateReviews) return;
 
       let jsonData = await get_request('reviews/');
 
@@ -42,7 +42,7 @@ export const useReviewStore = defineStore("review", {
       
       this.reviews = jsonData ?? [];
       
-      this.areUpdatereviews = true;
+      this.areUpdateReviews = true;
     },
   }
 });
