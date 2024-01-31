@@ -1,0 +1,6 @@
+candle/__pycache__/
+candle/migrations/__pycache__/
+candle/models/__pycache__/
+candle/serializers/__pycache__/
+candle/views/__pycache__/
+candle_project/__pycache__/
