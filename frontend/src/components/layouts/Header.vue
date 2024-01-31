@@ -37,7 +37,7 @@
       <div class="flex flex-1 justify-end">
         <Menu as="div" class="relative inline-block text-left pr-4 uppercase">
             <div>
-                <MenuButton class="inline-flex w-full justify-center gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm uppercase font-medium text-black_p shadow-sm hover:bg-gray-50">
+                <MenuButton class="inline-flex w-full justify-center gap-x-1.5 rounded-md px-3 py-2 text-sm uppercase font-medium text-black_p">
                     Language 
                     <ChevronDownIcon class="-mr-1 h-5 w-5 text-black_p" aria-hidden="true" />
                 </MenuButton>
@@ -56,7 +56,7 @@
             </transition>
         </Menu>
           <RouterLink  :to="{ name: 'contact' }" 
-            type="button" class="rounded-full bg-white px-3.5 py-2 text-sm uppercase font-medium text-black_p shadow-sm ring-1 ring-inset ring-black_p hover:bg-gray-50">
+            type="button" class="rounded-full px-3.5 py-2 text-sm uppercase font-medium text-black_p hover:bg-black_p hover:text-second_p">
             Contact
           </RouterLink>
         </div>
