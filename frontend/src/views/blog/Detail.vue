@@ -1,26 +1,22 @@
 <template>  
     <Header></Header>
-    <div v-if="blog" class="mx-auto flex flex-col max-w-7xl px-8">
-        <div class="relative max-w-7xl flex pb-8">
-            <img       
-                v-if="blog && blog.image_url"
-                :src="`/api/${blog.image_url}`" 
-                class="object-cover w-full h-96">
-            <div class="rounded-2xl bg-white absolute bottom-0 left-0 p-8 pt-4 flex flex-col">           
-                <p>{{ blog.title}}</p>
-                <div class="flex pt-3">
-                    <img       
-                        v-if="blog && blog.owner_image_url"
-                        :src="`/api/${blog.image_url}`"
-                        class="object-cover rounded-full size-14">
-                    <div class="pl-3">
-                        <p>{{ blog.owner_full_name }}</p>
-                        <p>{{ blog.publication_date }}</p>
-                    </div>                    
-                </div>
+    <div v-if="blog" class="mx-auto flex flex-col px-16">
+        <div class="relative flex pb-8">
+            <div class="w-full max-h-96 flex items-center justify-center">
+                <img       
+                    v-if="blog && blog.image_url"
+                    :src="`/api/${blog.image_url}`" 
+                    class="object-cover w-full h-full"
+                >
+            </div>
+
+            <div class=" bg-background_p absolute bottom-0 -left-px p-8 pt-4 flex flex-col">           
+                <h1 class="font-bold text-4xl tracking-wider">{{ blog.title}}</h1>
             </div>
         </div>
-        <p>{{ blog.description }}</p>
+        <div class="flex justify-center">
+            <p class="max-w-7xl font-regular text-xl tracking-wider">{{ blog.description }}</p>
+        </div>
     </div>
     <BlogCarousel
         :top="3"

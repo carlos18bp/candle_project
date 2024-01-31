@@ -1,7 +1,7 @@
 <template>  
-    <div v-if="topBlogs" class="mx-auto flex flex-col max-w-7xl px-8 pt-12">
-        <p class="font-bold uppercase pb-6">Latest blogs</p>
-        <div class="flex justify-between">
+    <div v-if="topBlogs" class="mx-auto flex flex-col px-16 pt-12">
+        <h2 class="font-bold text-4xl uppercase">Latest blogs</h2>
+        <div class="grid grid-cols-3 gap-8 justify-between">
             <BlogPresentation
                 v-for="blog in topBlogs"
                 :blog="blog"

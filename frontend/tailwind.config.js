@@ -17,6 +17,7 @@ export default {
       colors: {
         black_p: '#0C0D12',
         gray_p: '#555659',
+        background_p: '#F9F5EA',
         cream_p: '#ECDFDB',
         shadow_home: '#7A6457',
         primary_p: '#CEAD95',

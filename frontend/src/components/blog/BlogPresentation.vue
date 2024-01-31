@@ -1,27 +1,19 @@
 <template>  
-    <div class="flex flex-col">
+    <div class="flex flex-col pt-16">
+      <div>
         <img       
           v-if="blog && blog.image_url"
           :src="`/api/${blog.image_url}`" 
-          class="rounded w-96 h-72 pb-4">
-        <p class="text-gray-400 uppercase pb-2">{{ blog.category }}</p>
+          class="object-cover w-full h-96 pb-4">
+      </div>
+        <h2 class="font-regular text-gray_p tracking-widest text-xl uppercase pb-2">{{ blog.category }}</h2>
         <RouterLink
           v-if="blog.id"       
           :to="{ name: 'blog', 
           params: { blog_id: blog.id } }" 
-          class="btn btn-primary btn-lg pb-3">
+          class="font-bold text-3xl tracking-wider pb-3">
               {{ blog.title }}
         </RouterLink> 
-        <div class="flex pt-3">
-            <img       
-              v-if="blog && blog.owner_image_url"
-              :src="`/api/${blog.image_url}`"
-              class="object-cover rounded-full size-14">
-            <div class="pl-3">
-                <p>{{ blog.owner_full_name }}</p>
-                <p>{{ blog.publication_date }}</p>
-            </div>                    
-        </div>
     </div>
 </template>
 

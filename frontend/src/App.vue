@@ -1,5 +1,7 @@
 <template>
-  <RouterView/>
+  <div class="bg-background_p">
+    <RouterView/>
+  </div>
 </template>
 
 <script setup>
