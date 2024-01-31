@@ -1,7 +1,6 @@
 from django.http import JsonResponse
 from candle.models import Product
 from candle.serializers.product_serializer import products_serializer
-import json
 
 def index(request):
     """

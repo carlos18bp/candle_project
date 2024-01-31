@@ -54,7 +54,7 @@
 
             <main class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                 <div class="flex items-baseline justify-between border-b border-gray-200 pb-6 pt-24">
-                <h1 class="text-4xl font-bold tracking-tight text-gray-900">New Arrivals</h1>
+                <h1 class="text-4xl font-bold tracking-tight text-gray-900">Filters</h1>
 
                 <div class="flex items-center">
                     <Menu as="div" class="relative inline-block text-left">
@@ -115,24 +115,26 @@
                     <!-- Product grid -->
                     <div class="lg:col-span-3">
                         <div class="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-8 lg:max-w-7xl lg:px-8">
-                            <h2 class="text-2xl font-bold tracking-tight text-gray-900">Customers also purchased</h2>
+                            <h2 class="text-2xl font-bold tracking-tight text-gray-900">Candles</h2>
 
                             <div class="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:gap-x-8">
                                 <div v-for="product in products" :key="product.id" class="group relative">
-                                <div class="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-80">
-                                    <img :src="product.imageSrc" :alt="product.imageAlt" class="h-full w-full object-cover object-center lg:h-full lg:w-full" />
+                                <div class="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-80 mb-4">
+                                    <img :src="`/api/${product.images[0].image_url}`" class="h-full w-full object-cover object-center lg:h-full lg:w-full" />
                                 </div>
                                 <div class="mt- flex justify-between">
                                     <div>
                                     <h3 class="text-sm text-gray-700">
-                                        <a :href="product.href">
-                                        <span aria-hidden="true" class="absolute inset-0" />
-                                        {{ product.name }}
-                                        </a>
+                                        <RouterLink
+                                            v-if="product.id"       
+                                            :to="{ name: 'product', 
+                                            params: { product_id: product.id } }">
+                                            <span aria-hidden="true" class="absolute inset-0" />
+                                            {{ product.title }}
+                                        </RouterLink>
                                     </h3>
-                                    <p class="mt-1 text-sm text-gray-500">{{ product.color }}</p>
                                     </div>
-                                    <p class="text-sm font-medium text-gray-900">{{ product.price }}</p>
+                                    <p class="text-sm font-medium text-gray-900">$ {{ product.price }}</p>
                                 </div>
                                 </div>
                             </div>
@@ -150,7 +152,7 @@
 <script setup>
     import Header from "@/components/layouts/Header.vue";
     import Footer from "@/components/layouts/Footer.vue";
-    import { ref } from 'vue'
+    import { onMounted, ref } from "vue";
     import {
     Dialog,
     DialogPanel,
@@ -164,8 +166,17 @@
     TransitionChild,
     TransitionRoot,
     } from '@headlessui/vue'
-    import { XMarkIcon } from '@heroicons/vue/24/outline'
-    import { ChevronDownIcon, FunnelIcon, MinusIcon, PlusIcon, Squares2X2Icon } from '@heroicons/vue/20/solid'
+    import { XMarkIcon } from '@heroicons/vue/24/outline';
+    import { ChevronDownIcon, FunnelIcon, MinusIcon, PlusIcon, Squares2X2Icon } from '@heroicons/vue/20/solid';
+    import { useProductStore } from '@/stores/product';
+
+    const productStore = useProductStore();
+    const products = ref([]); 
+
+    onMounted(async () => {
+        await productStore.fetchProductsData();
+        products.value = productStore.products;
+    });
 
     const sortOptions = [
     { name: 'Most Popular', href: '#', current: true },
@@ -214,35 +225,4 @@
     ]
 
     const mobileFiltersOpen = ref(false)
-
-    const products = [
-    {
-        id: 1,
-        name: 'Basic Tee',
-        href: '#',
-        imageSrc: 'https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg',
-        imageAlt: "Front of men's Basic Tee in black.",
-        price: '$35',
-        color: 'Black',
-    },
-    {
-        id: 1,
-        name: 'Basic Tee',
-        href: '#',
-        imageSrc: 'https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg',
-        imageAlt: "Front of men's Basic Tee in black.",
-        price: '$35',
-        color: 'Black',
-    },
-    {
-        id: 1,
-        name: 'Basic Tee',
-        href: '#',
-        imageSrc: 'https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg',
-        imageAlt: "Front of men's Basic Tee in black.",
-        price: '$35',
-        color: 'Black',
-    },
-    ]
-
 </script>
