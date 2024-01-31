@@ -24,7 +24,6 @@ class Review(models.Model):
             MaxValueValidator(5, message="The maximum value allowed is 5"),
         ]
     )
-    title = models.CharField(max_length=40)
     description = models.TextField()
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)

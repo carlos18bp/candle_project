@@ -16,28 +16,28 @@
                 <span class="font-special text-primary_p text-9xl">candle</span>
             </p>
             <div>
-                <button type="button" 
-                        class="inline-block font-regular rounded-full bg-black_p py-4 px-8 text-lg text-second_p shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-primary_p uppercase">
-                        Discover Products
-                </button>
+                <RouterLink :to="{ name: 'blogs' }" 
+                    class="inline-block font-regular rounded-full bg-black_p py-4 px-8 text-lg text-second_p shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-primary_p uppercase">
+                    Discover Products
+                </RouterLink>
             </div>
         </div>
     </div>
 
-
     <div class="mx-auto flex flex-col items-center justify-center max-w-7xl px-8 pb-12">
         <h2 class="uppercase pb-4 font-regular tracking-widest text_gray_p text-2xl">Trending</h2>
         <h2 class="pb-4 font-semibold text-4xl">Shop our pupular candle products</h2>
-        <ProductCarousel></ProductCarousel>
+        <ProductCarousel
+            :top="4"
+        ></ProductCarousel>
     </div>
-
 
     <div class="mx-auto relative flex flex-col items-center justify-center px-16 pb-12">
         <img src="@/assets/images/home/banner_2.jpg" class="w-full h-auto pb-8">
-        <button type="button" 
-                    class=" font-regular rounded-full bg-white py-4 px-16 text-xl text-black_p shadow-sm ring-1 ring-inset ring-primary_p hover:bg-black_p hover:text-second_p hover:ring-transparent uppercase">
-                Show more
-        </button>
+        <RouterLink :to="{ name: 'blogs' }" 
+              class="font-regular rounded-full bg-white py-4 px-16 text-xl text-black_p shadow-sm ring-1 ring-inset ring-primary_p hover:bg-black_p hover:text-second_p hover:ring-transparent uppercase">
+              Show more
+        </RouterLink> 
     </div>
 
     <div class="bg-cream_p py-20">
@@ -67,7 +67,6 @@
         </div>
     </div>
 
-
     <div class="mx-auto relative px-8 py-12 bg-primary_p">
         <div class="relative z-10">
             <img src="@/assets/images/home/banner_8.png" class="max-w-7xl mx-auto h-auto relative z-20">
@@ -93,7 +92,6 @@
 <script setup>
     import Header from "@/components/layouts/Header.vue";
     import Footer from "@/components/layouts/Footer.vue";
-    import ProductCarousel from "@/components/ProductCarousel.vue";
+    import ProductCarousel from "@/components/product/ProductCarousel.vue";
     import FAQS from "@/components/home/FAQS.vue";
-
 </script>

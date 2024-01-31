@@ -13,7 +13,6 @@
     </div>
 
     <!--Content Block-->
-
     <div class="relative h-96">
 
         <!--Content-->
@@ -35,7 +34,6 @@
     </div>
 
     <!--Content-->
-
     <div class="relative mt-20 p-20">
         <h2 class="font-bold text-2xl tracking-widest text-black_p">OUR PRODUCT</h2>
         <div class="relative grid grid-cols-3 gap-4 mt-16 items-center">
@@ -67,7 +65,6 @@
     </div>
 
     <!--Video Content-->
-
     <div class="relative p-20 flex justify-center">
         <img class="w-full" src="@/assets/images/aboutUs/videPic.jpg" alt="...">
     </div>
@@ -91,7 +88,6 @@
     </div>
 
     <!--Banner-->
-
     <div class="relative p-16 flex justify-center items-center bg-primary_p">
         <div class="inline-block">
             <h1 class="inline-block text-second_p tracking-wider"><span class="font-semibold text-4xl">Can safely enjoy your </span><span class="font-special text-5xl">candle</span></h1>
@@ -110,20 +106,15 @@
             <div class="-my-10">
                 <div v-for="(review, reviewIdx) in reviews" :key="review.id" class="flex space-x-4 text-sm text-gray-500">
                 <div class="flex-none py-10">
-                    <img :src="review.avatarSrc" alt="" class="h-10 w-10 rounded-full bg-gray_p" />
+                    <img :src="`/api/${review.user_image_url}`" class="h-10 w-10 rounded-full bg-gray_p" />
                 </div>
                 <div :class="[reviewIdx === 0 ? '' : 'border-t border-terciary_p', 'flex-1 py-10']">
-                    <h3 class="font-bold text-black_p">{{ review.author }}</h3>
-                    <p>
-                    <time class="font-regular" :datetime="review.datetime">{{ review.date }}</time>
-                    </p>
-
+                    <h3 class="font-bold text-black_p">{{ review.user_full_name }}</h3>
                     <div class="mt-4 flex items-center">
-                    <StarIcon v-for="rating in [0, 1, 2, 3, 4]" :key="rating" :class="[review.rating > rating ? 'text-primary_p' : 'text-gray_p', 'h-5 w-5 flex-shrink-0']" aria-hidden="true" />
+                    <StarIcon v-for="rating in [0, 1, 2, 3, 4]" :key="rating" :class="[review.rate > rating ? 'text-primary_p' : 'text-gray_p', 'h-5 w-5 flex-shrink-0']" aria-hidden="true" />
                     </div>
-                    <p class="sr-only">{{ review.rating }} out of 5 stars</p>
 
-                    <div class="prose prose-sm mt-4 max-w-none text-black_p font-medium" v-html="review.content" />
+                    <p>{{ review.title }}</p>
                 </div>
                 </div>
             </div>
@@ -134,36 +125,17 @@
 </template>
 
 <script setup>
+    import { onMounted, ref } from "vue";
     import Header from "@/components/layouts/Header.vue";
     import Footer from "@/components/layouts/Footer.vue";
+    import { useReviewStore } from '@/stores/review';
+    import { StarIcon } from '@heroicons/vue/20/solid';
 
-    import { StarIcon } from '@heroicons/vue/20/solid'
+    const reviewtStore = useReviewStore();
+    const reviews = ref([]);
 
-    const reviews = [
-        {
-            id: 1,
-            rating: 5,
-            content: `
-            <p>This icon pack is just what I need for my latest project. There's an icon for just about anything I could ever need. Love the playful look!</p>
-            `,
-            date: 'July 16, 2021',
-            datetime: '2021-07-16',
-            author: 'Emily Selman',
-            avatarSrc:
-            'https://images.unsplash.com/photo-1502685104226-ee32379fefbe?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=256&h=256&q=80',
-        },
-        {
-            id: 2,
-            rating: 5,
-            content: `
-            <p>Blown away by how polished this icon pack is. Everything looks so consistent and each SVG is optimized out of the box so I can use it directly with confidence. It would take me several hours to create a single icon this good, so it's a steal at this price.</p>
-            `,
-            date: 'July 12, 2021',
-            datetime: '2021-07-12',
-            author: 'Hector Gibbons',
-            avatarSrc:
-            'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=256&h=256&q=80',
-        },
-    ]
-
+    onMounted(async () => {
+        await reviewtStore.fetchReviewsData();
+        reviews.value = reviewtStore.reviews
+    });
 </script>

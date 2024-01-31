@@ -42,7 +42,7 @@ def _get_reviews(product_id):
             'title': review.title,
             'description': review.description,
             'user_full_name': review.user.full_name,
-            'user_birthday_date': review.user.birthday_date,
+            'user_birthday_date': review.user.birthday_date.strftime('%Y-%m-%d'),
             'user_email': review.user.email,
         }
         reviews_serialized.append(resource_data)
