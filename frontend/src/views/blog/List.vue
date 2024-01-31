@@ -1,38 +1,30 @@
 <template>  
     <Header></Header>
-    <div class="mx-auto flex flex-col max-w-7xl px-8">
+    <div class="mx-auto flex flex-col px-16">
         <div class="flex pb-12">
             <div class="w-1/2">
                 <img       
                     v-if="firstBlog && firstBlog.image_url"
                     :src="`/api/${firstBlog.image_url}`" 
-                    class="w-full h-96">
+                    class="w-full h-96 object-cover">
             </div>
             <div class="w-1/2 flex flex-col justify-center px-8">
-                <p class="text-gray-400 uppercase pb-2">{{ firstBlog.category }}</p>
-                <RouterLink
-                    v-if="firstBlog.id"       
-                    :to="{ name: 'blog', 
-                    params: { blog_id: firstBlog.id } }" 
-                    class="btn btn-primary btn-lg pb-3">
-                        {{ firstBlog.title }}
-                </RouterLink> 
-                <p>{{firstBlog.brief_description }}</p>
-                <div class="flex pt-4">
-                    <img       
-                        v-if="firstBlog && firstBlog.owner_image_url"
-                        :src="`/api/${firstBlog.image_url}`" 
-                        class="object-cover rounded-full size-14">
-                    <div class="pl-3">
-                        <p>{{ firstBlog.owner_full_name }}</p>
-                        <p>{{firstBlog.publication_date }}</p>
-                    </div>                    
-                </div>
+                <p class="font-regular tracking-widest text-xl text-gray_p uppercase pb-2">{{ firstBlog.category }}</p>
+                <h1 class="py-3">
+                    <RouterLink
+                        v-if="firstBlog.id"       
+                        :to="{ name: 'blog', 
+                        params: { blog_id: firstBlog.id } }" 
+                        class="font-bold text-5xl tracking-wider btn-lg">
+                            {{ firstBlog.title }}
+                    </RouterLink> 
+                </h1>
+                <p class="font-regular text-2xl line-clamp-3 tracking-wider pt-4">{{firstBlog.brief_description }}</p>
             </div>
         </div>
 
         <div>
-            <div class="grid grid-cols-3 gap-3 pb-8">
+            <div class="grid grid-cols-3 gap-12 pb-8">
                 <BlogPresentation
                     v-for="blog in paginatedBlogs"
                     :blog="blog"
@@ -41,7 +33,6 @@
             <nav class="flex items-center justify-between border-t border-gray-200 px-4 sm:px-0">
                 <!-- Previous page button -->
                 <a
-                    href="#"
                     class="inline-flex items-center border-t-2 border-transparent pr-1 pt-4 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700"
                     @click="goToPage(currentPage - 1)"
                     :disabled="currentPage === 1"

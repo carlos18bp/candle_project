@@ -56,7 +56,7 @@
             </transition>
         </Menu>
           <RouterLink  :to="{ name: 'contact' }" 
-            type="button" class="rounded-full px-3.5 py-2 text-sm uppercase font-medium text-black_p hover:bg-black_p hover:text-second_p">
+            type="button" class="rounded-full px-3.5 py-2 text-sm uppercase font-medium text-black_p ring-1 ring-black_p hover:bg-black_p hover:text-second_p">
             Contact
           </RouterLink>
         </div>
