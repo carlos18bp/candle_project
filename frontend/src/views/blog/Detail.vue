@@ -2,11 +2,17 @@
     <Header></Header>
     <div v-if="blog" class="mx-auto flex flex-col max-w-7xl px-8">
         <div class="relative max-w-7xl flex pb-8">
-            <img src="@/assets/images/home/banner_1.jpg" class="w-full h-96">
-            <div class="bg-white absolute bottom-0 left-0 p-8 pt-4 flex flex-col">           
+            <img       
+                v-if="blog && blog.image_url"
+                :src="`/api/${blog.image_url}`" 
+                class="object-cover w-full h-96">
+            <div class="rounded-2xl bg-white absolute bottom-0 left-0 p-8 pt-4 flex flex-col">           
                 <p>{{ blog.title}}</p>
                 <div class="flex pt-3">
-                    <img src="@/assets/images/home/banner_1.jpg" class="rounded-full size-14">
+                    <img       
+                        v-if="blog && blog.owner_image_url"
+                        :src="`/api/${blog.image_url}`"
+                        class="object-cover rounded-full size-14">
                     <div class="pl-3">
                         <p>{{ blog.owner_full_name }}</p>
                         <p>{{ blog.publication_date }}</p>

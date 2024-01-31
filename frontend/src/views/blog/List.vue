@@ -3,14 +3,26 @@
     <div class="mx-auto flex flex-col max-w-7xl px-8">
         <div class="flex pb-12">
             <div class="w-1/2">
-                <img src="@/assets/images/home/banner_1.jpg" class="w-full h-96">
+                <img       
+                    v-if="firstBlog && firstBlog.image_url"
+                    :src="`/api/${firstBlog.image_url}`" 
+                    class="w-full h-96">
             </div>
             <div class="w-1/2 flex flex-col justify-center px-8">
                 <p class="text-gray-400 uppercase pb-2">{{ firstBlog.category }}</p>
-                <p class="pb-3">{{ firstBlog.title }}</p>
+                <RouterLink
+                    v-if="firstBlog.id"       
+                    :to="{ name: 'blog', 
+                    params: { blog_id: firstBlog.id } }" 
+                    class="btn btn-primary btn-lg pb-3">
+                        {{ firstBlog.title }}
+                </RouterLink> 
                 <p>{{firstBlog.brief_description }}</p>
                 <div class="flex pt-4">
-                    <img src="@/assets/images/home/banner_1.jpg" class="rounded-full size-14">
+                    <img       
+                        v-if="firstBlog && firstBlog.owner_image_url"
+                        :src="`/api/${firstBlog.image_url}`" 
+                        class="object-cover rounded-full size-14">
                     <div class="pl-3">
                         <p>{{ firstBlog.owner_full_name }}</p>
                         <p>{{firstBlog.publication_date }}</p>
@@ -72,6 +84,7 @@
     import { computed, reactive, ref, onMounted,  } from 'vue';
     import Header from "@/components/layouts/Header.vue";
     import Footer from "@/components/layouts/Footer.vue";
+    import { RouterLink } from 'vue-router';
     import { useBlogStore } from '@/stores/blog';
     import BlogPresentation from "@/components/blog/BlogPresentation.vue";
     import { ArrowLongLeftIcon, ArrowLongRightIcon } from '@heroicons/vue/20/solid';
