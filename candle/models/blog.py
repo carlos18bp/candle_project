@@ -6,8 +6,6 @@ class Blog(models.Model):
 
     :ivar title: title blog.
     :vartype title: str
-    :ivar brief_description: brief_description blog.
-    :vartype brief_description: str
     :ivar description: description blog.
     :vartype description: str
     :ivar category: category blog.
@@ -19,12 +17,9 @@ class Blog(models.Model):
     """
 
     title = models.CharField(max_length=200)
-    brief_description = models.TextField()
     description = models.TextField()
     category = models.CharField(max_length=40)
     publication_date =  models.DateField()
-    owner_full_name = models.CharField(max_length=40)
-    owner_image = models.ImageField(upload_to='blog_images/', null=True, blank=True)
     image = models.ImageField(upload_to='blog_images/', null=True, blank=True)
 
     def __str__(self):
