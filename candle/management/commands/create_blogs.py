@@ -1,7 +1,8 @@
-from django.core.management.base import BaseCommand
+import os
 from faker import Faker
-from datetime import date, timedelta
 from django.core.files import File
+from datetime import date, timedelta
+from django.core.management.base import BaseCommand
 from candle.models import Blog
 
 class Command(BaseCommand):
@@ -19,10 +20,11 @@ class Command(BaseCommand):
                 title = fake.word(),
                 description  = fake.text(max_nb_chars=300),
                 category = fake.word(),
-                publication_date = fake.date_between(start_date=date.today(), end_date=date.today() + timedelta(days=30)),
+                publication_date = fake.date_between(start_date=date.today(), 
+                                                     end_date=date.today() + timedelta(days=30)),
             )
 
-            image_path = '/home/dev-env-1/candle_project/media/temp/blog_temp1.jpg'
+            image_path = os.getcwd() + '/media/temp/blog_temp1.jpg'
             name_file = image_path.split("/")[-1]
             with open(image_path, 'rb') as file:
                 new_blog.image.save(name_file, File(file), save=True)

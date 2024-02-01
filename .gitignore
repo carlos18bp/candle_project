@@ -1,3 +1,4 @@
+db.sqlite3
 candle/__pycache__/
 candle/management/commands/__pycache__/
 candle/migrations/__pycache__/
@@ -5,6 +6,6 @@ candle/models/__pycache__/
 candle/serializers/__pycache__/
 candle/views/__pycache__/
 candle_project/__pycache__/
-candle_project/media/blog_images
-candle_project/media/product_images
-candle_project/media/user_images
+media/blog_images
+media/product_images
+media/user_images

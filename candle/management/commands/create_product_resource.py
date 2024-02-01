@@ -1,3 +1,4 @@
+import os
 from django.core.files import File
 from django.core.management.base import BaseCommand
 from candle.models import ProductResource
@@ -10,13 +11,13 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         self._create_resource(ProductResource.objects.create(), 
-                              '/home/dev-env-1/candle_project/media/temp/product_temp1.jpg')
+                              os.getcwd() + '/media/temp/product_temp1.jpg')
         self._create_resource(ProductResource.objects.create(), 
-                              '/home/dev-env-1/candle_project/media/temp/product_temp2.jpg')
+                              os.getcwd() + '/media/temp/product_temp2.jpg')
         self._create_resource(ProductResource.objects.create(), 
-                              '/home/dev-env-1/candle_project/media/temp/product_temp3.jpg')
+                              os.getcwd() + '/media/temp/product_temp3.jpg')
         self._create_resource(ProductResource.objects.create(), 
-                              '/home/dev-env-1/candle_project/media/temp/product_temp4.jpg')
+                              os.getcwd() + '/media/temp/product_temp4.jpg')
         
         print(f'"{len(ProductResource.objects.all())}" Product Resource records created')
 

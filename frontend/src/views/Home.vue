@@ -16,7 +16,7 @@
                 <span class="font-special text-primary_p text-9xl">candle</span>
             </p>
             <div>
-                <RouterLink :to="{ name: 'blogs' }" 
+                <RouterLink :to="{ name: 'products' }" 
                     class="inline-block font-regular rounded-full bg-black_p py-4 px-8 text-lg text-second_p shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-primary_p uppercase">
                     Discover Products
                 </RouterLink>

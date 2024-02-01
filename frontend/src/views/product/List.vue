@@ -117,27 +117,65 @@
                         <div class="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-8 lg:max-w-7xl lg:px-8">
                             <h2 class="text-2xl font-bold tracking-tight text-gray-900">Candles</h2>
 
-                            <div class="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:gap-x-8">
-                                <div v-for="product in products" :key="product.id" class="group relative">
-                                <div class="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-80 mb-4">
-                                    <img :src="`/api/${product.images[0].image_url}`" class="h-full w-full object-cover object-center lg:h-full lg:w-full" />
-                                </div>
-                                <div class="mt- flex justify-between">
-                                    <div>
-                                    <h3 class="text-sm text-gray-700">
-                                        <RouterLink
-                                            v-if="product.id"       
-                                            :to="{ name: 'product', 
-                                            params: { product_id: product.id } }">
-                                            <span aria-hidden="true" class="absolute inset-0" />
-                                            {{ product.title }}
-                                        </RouterLink>
-                                    </h3>
+                            <div class="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
+                                <div v-for="product in paginatedProducts" :key="product.id" class="group relative">
+                                    <div class="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-80 mb-4">
+                                        <img :src="`/api/${product.images[0].image_url}`" class="h-full w-full object-cover object-center lg:h-full lg:w-full" />
                                     </div>
-                                    <p class="text-sm font-medium text-gray-900">$ {{ product.price }}</p>
-                                </div>
+                                    <div class="mt- flex justify-between">
+                                        <div>
+                                        <h3 class="text-sm text-gray-700">
+                                            <RouterLink
+                                                v-if="product.id"       
+                                                :to="{ name: 'product', 
+                                                params: { product_id: product.id } }">
+                                                <span aria-hidden="true" class="absolute inset-0" />
+                                                {{ product.title }}
+                                            </RouterLink>
+                                        </h3>
+                                        </div>
+                                        <p class="text-sm font-medium text-gray-900">$ {{ product.price }}</p>
+                                    </div>
                                 </div>
                             </div>
+
+                            <nav class="flex items-center justify-between border-t border-gray-200 px-4 sm:px-0">
+                                <!-- Previous page button -->
+                                <a
+                                    href="#"
+                                    class="inline-flex items-center border-t-2 border-transparent pr-1 pt-4 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700"
+                                    @click="goToPage(currentPage - 1)"
+                                    :disabled="currentPage === 1"
+                                >
+                                    <ArrowLongLeftIcon class="mr-3 h-5 w-5 text-gray-400" aria-hidden="true" />
+                                    Previous
+                                </a>
+
+                                <!-- Show page numbers -->
+                                <div>
+                                    <template v-for="page in totalPages" :key="page">
+                                        <a
+                                        href="#"                
+                                        class="inline-flex items-center border-t-2 border-transparent px-4 pt-4 text-sm font-medium"
+                                        :class="{ 'border-indigo-500 text-indigo-600': currentPage === page, 'text-gray-500 hover:text-gray-700 hover:border-gray-300': currentPage !== page }"
+                                        @click="goToPage(page)"
+                                        >
+                                        {{ page }}
+                                        </a>
+                                    </template>
+                                </div>
+
+                                <!-- Next page button -->
+                                <a
+                                    href="#"
+                                    class="inline-flex items-center border-t-2 border-transparent pl-1 pt-4 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700"
+                                    @click="goToPage(currentPage + 1)"
+                                    :disabled="currentPage === totalPages"
+                                >
+                                    Next
+                                    <ArrowLongRightIcon class="ml-3 h-5 w-5 text-gray-400" aria-hidden="true" />
+                                </a>
+                            </nav>                            
                         </div>
                     </div>
                 </div>
@@ -152,7 +190,7 @@
 <script setup>
     import Header from "@/components/layouts/Header.vue";
     import Footer from "@/components/layouts/Footer.vue";
-    import { onMounted, ref } from "vue";
+    import { computed, onMounted, ref } from "vue";
     import {
     Dialog,
     DialogPanel,
@@ -169,14 +207,54 @@
     import { XMarkIcon } from '@heroicons/vue/24/outline';
     import { ChevronDownIcon, FunnelIcon, MinusIcon, PlusIcon, Squares2X2Icon } from '@heroicons/vue/20/solid';
     import { useProductStore } from '@/stores/product';
+    import { ArrowLongLeftIcon, ArrowLongRightIcon } from '@heroicons/vue/20/solid';
 
     const productStore = useProductStore();
-    const products = ref([]); 
+    const products = ref([]);
+    const currentPage = ref(1);
+    const productsPerPage = 6;
+    const isProductsLoaded = ref(false);
 
     onMounted(async () => {
         await productStore.fetchProductsData();
         products.value = productStore.products;
+
+        isProductsLoaded.value = true;
     });
+
+    // Calculate the total number of pages
+    const totalPages = computed(() => {
+        if (isProductsLoaded.value) {
+            return Math.ceil(products.value.length / productsPerPage);
+        }
+        return 0;
+    });
+
+    // Calculate the Products to display on the current page
+    const paginatedProducts = computed(() => {
+        if (isProductsLoaded.value) {
+        const start = (currentPage.value - 1) * productsPerPage;
+        const end = start + productsPerPage;
+        return products.value.slice(start, end);
+        }
+        return [];
+    });
+
+    // Property to store the scroll position
+    const scrollPosition = ref(0);
+
+    // Function to go to a specific page
+    const goToPage = (page) => {
+        if (isProductsLoaded.value && page >= 1 && page <= totalPages.value) {
+            // Save current scroll position
+            scrollPosition.value = window.scrollY;
+            currentPage.value = page;
+
+            setTimeout(() => {
+                window.scrollTo(0, scrollPosition.value);
+            }, 0);
+        }
+    };
 
     const sortOptions = [
     { name: 'Most Popular', href: '#', current: true },

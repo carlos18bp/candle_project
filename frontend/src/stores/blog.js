@@ -41,6 +41,8 @@ export const useBlogStore = defineStore("blog", {
       }
       
       this.blogs = jsonData ?? [];
+      console.log('Source: blogs, count: '+ this.blogs.length);
+      console.log(this.blogs);
       
       this.areUpdateBlogs = true;
     },

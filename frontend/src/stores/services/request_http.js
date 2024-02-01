@@ -30,7 +30,7 @@ async function makeRequest(method, url) {
       default:
         throw new Error(`Unsupported method: ${method}`);
     }
-    console.log(response.data);
+
     return response.data;
   } catch (error) {
     console.error(error);

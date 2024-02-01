@@ -40,6 +40,8 @@ export const useProductStore = defineStore("product", {
       }
 
       this.products = jsonData ?? [];
+      console.log('Source: products, count: '+ this.products.length);
+      console.log(this.products);
       
       this.areUpdateProducts = true;
     },

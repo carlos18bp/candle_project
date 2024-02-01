@@ -26,7 +26,7 @@
 </template>
 
 <script setup>
-    import { onMounted, reactive, ref } from "vue";
+    import { onMounted, reactive, ref, watchEffect  } from "vue";
     import { useRoute } from "vue-router";
     import { useBlogStore } from '@/stores/blog';
     import { decodeHandler } from '@/shared/decode_handler';
@@ -40,8 +40,15 @@
     const blog = reactive({});
 
     onMounted(async () => {
-        await blogStore.fetchBlogsData();
+        await blogStore.fetchBlogsData();        
+    });
+
+    watchEffect(async () => {
         blog_id.value = await decodeHandler(route.params.blog_id);
         if (blog_id.value) Object.assign(blog, blogStore.blogById(blog_id.value));
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
     });
 </script>

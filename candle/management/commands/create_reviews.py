@@ -1,3 +1,4 @@
+import os
 import random
 from faker import Faker
 from django.core.files import File
@@ -27,7 +28,7 @@ class Command(BaseCommand):
                 email = fake.email(),
             )
 
-            image_path = '/home/dev-env-1/candle_project/media/temp/user_temp1.jpg'
+            image_path = os.getcwd() + '/media/temp/user_temp1.jpg'
             name_file = image_path.split("/")[-1]
             with open(image_path, 'rb') as file:
                 new_user.image.save(name_file, File(file), save=True)
