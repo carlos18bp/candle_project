@@ -41,6 +41,8 @@ export const useReviewStore = defineStore("review", {
       }
       
       this.reviews = jsonData ?? [];
+      console.log('Source: reviews, count: '+ this.reviews.length);
+      console.log(this.reviews);
       
       this.areUpdateReviews = true;
     },

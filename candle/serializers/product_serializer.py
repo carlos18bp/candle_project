@@ -39,7 +39,6 @@ def _get_reviews(product_id):
     for review in reviews:
         resource_data = {
             'rate': review.rate,
-            'title': review.title,
             'description': review.description,
             'user_full_name': review.user.full_name,
             'user_birthday_date': review.user.birthday_date.strftime('%Y-%m-%d'),
