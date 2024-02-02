@@ -104,19 +104,42 @@
             <h2 class="sr-only">Customer Reviews</h2>
 
             <div class="-my-10">
-                <div v-for="(review, reviewIdx) in reviews" :key="review.id" class="flex space-x-4 text-sm text-gray-500">
-                <div class="flex-none py-10">
-                    <img :src="`/api/${review.user_image_url}`" class="h-10 w-10 rounded-full bg-gray_p" />
-                </div>
-                <div :class="[reviewIdx === 0 ? '' : 'border-t border-terciary_p', 'flex-1 py-10']">
-                    <h3 class="font-bold text-black_p">{{ review.user_full_name }}</h3>
-                    <div class="mt-4 flex items-center">
-                    <StarIcon v-for="rating in [0, 1, 2, 3, 4]" :key="rating" :class="[review.rate > rating ? 'text-primary_p' : 'text-gray_p', 'h-5 w-5 flex-shrink-0']" aria-hidden="true" />
-                    </div>
+                <swiper
+                    :spaceBetween="30"
+                    :centeredSlides="true"
+                    :autoplay="{
+                    delay: 2500,
+                    disableOnInteraction: false,
+                    }"
+                    :pagination="{
+                    clickable: true,
+                    }"
+                    :modules="modules"
+                    class="mySwiper"
+                >
+                    <swiper-slide class="w-full " v-for="(review, reviewIdx) in reviews" :key="review.id">
+                        <div class="p-16 w-full grid grid-cols-6 gap-6">
+                            <div class="grid grid-cols-2 gap-6">
 
-                    <p>{{ review.title }}</p>
-                </div>
-                </div>
+                                <img :src="`/api/${review.user_image_url}`" alt="..." style="width: 75%;  height: auto;" />
+
+                                <div>
+                                    <h2 class="font-bold text-2xl text-black_p">{{ review.user_full_name }}</h2>
+                                </div>
+                            </div>
+
+                            <div class="w-auto col-span-5">
+                                <div class="max-w-8">
+                                    <img src="@/assets/images/aboutUs/resource.png">
+                                </div>
+                                <div class="ps-16">
+                                    <p class="font-medium text-3xl text-justify">{{ review.description }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </swiper-slide>
+                </swiper>
+                
             </div>
             </div>
         </div>
@@ -125,6 +148,11 @@
 </template>
 
 <script setup>
+    import { Swiper, SwiperSlide } from 'swiper/vue';
+    import 'swiper/css';
+    import 'swiper/css/pagination';
+    import 'swiper/css/navigation';
+    import { Autoplay, Pagination, Navigation } from 'swiper/modules';
     import { onMounted, ref } from "vue";
     import Header from "@/components/layouts/Header.vue";
     import Footer from "@/components/layouts/Footer.vue";
@@ -133,9 +161,41 @@
 
     const reviewtStore = useReviewStore();
     const reviews = ref([]);
+    const modules = [Autoplay, Pagination, Navigation];
 
     onMounted(async () => {
         await reviewtStore.fetchReviewsData();
         reviews.value = reviewtStore.reviews
     });
 </script>
+
+<style>
+.mySwiper {
+  width: 100%;
+  height: 100%;
+}
+
+.mySwiper .swiper-pagination-bullet {
+    background-color: #555659;
+}
+
+.mySwiper .swiper-pagination-bullet-active {
+  background-color: #CEAD95;
+}
+
+.mySwiper .swiper-slide {
+  text-align: center;
+  font-size: 18px;
+  background: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.mySwiper .swiper-slide img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+</style>

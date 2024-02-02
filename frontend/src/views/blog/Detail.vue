@@ -29,7 +29,6 @@
     import { onMounted, reactive, ref, watchEffect  } from "vue";
     import { useRoute } from "vue-router";
     import { useBlogStore } from '@/stores/blog';
-    import { decodeHandler } from '@/shared/decode_handler';
     import Header from "@/components/layouts/Header.vue";
     import Footer from "@/components/layouts/Footer.vue";
     import BlogCarousel from "@/components/blog/BlogCarousel.vue";
@@ -44,7 +43,7 @@
     });
 
     watchEffect(async () => {
-        blog_id.value = await decodeHandler(route.params.blog_id);
+        blog_id.value = parseInt(route.params.blog_id);
         if (blog_id.value) Object.assign(blog, blogStore.blogById(blog_id.value));
         window.scrollTo({
             top: 0,

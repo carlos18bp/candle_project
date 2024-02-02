@@ -43,6 +43,7 @@ def _get_reviews(product_id):
             'user_full_name': review.user.full_name,
             'user_birthday_date': review.user.birthday_date.strftime('%Y-%m-%d'),
             'user_email': review.user.email,
+            'user_image_url': review.user.image.url,
         }
         reviews_serialized.append(resource_data)
     
