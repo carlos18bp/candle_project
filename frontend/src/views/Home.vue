@@ -3,30 +3,33 @@
         <Header></Header>
     </div>
 
-    <div class="flex pb-12">
-        <div class="w-2/5">
+    <div class="grid lg:flex pt-24 lg:pt-0 pb-12">
+        <div class="hidden lg:block lg:w-2/5">
             <img src="@/assets/images/home/banner_1.jpg" class="w-full h-auto">
         </div>
-        <div class="w-3/5 bg-second_p flex flex-col justify-center px-32">
-            <p class="uppercase pb-4 font-regular tracking-widest text-xl">#Candle Experience</p>
-            <p class="pb-8">
-                <span class="font-semibold text-8xl">Always </span>
-                <span class="text-primary_p font-semibold text-8xl">cool and soothe </span>
-                <span class="text-black_p font-semibold text-8xl">your feelings available in a variety of </span>
-                <span class="font-special text-primary_p text-9xl">candle</span>
+        <div class="w-full lg:w-3/5 bg-second_p flex flex-col justify-center lg:px-32">
+            <p class="uppercase pb-4 font-regular tracking-widest text-center text-gray_p lg:text-start text-base md:text-2xl lg:text-xl">#Candle Experience</p>
+            <p class="px-3 lg:px-0 pb-8 text-center lg:text-start">
+                <span class="font-semibold text-4xl md:text-6xl 2xl:text-8xl">Always </span>
+                <span class="text-primary_p font-semibold text-4xl md:text-6xl 2xl:text-8xl">cool and soothe </span>
+                <span class="text-black_p font-semibold text-4xl md:text-6xl 2xl:text-8xl">your feelings available in a variety of </span>
+                <span class="font-special text-primary_p text-5xl md:text-7xl 2xl:text-9xl">candle</span>
             </p>
-            <div>
+            <div class="flex justify-center lg:justify-start">
                 <RouterLink :to="{ name: 'products' }" 
-                    class="inline-block font-regular rounded-full bg-black_p py-4 px-8 text-lg text-second_p shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-primary_p uppercase">
+                    class="inline-block font-regular rounded-full bg-black_p py-4 px-8 xl:text-md 2xl:text-lg text-second_p shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-primary_p uppercase">
                     Discover Products
                 </RouterLink>
             </div>
         </div>
+        <div class="lg:hidden w-full mt-10">
+            <img src="@/assets/images/home/banner_1.jpg" class="w-full h-auto">
+        </div>
     </div>
 
     <div class="mx-auto flex flex-col items-center justify-center max-w-7xl px-8 pb-12">
-        <h2 class="uppercase pb-4 font-regular tracking-widest text_gray_p text-2xl">Trending</h2>
-        <h2 class="pb-4 font-semibold text-4xl">Shop our pupular candle products</h2>
+        <h2 class="uppercase pb-4 font-regular tracking-widest text-gray_p text-center text-2xl">Trending</h2>
+        <h2 class="pb-4 font-semibold text-center text-4xl">Shop our pupular candle products</h2>
         <ProductCarousel
             :top="4"
         ></ProductCarousel>
