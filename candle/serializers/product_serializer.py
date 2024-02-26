@@ -10,6 +10,8 @@ def products_serializer(products):
     for product in products:
         product_data = {
             'id': product.id,
+            'category': product.category,
+            'subCategory': product.sub_category,
             'title': product.title,
             'description': product.description,
             'price': product.price,

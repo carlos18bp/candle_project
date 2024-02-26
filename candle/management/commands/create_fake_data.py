@@ -15,5 +15,5 @@ class Command(BaseCommand):
         number_of_records = options['number_of_records']
         call_command('create_blogs', number_of_blogs=number_of_records)
         call_command('create_product_resource', number_of_product_resources=1)
-        call_command('create_products', number_of_products=number_of_records)
+        call_command('create_products', number_of_products=number_of_records*3)
         call_command('create_reviews', number_of_reviews=number_of_records)
