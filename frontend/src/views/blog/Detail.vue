@@ -19,7 +19,8 @@
         </div>
     </div>
     <BlogCarousel
-        :top="3"
+        :top= "{top_blog}"
+        class="mb-16"
     >
     </BlogCarousel>
     <Footer></Footer>
@@ -37,9 +38,19 @@
     const blogStore = useBlogStore();
     const blog_id = ref(0);
     const blog = reactive({});
+    const top_blog = ref(null);
 
-    onMounted(async () => {
-        await blogStore.fetchBlogsData();        
+        if (window.innerWidth >= 1024) {
+            top_blog.value = 3;
+        } else if (window.innerWidth < 1024 && 760 <= window.innerWidth){
+            top_blog.value = 2;
+        } else if  (window.innerWidth < 760) {
+            top_blog.value = 1;
+        }  
+
+
+    onMounted(async () => { 
+        await blogStore.fetchBlogsData();    
     });
 
     watchEffect(async () => {

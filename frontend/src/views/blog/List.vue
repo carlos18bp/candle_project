@@ -23,8 +23,8 @@
             </div>
         </div>
 
-        <div>
-            <div class="grid grid-cols-3 gap-12 pb-8">
+        <div class="mb-16">
+            <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-12 pb-8">
                 <BlogPresentation
                     v-for="blog in paginatedBlogs"
                     :blog="blog"
@@ -33,7 +33,6 @@
             <nav class="flex items-center justify-between border-t border-gray-200 px-4 sm:px-0">
                 <!-- Previous page button -->
                 <a
-                    href="#"
                     class="inline-flex items-center border-t-2 border-transparent pr-1 pt-4 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700"
                     @click="goToPage(currentPage - 1)"
                     :disabled="currentPage === 1"
@@ -43,10 +42,9 @@
                 </a>
 
                 <!-- Show page numbers -->
-                <div>
+                <div class="hidden md:block">
                     <template v-for="page in totalPages" :key="page">
-                        <a
-                        href="#"                
+                        <a             
                         class="inline-flex items-center border-t-2 border-transparent px-4 pt-4 text-sm font-medium"
                         :class="{ 'border-indigo-500 text-indigo-600': currentPage === page, 'text-gray-500 hover:text-gray-700 hover:border-gray-300': currentPage !== page }"
                         @click="goToPage(page)"
@@ -85,10 +83,18 @@
     const blogs = ref([]);
     const firstBlog = reactive({}); 
     const currentPage = ref(1);
-    const blogsPerPage = 6;
     const isBlogsLoaded = ref(false);
+    let blogsPerPage;
 
     onMounted(async () => fetchBlogs());
+
+    if (window.innerWidth >= 1024) {
+        blogsPerPage = 6;
+    } else if (window.innerWidth < 1024 && 760 <= window.innerWidth){
+        blogsPerPage = 4;
+    } else if  (window.innerWidth < 760) {
+        blogsPerPage = 2;
+    }
 
     /**
      * Fetch and update blogs data.
