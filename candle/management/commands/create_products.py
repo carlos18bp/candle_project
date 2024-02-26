@@ -1,3 +1,4 @@
+import random
 from faker import Faker
 from django.core.management.base import BaseCommand
 from candle.models import Product, ProductResource
@@ -11,10 +12,44 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
 
         number_of_products = options['number_of_products']
-        fake = Faker()  
+        fake = Faker()
+
+        categories = [
+            'Aesthetic Candles',
+            'Decor',
+            'Gift & Party Favors'    
+        ]
+        sub_categories = {
+            'Aesthetic Candles': [
+                'Greek Scultures',
+                'Love & Romance',
+                'Minimalist Modern',
+                'Cute Animals',
+                'Flowers',
+                'Holiday Glow',
+                'New Arrivals'
+            ],
+            'Decor': [
+                'Trending Now',
+                'New Arrivals'
+            ],
+            'Gift & Party Favors': [
+                "Valentine's Day",
+                'Birthdays',
+                'Wedding',
+                'Christmas',
+                "Mother's Day",
+                'Gender reveal & Baby showers',
+                'Trending Now'
+            ]  
+        }
 
         for _ in range(number_of_products):
+            category = random.choice(categories)
+
             new_product = Product.objects.create(
+                category = category,
+                sub_category = random.choice(sub_categories[category]),
                 title = fake.word(),
                 description  = fake.text(max_nb_chars=300),
                 price = fake.random_int(min=100, max=190),

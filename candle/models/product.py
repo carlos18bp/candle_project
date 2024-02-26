@@ -5,6 +5,10 @@ class Product(models.Model):
     """
     Product model.
 
+    :ivar category: title product.
+    :vartype category: str
+    :ivar subcategory: title product.
+    :vartype subcategory: str
     :ivar title: title product.
     :vartype title: str
     :ivar description: description product.
@@ -15,6 +19,8 @@ class Product(models.Model):
     :vartype image: Image
     """
 
+    category = models.CharField(max_length=40)
+    sub_category = models.CharField(max_length=40)
     title = models.CharField(max_length=40)
     description = models.TextField()
     price = models.IntegerField()

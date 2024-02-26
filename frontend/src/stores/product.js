@@ -4,16 +4,33 @@ import { get_request } from "./services/request_http";
 export const useProductStore = defineStore("product", {
   state: () => ({
     products: [],
+    categories: [],
     areUpdateProducts: false,
   }),
   getters: {
     /**
      * Get product by id.
      * @param {object} state - State. 
-     * @returns {array} - product by id occurrence.
+     * @returns {array} - Product by id occurrence.
      */
     productById: (state) => (productId) => {
       return state.products.find(product => product.id === productId);
+    },
+    /**
+     * Get product by sub-category.
+     * @param {object} state - State. 
+     * @returns {array} - Product by sub-category occurrence.
+     */
+    productBySubCategory: (state) => {
+      const isCheckedSubCategory = (subCategory) => subCategory.checked;
+
+      return state.products.filter(product =>
+        state.categories.some(category =>
+          category.subCategories.some(subCategory =>
+            isCheckedSubCategory(subCategory) && product.subCategory === subCategory.name
+          )
+        )
+      );
     },
   },
   actions: { 
@@ -44,6 +61,38 @@ export const useProductStore = defineStore("product", {
       console.log(this.products);
       
       this.areUpdateProducts = true;
+    },
+    /**
+     * Get unique categories and subCategories.
+     */
+    async fetchUniqueCategoriesAndSubCategories() {
+      if(!this.areUpdateProducts) this.fetchProductsData();
+
+      const uniqueCategories = [];
+
+      this.products.forEach(product => {
+        const category = product.category;
+        const subCategory = product.subCategory;
+      
+        if (!uniqueCategories[category]) {
+          uniqueCategories[category] = [];
+        }
+      
+        if (!uniqueCategories[category].includes(subCategory)) {
+          uniqueCategories[category].push(subCategory);
+        }
+      });
+
+      this.categories = Object.keys(uniqueCategories).map(category => ({
+        name: category,
+        subCategories: uniqueCategories[category].map(subCategory => ({
+          name: subCategory,
+          checked: false,
+        }))
+      }));
+
+      console.log('categories');
+      console.log(this.categories)
     },
   }
 });
