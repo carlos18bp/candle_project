@@ -112,11 +112,11 @@
 
     <!--Content-->
 
-    <div class="container mx-auto mt-16 grid grid-cols-2 gap-4">
+    <div class="container mx-auto mt-16 grid text-center xl:text-start xl:grid-cols-2 gap-4">
       <div class="grid content-center">
         <div>
-          <h2 class="font-regular text-lg text-gray_p tracking-widest">OUR MISSION</h2>
-          <p class="font-medium text-7xl text-black_p mt-12">Made from natural ingredients and does not harm the environment</p>
+          <h2 class="font-regular text-2xl text-gray_p tracking-widest">OUR MISSION</h2>
+          <p class="font-medium text-5xl xl:text-7xl text-black_p mt-12">Made from natural ingredients and does not harm the environment</p>
         </div>
       </div>
       <div class="relative">

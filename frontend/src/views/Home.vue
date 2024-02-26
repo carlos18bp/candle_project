@@ -35,7 +35,7 @@
         ></ProductCarousel>
     </div>
 
-    <div class="mx-auto relative flex flex-col items-center justify-center px-16 pb-12">
+    <div class="mx-auto relative flex flex-col items-center justify-center pb-12">
         <img src="@/assets/images/home/banner_2.jpg" class="w-full h-auto pb-8">
         <RouterLink :to="{ name: 'blogs' }" 
               class="font-regular rounded-full bg-white py-4 px-16 text-xl text-black_p shadow-sm ring-1 ring-inset ring-primary_p hover:bg-black_p hover:text-second_p hover:ring-transparent uppercase">
@@ -44,41 +44,41 @@
     </div>
 
     <div class="bg-cream_p py-20">
-        <div class="mx-auto flex flex-col px-16 pb-12">
+        <div class="mx-auto flex flex-col xl:px-16 pb-12">
             <img src="@/assets/images/home/banner_3.jpg" class="w-full h-auto pb-8">
-            <p class="pb-4 font-medium text-3xl tracking-wide w-1/2 text-black_p">We make products with quality materials so you get a very good product</p>
+            <p class="pb-4 px-8 xl:px-0 font-medium text-3xl tracking-wide w-full xl:w-1/2 text-black_p">We make products with quality materials so you get a very good product</p>
         </div>
-        <div class="mx-auto flex px-16 pb-12">
-            <div class="w-1/2">
+        <div class="mx-auto xl:flex xl:px-16 pb-12">
+            <div class="w-full xl:w-1/2">
                 <img src="@/assets/images/home/banner_4.jpg" class="w-full h-auto">
             </div>
-            <div class="w-1/2 flex flex-col pl-6">
+            <div class="w-full xl:w-1/2 flex flex-col xl:pl-6">
                 <img src="@/assets/images/home/banner_5.jpg" class="w-full h-auto pb-4">
-                <h2 class="font-bold text-4xl pb-6">Durable</h2>
-                <p class="text-3xl font-medium tracking-wide">The life of the candle reaches 6 months since it is used and still feels the smell</p>
+                <h2 class="font-bold text-4xl px-8 xl:px-0 pb-6">Durable</h2>
+                <p class="text-3xl font-medium tracking-wide px-8 xl:px-0">The life of the candle reaches 6 months since it is used and still feels the smell</p>
             </div>
         </div>
-        <div class="mx-auto flex px-16 pb-12">
-            <div class="w-1/2 flex flex-col">
+        <div class="mx-auto xl:flex px-0 xl:px-16 pb-12">
+            <div class="w-full xl:w-1/2 flex flex-col">
                 <img src="@/assets/images/home/banner_6.jpg" class="w-full h-auto pb-4">
-                <h2 class="font-bold text-4xl pb-6">Calm</h2>
-                <p class="text-3xl font-medium tracking-wide">The aroma emitted by the candles soothes the feeling and the room is of course very durable</p>
+                <h2 class="font-bold text-4xl pb-6 px-8 xl:px-0">Calm</h2>
+                <p class="text-3xl font-medium tracking-wide pb-8 px-8 xl:px-8">The aroma emitted by the candles soothes the feeling and the room is of course very durable</p>
             </div>
-            <div class="w-1/2">
-                <img src="@/assets/images/home/banner_7.jpg" class="w-full h-auto pl-6">
+            <div class="w-full xl:w-1/2">
+                <img src="@/assets/images/home/banner_7.jpg" class="w-full h-auto xl:pl-6">
             </div>
         </div>
     </div>
 
     <div class="mx-auto relative px-8 py-12 bg-primary_p">
         <div class="relative z-10">
-            <img src="@/assets/images/home/banner_8.png" class="max-w-7xl mx-auto h-auto relative z-20">
-                <h1 class="absolute w-full text-center top-40 font-bold text-second_p text-8xl tracking-wider">
+            <img src="@/assets/images/home/banner_8.png" class="max-w-lg md:max-w-7xl mx-auto h-auto relative z-20 object-cover object-center">
+                <h1 class="absolute w-full text-center top-40 font-bold text-second_p text-6xl md:text-8xl tracking-wider">
                     <span class="relative z-30">Fragr</span>
-                    <span>anc</span>
+                    <span class="relative z-30 md:z-0">anc</span>
                     <span class="relative z-30">e Room</span>
                 </h1>
-            <div class="absolute bottom-14 left-1/2 -translate-x-1/2">        
+            <div class="absolute bottom-14 left-1/2 -translate-x-1/2 z-30">        
                 <button type="button" 
                         class=" font-regular tracking-wider rounded-full bg-black_p py-3 px-14 text-sm text-second_p shadow-sm  hover:bg-second_p hover:text-black_p uppercase">
                     Find product
