@@ -1,21 +1,21 @@
 <template>  
     <Header></Header>
-    <div class="mx-auto flex flex-col px-16">
+    <div class="md:mx-auto flex flex-col mx-8 md:px-16">
         <div class="flex pb-12">
-            <div class="w-1/2">
+            <div class="w-full md:w-1/2 mt-4 -m-8 md:-m-0 md:mt-0">
                 <img       
                     v-if="firstBlog && firstBlog.image_url"
                     :src="`/api/${firstBlog.image_url}`" 
-                    class="w-full h-96 object-cover">
+                    class="w-full md:h-96 object-cover">
             </div>
-            <div class="w-1/2 flex flex-col justify-center px-8">
-                <p class="font-regular tracking-widest text-xl text-gray_p uppercase pb-2">{{ firstBlog.category }}</p>
+            <div class="w-full md:w-1/2 flex flex-col justify-center pl-10 md:px-8">
+                <p class="font-regular tracking-widest text-lg md:text-xl text-gray_p uppercase pb-2">{{ firstBlog.category }}</p>
                 <h1 class="py-3">
                     <RouterLink
                         v-if="firstBlog.id"       
                         :to="{ name: 'blog', 
                         params: { blog_id: firstBlog.id } }" 
-                        class="font-bold text-5xl tracking-wider btn-lg">
+                        class="font-bold text-3xl md:text-5xl tracking-wider break-all">
                             {{ firstBlog.title }}
                     </RouterLink> 
                 </h1>
@@ -33,11 +33,11 @@
             <nav class="flex items-center justify-between border-t border-gray-200 px-4 sm:px-0">
                 <!-- Previous page button -->
                 <a
-                    class="inline-flex items-center border-t-2 border-transparent pr-1 pt-4 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700"
+                    class="inline-flex items-center border-t-2 border-transparent pr-1 pt-4 text-sm font-medium text-gray-500 hover:border-terciary_p hover:text-terciary_p"
                     @click="goToPage(currentPage - 1)"
                     :disabled="currentPage === 1"
                 >
-                    <ArrowLongLeftIcon class="mr-3 h-5 w-5 text-gray-400" aria-hidden="true" />
+                    <ArrowLongLeftIcon class="mr-3 h-5 w-5 text-terciary_p" aria-hidden="true" />
                     Previous
                 </a>
 
@@ -46,7 +46,7 @@
                     <template v-for="page in totalPages" :key="page">
                         <a             
                         class="inline-flex items-center border-t-2 border-transparent px-4 pt-4 text-sm font-medium"
-                        :class="{ 'border-indigo-500 text-indigo-600': currentPage === page, 'text-gray-500 hover:text-gray-700 hover:border-gray-300': currentPage !== page }"
+                        :class="{ 'border-primary_p text-primary_p': currentPage === page, 'text-gray-500 hover:text-terciary_p hover:border-terciary_p': currentPage !== page }"
                         @click="goToPage(page)"
                         >
                         {{ page }}
@@ -57,12 +57,12 @@
                 <!-- Next page button -->
                 <a
                     href="#"
-                    class="inline-flex items-center border-t-2 border-transparent pl-1 pt-4 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700"
+                    class="inline-flex items-center border-t-2 border-transparent pl-1 pt-4 text-sm font-medium text-gray-500 hover:border-terciary_p hover:text-terciary_p"
                     @click="goToPage(currentPage + 1)"
                     :disabled="currentPage === totalPages"
                 >
                     Next
-                    <ArrowLongRightIcon class="ml-3 h-5 w-5 text-gray-400" aria-hidden="true" />
+                    <ArrowLongRightIcon class="ml-3 h-5 w-5 text-terciary_p" aria-hidden="true" />
                 </a>
             </nav>
         </div>
