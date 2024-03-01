@@ -7,17 +7,17 @@
           <!-- Tus enlaces para escritorio -->
           <a class="text-sm uppercase font-regular leading-6 text-black_p">
             <RouterLink :to="{ name: 'products' }" class="btn btn-primary btn-lg">
-              Shop
+              {{ $t('shop') }}
             </RouterLink>
           </a>
           <a class="text-sm uppercase font-regular leading-6 text-black_p">
             <RouterLink :to="{ name: 'about_us' }" class="btn btn-primary btn-lg">
-              About
+              {{ $t('about') }}
             </RouterLink>
           </a>
           <a class="text-sm uppercase font-regular leading-6 text-black_p">
             <RouterLink :to="{ name: 'blogs' }" class="btn btn-primary btn-lg">
-              Blog
+              {{ $t('blog') }}
             </RouterLink>
           </a>
         </div>
@@ -40,7 +40,7 @@
         <Menu as="div" class="relative inline-block text-left pr-4 uppercase">
             <div>
                 <MenuButton class="inline-flex w-full justify-center gap-x-1.5 rounded-md px-3 py-2 text-sm uppercase font-medium text-black_p">
-                    Language 
+                  {{ $t('language').language }} 
                     <ChevronDownIcon class="-mr-1 h-5 w-5 text-black_p" aria-hidden="true" />
                 </MenuButton>
             </div>
@@ -48,10 +48,10 @@
                 <MenuItems class="font-medium absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                     <div class="py-1">
                         <MenuItem v-slot="{ active }">
-                            <a href="#" :class="[active ? 'bg-gray-100 text-black_p' : 'text-gray-700', 'block px-4 py-2 text-sm']">English</a>
+                            <a @click="handleLanguage('en')" :class="[active ? 'bg-gray-100 text-black_p' : 'text-gray-700', 'block px-4 py-2 text-sm cursor-pointer']">{{ $t('language').english }} </a>
                         </MenuItem>
                         <MenuItem v-slot="{ active }">
-                            <a href="#" :class="[active ? 'bg-gray-100 text-black_p' : 'text-gray-700', 'block px-4 py-2 text-sm']">Spanish</a>
+                            <a @click="handleLanguage('es')" :class="[active ? 'bg-gray-100 text-black_p' : 'text-gray-700', 'block px-4 py-2 text-sm cursor-pointer']">{{ $t('language').spanish }} </a>
                         </MenuItem>
                     </div>
                 </MenuItems>
@@ -59,7 +59,7 @@
         </Menu>
         <!-- Enlace de contacto -->
         <RouterLink :to="{ name: 'contact' }" type="button" class="rounded-full px-3.5 py-2 text-sm uppercase font-medium text-black_p ring-1 ring-black_p hover:bg-black_p hover:text-second_p">
-          Contact
+          {{ $t('contact') }}
         </RouterLink>
       </div>
     </nav>
@@ -82,11 +82,11 @@
           <div class="mt-6 flow-root">
             <div class="-my-6 divide-y divide-gray-500/10">
               <!-- Tus enlaces para dispositivos móviles -->
-              <a v-for="item in mobileLinks" :key="item.name" :href="item.href" :class="{ 'bg-gray-100 text-black_p': isActive(item.name), 'text-gray-900': !isActive(item.name) }" class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 hover:bg-gray-50">{{ item.name }}</a>
+              <a v-for="item in mobileLinks" :key="item.name" :href="item.href" :class="{ 'bg-gray-100 text-black_p': isActive(item.name), 'text-gray-900': !isActive(item.name) }" class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 hover:bg-gray-50">{{ $t(item.name) }}</a>
               <Menu as="div" class="-mx-3 px-3 block text-left rounded-lg">
                   <div>
                     <MenuButton class="inline-flex w-full justify-start items-center rounded-md py-2 text-base font-semibold text-gray-900">
-                      <span>Language</span>
+                      <span>{{ $t('language').language }}</span>
                       <ChevronDownIcon class="ml-1 h-4 w-4 text-black" aria-hidden="true" />
                     </MenuButton>
 
@@ -95,10 +95,10 @@
                       <MenuItems class="font-medium absolute left-6 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                           <div class="py-1">
                               <MenuItem v-slot="{ active }">
-                                  <a href="#" :class="[active ? 'bg-gray-100 text-black_p' : 'text-gray-700', 'block px-4 py-2 text-sm']">English</a>
+                                  <a @click="handleLanguage('en')" :class="[active ? 'bg-gray-100 text-black_p' : 'text-gray-700', 'block px-4 py-2 text-sm cursor-pointer']">{{ $t('language').english }}</a>
                               </MenuItem>
                               <MenuItem v-slot="{ active }">
-                                  <a href="#" :class="[active ? 'bg-gray-100 text-black_p' : 'text-gray-700', 'block px-4 py-2 text-sm']">Spanish</a>
+                                  <a @click="handleLanguage('es')" :class="[active ? 'bg-gray-100 text-black_p' : 'text-gray-700', 'block px-4 py-2 text-sm cursor-pointer']">{{ $t('language').spanish }}</a>
                               </MenuItem>
                           </div>
                       </MenuItems>
@@ -122,16 +122,30 @@ import { Dialog, DialogPanel } from '@headlessui/vue'
 import { Bars3Icon, XMarkIcon } from '@heroicons/vue/24/outline'
 import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/vue'
 import { ChevronDownIcon } from '@heroicons/vue/20/solid'
+import enMessages from '@/locales/layout/header/en.js';
+import esMessages from '@/locales/layout/header/es.js';
+
+
+const currentLanguage = ref();
+const messages = ref();
+
+const handleLanguage = (key) => {
+  currentLanguage.value = key;
+  messages.value = currentLanguage.value === 'en' ? enMessages : esMessages;
+}
+
+
+const $t = (key) => messages.value[key]; 
 
 const mobileMenuOpen = ref(false)
 
 // Enlaces para dispositivos móviles
 const mobileLinks = [
-  { name: 'Home', href: '/'},
-  { name: 'Shop', href: 'products' },
-  { name: 'About', href: 'about_us' },
-  { name: 'Blog', href: 'blogs' },
-  { name: 'Contact', href: 'contact' }
+  { name: 'home', href: '/'},
+  { name: 'shop', href: 'products' },
+  { name: 'about', href: 'about_us' },
+  { name: 'blog', href: 'blogs' },
+  { name: 'contact', href: 'contact' }
 ]
 
 // Función para determinar si un enlace está activo
@@ -140,4 +154,7 @@ const isActive = (name) => {
   // Por ejemplo, podrías comparar el nombre del enlace con el nombre de la ruta actual
   return false // Cambia esto según tu lógica
 }
+
+handleLanguage('en');
+
 </script>
