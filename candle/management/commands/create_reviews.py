@@ -28,11 +28,6 @@ class Command(BaseCommand):
                 email = fake.email(),
             )
 
-            image_path = os.getcwd() + '/media/temp/user_temp1.jpg'
-            name_file = image_path.split("/")[-1]
-            with open(image_path, 'rb') as file:
-                new_user.image.save(name_file, File(file), save=True)
-
             new_review = Review.objects.create(
                 rate = fake.random_int(min=1, max=5),
                 description  = fake.text(max_nb_chars=300),

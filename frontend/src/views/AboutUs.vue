@@ -175,7 +175,7 @@
               <div class="p-8 md:p-16 w-full grid xl:grid-cols-6 gap-6">
                 <div class="grid xl:grid-cols-2 gap-6">
                   <img
-                    :src="`/api/${review.user_image_url}`"
+                    src="@/assets/images/user_avatar.jpg"
                     alt="..."
                     style="width: 75%; height: auto"
                   />
