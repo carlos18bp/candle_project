@@ -46,13 +46,19 @@ class Command(BaseCommand):
 
         for _ in range(number_of_products):
             category = random.choice(categories)
+            title = fake.word()
+            description  = fake.text(max_nb_chars=300)
 
             new_product = Product.objects.create(
-                category = category,
-                sub_category = random.choice(sub_categories[category]),
-                title = fake.word(),
-                description  = fake.text(max_nb_chars=300),
+                category = category + ' (EN)',
+                sub_category = random.choice(sub_categories[category]) + ' (EN)',
+                title = title + ' (EN)',
+                description  = description + ' (EN)',
                 price = fake.random_int(min=100, max=190),
+                categoria = category + ' (ES)',
+                sub_categoria = random.choice(sub_categories[category]) + ' (ES)',
+                titulo = title + ' (ES)',
+                descripcion = description + ' (ES)',
             )
 
             new_product.images.add(*ProductResource.objects.all())

@@ -17,6 +17,10 @@ def products_serializer(products):
             'price': product.price,
             'images': _get_images(product.images.all()),
             'reviews': _get_reviews(product.id),
+            'categoria': product.categoria,
+            'subCategoria': product.sub_categoria,
+            'titulo': product.titulo,
+            'descripcion': product.descripcion,
         }
         products_serialized.append(product_data)
 
@@ -28,7 +32,6 @@ def _get_images(images):
     for image in images:
         resource_data = {
             'image_url': image.image.url if image.image else '',
-            'image_path': image.image.path if image.image else ''
         }
         images_serialized.append(resource_data)
     
