@@ -10,8 +10,6 @@ class Blog(models.Model):
     :vartype description: str
     :ivar category: category blog.
     :vartype category: str
-    :ivar publication_date: publication date.
-    :vartype publication_date: datetime.date
     :ivar image: image by blog.
     :vartype image: Image
     """
@@ -19,7 +17,6 @@ class Blog(models.Model):
     title = models.CharField(max_length=200)
     description = models.TextField()
     category = models.CharField(max_length=40)
-    publication_date =  models.DateField()
     image = models.ImageField(upload_to='blog_images/', null=True, blank=True)
 
     def __str__(self):

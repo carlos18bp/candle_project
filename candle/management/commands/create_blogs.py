@@ -20,8 +20,6 @@ class Command(BaseCommand):
                 title = fake.word(),
                 description  = fake.text(max_nb_chars=300),
                 category = fake.word(),
-                publication_date = fake.date_between(start_date=date.today(), 
-                                                     end_date=date.today() + timedelta(days=30)),
             )
 
             image_path = os.getcwd() + '/media/temp/blog_temp1.jpg'

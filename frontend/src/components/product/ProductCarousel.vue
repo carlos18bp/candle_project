@@ -25,18 +25,18 @@
 </template>
 
 <script setup>
-    import { onMounted, ref } from "vue";
-    import { useProductStore } from '@/stores/product';
+  import { onMounted, ref } from "vue";
+  import { useProductStore } from '@/stores/product';
 
-    const props = defineProps({
-        top: Number,
-    });
+  const props = defineProps({
+      top: Number,
+  });
 
-    const productStore = useProductStore();
-    const topProducts = ref([]); 
+  const productStore = useProductStore();
+  const topProducts = ref([]); 
 
-    onMounted(async () => {
-        await productStore.fetchProductsData();
-        topProducts.value = productStore.products.slice(0, props.top);
-    });
+  onMounted(async () => {
+      await productStore.fetchProductsData();
+      topProducts.value = productStore.products.slice(0, props.top);
+  });
 </script>

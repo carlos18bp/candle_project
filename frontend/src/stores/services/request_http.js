@@ -3,7 +3,7 @@ axios.defaults.withCredentials = true;
 axios.defaults.xsrfCookieName = "csrftoken";
 axios.defaults.xsrfHeaderName = "X-CSRFToken";
 
-const route = 'http://127.0.0.1:8000/';
+const route = "http://127.0.0.1:8000/";
 
 /**
  * Request endpoint
@@ -12,7 +12,7 @@ const route = 'http://127.0.0.1:8000/';
  * @param {object} params - Params.
  * @returns {object} - Data and status from endpoint.
  */
-async function makeRequest(method, url) {
+async function makeRequest(method, url, params = {}) {
   const headers = {
     "Content-Type": "application/json",
   };
@@ -31,7 +31,7 @@ async function makeRequest(method, url) {
         throw new Error(`Unsupported method: ${method}`);
     }
 
-    return response.data;
+    return response;
   } catch (error) {
     console.error(error);
   }
