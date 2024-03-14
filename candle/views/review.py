@@ -42,14 +42,7 @@ def create(request):
                 birthday_date= datetime.strptime(params['birthday'], '%Y-%m-%d').date(),
                 email= params['email']
             )
-            
-            if user_created:
-                image_path = os.getcwd() + '/media/temp/user_temp1.jpg'
-                name_file = image_path.split("/")[-1]
-                with open(image_path, 'rb') as file:
-                    user.image.save(name_file, File(file), save=True)
-
-            
+                        
             Review.objects.create(
                 rate = params['rate'],
                 description = params['description'],

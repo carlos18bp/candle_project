@@ -137,7 +137,7 @@
             <div v-for="review in reviews" key="" class="py-12">
               
               <div class="flex items-center">
-                <img :src="`/api${review.user_image_url}`" :alt="`...`" class="h-12 w-12 rounded-full" />
+                <img src="@/assets/images/user_avatar.jpg" :alt="`...`" class="h-12 w-12 rounded-full" />
                 <div class="ml-4">
                   <h4 class="text-sm font-bold text-black_p">{{ review.user_full_name }}</h4>
                   <div class="mt-1 flex items-center">
