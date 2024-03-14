@@ -9,42 +9,43 @@ export const useReviewStore = defineStore("review", {
   getters: {
     /**
      * Get review by id.
-     * @param {object} state - State. 
+     * @param {object} state - State.
      * @returns {array} - review by id occurrence.
      */
     reviewById: (state) => (reviewId) => {
-      return state.reviews.find(review => review.id === reviewId);
+      return state.reviews.find((review) => review.id === reviewId);
     },
   },
-  actions: { 
+  actions: {
     /**
      * Fetch data from backend.
      */
     async init() {
-      if(!this.areUpdateReviews) this.fetchReviewsData();
+      if (!this.areUpdateReviews) this.fetchReviewsData();
     },
     /**
      * Fetch reviews from backend.
      */
     async fetchReviewsData() {
-      if(this.areUpdateReviews) return;
+      if (this.areUpdateReviews) return;
 
-      let jsonData = await get_request('reviews/');
+      let response = await get_request("reviews/");
+      let jsonData = response.data;
 
-      if (jsonData && typeof jsonData === 'string') {
+      if (jsonData && typeof jsonData === "string") {
         try {
-          jsonData = JSON.parse(jsonData)
+          jsonData = JSON.parse(jsonData);
         } catch (error) {
           console.error(error.message);
           jsonData = [];
         }
       }
-      
+
       this.reviews = jsonData ?? [];
-      console.log('Source: reviews, count: '+ this.reviews.length);
+      console.log("Source: reviews, count: " + this.reviews.length);
       console.log(this.reviews);
-      
+
       this.areUpdateReviews = true;
     },
-  }
+  },
 });

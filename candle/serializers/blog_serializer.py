@@ -13,8 +13,8 @@ def blog_serializer(blogs):
             'description': blog.description,
             'category': blog.category,
             'publication_date': blog.publication_date.strftime('%Y-%m-%d'),
-            'image_url': blog.image.url,
-            'image_path': blog.image.path
+            'image_url': blog.image.url if blog.image else '',
+            'image_path': blog.image.path if blog.image else ''
         }
         blogs_serialized.append(blog_data)
 

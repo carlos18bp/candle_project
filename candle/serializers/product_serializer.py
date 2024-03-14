@@ -27,8 +27,8 @@ def _get_images(images):
 
     for image in images:
         resource_data = {
-            'image_url': image.image.url,
-            'image_path': image.image.path
+            'image_url': image.image.url if image.image else '',
+            'image_path': image.image.path if image.image else ''
         }
         images_serialized.append(resource_data)
     
@@ -45,7 +45,7 @@ def _get_reviews(product_id):
             'user_full_name': review.user.full_name,
             'user_birthday_date': review.user.birthday_date.strftime('%Y-%m-%d'),
             'user_email': review.user.email,
-            'user_image_url': review.user.image.url,
+            'user_image_url': review.user.image.url if review.user.image else '',
         }
         reviews_serialized.append(resource_data)
     

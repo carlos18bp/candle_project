@@ -16,15 +16,17 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from candle.views import blog, product, review
+from candle.views import blog, product, review, empty_response
 from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
+    path('', empty_response.empty_response, name='empty_response'),
     path('admin/', admin.site.urls),
     path('blogs/', blog.index, name='products'),
     path('products/', product.index, name='products'),
-    path('reviews/', review.index, name='reviews'),     
+    path('reviews/', review.index, name='reviews'),
+    path('create_review/', review.create, name='create_review'),  
 ]
 
 if settings.DEBUG:
