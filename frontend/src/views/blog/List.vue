@@ -45,6 +45,7 @@
       >
         <!-- Previous page button -->
         <a
+          href="#"
           class="inline-flex items-center border-t-2 border-transparent pr-1 pt-4 text-sm font-medium text-gray-500 hover:border-terciary_p hover:text-terciary_p"
           @click="goToPage(currentPage - 1)"
           :disabled="currentPage === 1"
@@ -60,6 +61,7 @@
         <div class="hidden md:block">
           <template v-for="page in totalPages" :key="page">
             <a
+              href="#"
               class="inline-flex items-center border-t-2 border-transparent px-4 pt-4 text-sm font-medium"
               :class="{
                 'border-primary_p text-primary_p': currentPage === page,

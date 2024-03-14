@@ -16,10 +16,17 @@ class Command(BaseCommand):
         fake = Faker()  
 
         for _ in range(number_of_blogs):
+            title = fake.word()
+            description  = fake.text(max_nb_chars=300)
+            categoria = fake.word()
+
             new_blog = Blog.objects.create(
-                title = fake.word(),
-                description  = fake.text(max_nb_chars=300),
-                category = fake.word(),
+                title = title + '(EN)',
+                description  = description + '(EN)',
+                category = categoria + '(EN)',
+                titulo = title + '(ES)',
+                descripcion  = description + '(ES)',
+                categoria = categoria + '(ES)',
             )
 
             image_path = os.getcwd() + '/media/temp/blog_temp1.jpg'

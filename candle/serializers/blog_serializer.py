@@ -13,7 +13,9 @@ def blog_serializer(blogs):
             'description': blog.description,
             'category': blog.category,
             'image_url': blog.image.url if blog.image else '',
-            'image_path': blog.image.path if blog.image else ''
+            'titulo': blog.titulo,
+            'descripcion': blog.descripcion,
+            'categoria': blog.categoria,
         }
         blogs_serialized.append(blog_data)
 
