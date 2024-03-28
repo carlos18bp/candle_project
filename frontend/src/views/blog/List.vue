@@ -11,11 +11,18 @@
       </div>
       <div class="w-full md:w-1/2 flex flex-col justify-center pl-10 md:px-8">
         <p
+          v-if="currentLanguage === 'en' "
           class="font-regular tracking-widest text-lg md:text-xl text-gray_p uppercase pb-2"
         >
           {{ firstBlog.category }}
         </p>
-        <h1 class="py-3">
+        <p
+          v-else
+          class="font-regular tracking-widest text-lg md:text-xl text-gray_p uppercase pb-2"
+        >
+          {{ firstBlog.categoria }}
+        </p>
+        <h1 v-if="currentLanguage === 'en'" class="py-3">
           <RouterLink
             v-if="firstBlog.id"
             :to="{
@@ -27,8 +34,23 @@
             {{ firstBlog.title }}
           </RouterLink>
         </h1>
-        <p class="font-regular text-2xl line-clamp-3 tracking-wider pt-4">
-          {{ firstBlog.brief_description }}
+        <h1 v-else class="py-3">
+          <RouterLink
+            v-if="firstBlog.id"
+            :to="{
+              name: 'blog',
+              params: { blog_id: firstBlog.id },
+            }"
+            class="font-bold text-3xl md:text-5xl tracking-wider break-all"
+          >
+            {{ firstBlog.titulo }}
+          </RouterLink>
+        </h1>
+        <p v-if="currentLanguage === 'en'" class="font-regular text-2xl line-clamp-3 tracking-wider pt-4">
+          {{ firstBlog.description }}
+        </p>
+        <p v-else class="font-regular text-2xl line-clamp-3 tracking-wider pt-4">
+          {{ firstBlog.descripcion }}
         </p>
       </div>
     </div>
@@ -54,7 +76,7 @@
             class="mr-3 h-5 w-5 text-terciary_p"
             aria-hidden="true"
           />
-          Previous
+          {{ $t('previous') }}
         </a>
 
         <!-- Show page numbers -->
@@ -82,7 +104,7 @@
           @click="goToPage(currentPage + 1)"
           :disabled="currentPage === totalPages"
         >
-          Next
+          {{ $t('next') }}
           <ArrowLongRightIcon
             class="ml-3 h-5 w-5 text-terciary_p"
             aria-hidden="true"
@@ -95,14 +117,21 @@
 </template>
 
 <script setup>
-  import { computed, reactive, ref, onMounted } from "vue";
+  import { computed, reactive, ref, onMounted, watchEffect } from "vue";
   import Header from "@/components/layouts/Header.vue";
   import Footer from "@/components/layouts/Footer.vue";
   import { RouterLink } from "vue-router";
   import { useBlogStore } from "@/stores/blog";
   import BlogPresentation from "@/components/blog/BlogPresentation.vue";
   import { ArrowLongLeftIcon, ArrowLongRightIcon } from "@heroicons/vue/20/solid";
+  import { useAppStore } from '@/stores/language.js';
+  import enMessages from '@/locales/product/list/en.js';
+  import esMessages from '@/locales/product/list/es.js';
 
+  const messages = ref('');
+  const $t = (key) => messages.value[key];
+  const appStore = useAppStore();
+  const currentLanguage = ref('');
   const blogStore = useBlogStore();
   const blogs = ref([]);
   const firstBlog = reactive({});
@@ -110,7 +139,17 @@
   const isBlogsLoaded = ref(false);
   let blogsPerPage;
 
-  onMounted(async () => fetchBlogs());
+  onMounted(async () => {
+    watchEffect(() => {
+      currentLanguage.value = appStore.getCurrentLanguage;
+      if (currentLanguage.value === 'en') {
+        messages.value = enMessages;
+      } else {
+        messages.value = esMessages;
+      }
+    });
+    fetchBlogs()
+  });
 
   if (window.innerWidth >= 1024) {
   blogsPerPage = 6;

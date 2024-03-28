@@ -44,9 +44,10 @@
                   <div v-if="!selectedImage" class="mt-10 px-4 sm:mt-16 sm:px-0 lg:mt-0">
 
                     <div class="mt-3 flex justify-between">
-                        <h1 class="inline-block text-3xl font-semibold tracking-tight text-black_p">{{ product.title }}</h1>
+                        <h1 v-if="currentLanguage === 'en' " class="inline-block text-3xl font-semibold tracking-tight text-black_p">{{ product.title }}</h1>
+                        <h1 v-else class="inline-block text-3xl font-semibold tracking-tight text-black_p">{{ product.titulo }}</h1>
                         <h2 class="sr-only">Product information</h2>
-                        <p class="inline-block text-3xl tracking-tight font-regular text-black_p">$ {{ product.price }}</p>
+                        <p  class="inline-block text-3xl tracking-tight font-regular text-black_p">$ {{ product.price }}</p>
                     </div>
 
                     <!-- Reviews -->
@@ -58,12 +59,13 @@
                               </div>
                               <p class="sr-only">{{ product.reviews }} out of 5 stars</p>
                               <div class="ms-3">
-                                <p class="font-medium">12 Reviews</p>
+                                <p class="font-medium">12 {{ $t('reviews_1') }}</p>
                               </div>
                         </div>
 
                         <div class="mt-3">
-                          <p class="font-regular text-lg">{{ product.description }}</p>
+                          <p v-if="currentLanguage === 'en' " class="font-regular text-lg">{{ product.description }}</p>
+                          <p v-else class="font-regular text-lg">{{ product.descripcion }}</p>
                         </div>
                     </div>
 
@@ -72,7 +74,7 @@
                         <button type="submit" class="flex justify-center max-w-xs flex-1 items-center rounded-md border border-transparent bg-primary_p px-2 py-3 text-base font-medium text-white hover:bg-terciary_p focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-terciary_p sm:w-full">
                           <div>
                             <i class="bi bi-whatsapp text-2xl me-2.5"></i>
-                            <a class="text-2xl ms-2.5">Get In Touch</a>
+                            <a class="text-2xl ms-2.5">{{ $t('order') }}</a>
                           </div>
                         </button>
                         </div>
@@ -89,8 +91,8 @@
     <div class="container mx-auto mt-16 grid text-center xl:text-start xl:grid-cols-2 gap-4">
       <div class="grid content-center">
         <div>
-          <h2 class="font-regular text-2xl text-gray_p tracking-widest">OUR MISSION</h2>
-          <p class="font-medium text-5xl xl:text-7xl text-black_p mt-12">Made from natural ingredients and does not harm the environment</p>
+          <h2 class="font-regular text-2xl text-gray_p tracking-widest">{{ $t('trending') }}</h2>
+          <p class="font-medium text-2xl xl:text-4xl text-black_p mt-12 tracking-wider ">{{ $t('text') }}</p>
         </div>
       </div>
       <div class="relative">
@@ -102,7 +104,7 @@
 
     <div class="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:grid lg:max-w-7xl lg:grid-cols-12 lg:gap-x-8 lg:px-8 lg:py-32">
       <div class="lg:col-span-4">
-        <h2 class="text-2xl font-bold tracking-tight text-black_p">Customer Reviews</h2>
+        <h2 class="text-2xl font-bold tracking-tight text-black_p">{{ $t('reviews_title') }}</h2>
 
         <div v-if="reviews" class="mt-3 flex items-center">
           <div>
@@ -111,17 +113,17 @@
             </div>
             <p class="sr-only">out of 5 stars</p>
           </div>
-          <p class="ml-2 text-sm text-black_p">Based on {{ reviews.length }} reviews</p>
+          <p class="ml-2 text-sm text-black_p">{{ $t('based_on') }} {{ reviews.length }} {{ $t('reviews_2') }}</p>
         </div>
            
         <div class="mt-10">
-          <h3 class="text-lg font-medium text-black_p">Share your thoughts</h3>
-          <p class="mt-1 text-sm text-gray-600">If you’ve used this product, share your thoughts with other customers</p>
+          <h3 class="text-lg font-medium text-black_p">{{ $t('reviews_subtitle') }}</h3>
+          <p class="mt-1 text-sm text-gray-600">{{ $t('reviews_text') }}</p>
 
           <a href="#"
              data-modal-toggle="add-review-modal" data-modal-target="add-review-modal"
              class="mt-6 inline-flex w-full items-center justify-center rounded-md border border-gray-300 bg-white px-8 py-2 text-sm font-medium text-black_p hover:bg-gray-50 sm:w-auto lg:w-full">
-                Write a review
+                {{ $t('reviews_button') }}
           </a>
           <AddReview
             :productId=productId
@@ -172,7 +174,14 @@
   import { useProductStore } from '@/stores/product';
   import { useRoute } from "vue-router";
   import { initModals } from 'flowbite';
-  
+  import { useAppStore } from '@/stores/language.js';
+  import enMessages from '@/locales/product/detail/en.js';
+  import esMessages from '@/locales/product/detail/es.js';
+
+  const messages = ref('');
+  const $t = (key) => messages.value[key];
+  const appStore = useAppStore();
+  const currentLanguage = ref('');
   const selected = '';
   const route = useRoute();
   const productId = ref(0);
@@ -182,6 +191,14 @@
   const averageRate = ref(0);
 
   onMounted(async () => {
+      watchEffect(() => {
+        currentLanguage.value = appStore.getCurrentLanguage;
+        if (currentLanguage.value === 'en') {
+          messages.value = enMessages;
+        } else {
+          messages.value = esMessages;
+        }
+      });
       await productStore.fetchProductsData();
       initModals();     
   });

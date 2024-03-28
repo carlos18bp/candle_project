@@ -13,12 +13,16 @@
       <div
         class="bg-background_p absolute bottom-0 -left-px p-8 pt-4 flex flex-col"
       >
-        <h1 class="font-bold text-4xl tracking-wider">{{ blog.title }}</h1>
+        <h1 v-if="currentLanguage === 'en'" class="font-bold text-4xl tracking-wider">{{ blog.title }}</h1>
+        <h1 v-else class="font-bold text-4xl tracking-wider">{{ blog.titulo }}</h1>
       </div>
     </div>
     <div class="flex justify-center">
-      <p class="max-w-7xl font-regular text-xl tracking-wider">
+      <p v-if="currentLanguage === 'en'" class="max-w-7xl font-regular text-xl tracking-wider">
         {{ blog.description }}
+      </p>
+      <p v-else class="max-w-7xl font-regular text-xl tracking-wider">
+        {{ blog.descripcion }}
       </p>
     </div>
   </div>
@@ -33,7 +37,10 @@
   import Header from "@/components/layouts/Header.vue";
   import Footer from "@/components/layouts/Footer.vue";
   import BlogCarousel from "@/components/blog/BlogCarousel.vue";
+  import { useAppStore } from '@/stores/language.js';
 
+  const appStore = useAppStore();
+  const currentLanguage = ref('');
   const route = useRoute();
   const blogStore = useBlogStore();
   const blog_id = ref(0);
@@ -49,6 +56,9 @@
   }
 
   onMounted(async () => {
+  watchEffect(() => {
+    currentLanguage.value = appStore.getCurrentLanguage;
+  });
   await blogStore.fetchBlogsData();
   });
 

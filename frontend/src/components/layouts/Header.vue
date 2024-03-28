@@ -148,15 +148,17 @@
   import { Bars3Icon, XMarkIcon } from '@heroicons/vue/24/outline'
   import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/vue'
   import { ChevronDownIcon } from '@heroicons/vue/20/solid'
+  import { useAppStore } from '@/stores/language.js';
   import enMessages from '@/locales/layout/header/en.js';
   import esMessages from '@/locales/layout/header/es.js';
 
-
+  const appStore = useAppStore();
   const currentLanguage = ref();
   const messages = ref();
 
   const handleLanguage = (key) => {
     currentLanguage.value = key;
+    appStore.setCurrentLanguage(key);
     messages.value = currentLanguage.value === 'en' ? enMessages : esMessages;
   }
 

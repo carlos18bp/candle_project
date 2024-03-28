@@ -3,20 +3,41 @@
     <div>
       <img v-if="blog && blog.image_url" :src="`/api/${blog.image_url}`" class="object-cover w-full h-96 pb-4">
     </div>
-    <h2 class="font-regular text-gray_p tracking-widest text-xl uppercase pb-2">{{ blog.category }}</h2>
-    <RouterLink v-if="blog.id" :to="{
-        name: 'blog',
-        params: { blog_id: blog.id }
-      }" class="font-bold text-3xl tracking-wider pb-3">
-      {{ blog.title }}
-    </RouterLink>
+    <h2 v-if="currentLanguage === 'en'" class="font-regular text-gray_p tracking-widest text-xl uppercase pb-2">{{ blog.category }}</h2>
+    <h2 v-else class="font-regular text-gray_p tracking-widest text-xl uppercase pb-2">{{ blog.categoria }}</h2>
+    <div v-if="currentLanguage === 'en'">
+      <RouterLink v-if="blog.id" :to="{
+          name: 'blog',
+          params: { blog_id: blog.id }
+        }" class="font-bold text-3xl tracking-wider pb-3">
+        {{ blog.title }}
+      </RouterLink>
+    </div>
+    <div v-else>
+      <RouterLink v-if="blog.id" :to="{
+          name: 'blog',
+          params: { blog_id: blog.id }
+        }" class="font-bold text-3xl tracking-wider pb-3">
+        {{ blog.titulo }}
+      </RouterLink>
+    </div>
   </div>
 </template>
 
 <script setup>
   import { RouterLink } from 'vue-router';
+  import { useAppStore } from '@/stores/language.js';
+  import { onMounted, watchEffect, ref } from 'vue';
 
+  const appStore = useAppStore();
+  const currentLanguage = ref('');
   const props = defineProps({
     blog: Object,
+  });
+
+  onMounted(() => {
+    watchEffect (() => {
+      currentLanguage.value = appStore.getCurrentLanguage;
+    });
   });
 </script>

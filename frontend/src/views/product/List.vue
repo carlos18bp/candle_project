@@ -9,7 +9,7 @@
             <!-- Filters -->
             <div class="col-span-4 md:col-span-1">
               <h1 class="text-2xl font-bold tracking-tight text-gray-900 py-8">
-                Filter by Categories
+                {{ $t('filter_title') }}
               </h1>
 
               <Disclosure
@@ -69,7 +69,7 @@
             <div class="col-span-4 md:col-span-3">
               <div class="mx-auto pt-8 pb-16 max-w-7xl">
                 <h2 class="text-2xl font-bold tracking-tight text-gray-900">
-                  Candles
+                  {{ $t('candles') }}
                 </h2>
 
                 <div
@@ -90,7 +90,7 @@
                     </div>
                     <div class="mt- flex justify-between">
                       <div>
-                        <h3 class="text-sm text-gray-700">
+                        <h3 v-if="currentLanguage === 'en' " class="text-sm text-gray-700">
                           <RouterLink
                             v-if="product.id"
                             :to="{
@@ -102,6 +102,19 @@
                             {{ product.title }}
                           </RouterLink>
                         </h3>
+
+                        <h3 v-else class="text-sm text-gray-700">
+                          <RouterLink
+                            v-if="product.id"
+                            :to="{
+                              name: 'product',
+                              params: { product_id: product.id },
+                            }"
+                          >
+                            <span aria-hidden="true" class="absolute inset-0" />
+                            {{ product.titulo }}
+                          </RouterLink>
+                        </h3>
                       </div>
                       <p class="text-sm font-medium text-gray-900">
                         $ {{ product.price }}
@@ -111,7 +124,7 @@
                 </div>
 
                 <nav
-                  class="flex items-center justify-between border-t border-gray-200 px-4"
+                  class="flex items-center justify-between border-t border-gray-200 px-4 mt-8"
                 >
                   <!-- Previous page button -->
                   <a
@@ -124,7 +137,7 @@
                       class="mr-3 h-5 w-5 text-primary_p"
                       aria-hidden="true"
                     />
-                    Previous
+                    {{ $t('previous') }}
                   </a>
 
                   <!-- Show page numbers -->
@@ -153,7 +166,7 @@
                     @click="goToPage(currentPage + 1)"
                     :disabled="currentPage === totalPages"
                   >
-                    Next
+                    {{ $t('next') }}
                     <ArrowLongRightIcon
                       class="ml-3 h-5 w-5 text-primary_p"
                       aria-hidden="true"
@@ -179,7 +192,14 @@
   import { MinusIcon, PlusIcon } from "@heroicons/vue/20/solid";
   import { useProductStore } from "@/stores/product";
   import { ArrowLongLeftIcon, ArrowLongRightIcon } from "@heroicons/vue/20/solid";
+  import { useAppStore } from '@/stores/language.js';
+  import enMessages from '@/locales/product/list/en.js';
+  import esMessages from '@/locales/product/list/es.js';
 
+  const messages = ref('');
+  const $t = (key) => messages.value[key];
+  const appStore = useAppStore();
+  const currentLanguage = ref('');
   const productStore = useProductStore();
   const products = ref([]);
   const categories = ref([]);
@@ -196,6 +216,7 @@
   }
 
   onMounted(async () => {
+  
   await productStore.fetchProductsData();
   products.value = productStore.products;
 
@@ -203,7 +224,17 @@
   categories.value = productStore.categories;
 
   isProductsLoaded.value = true;
+  watchEffect(() => {
+      currentLanguage.value = appStore.getCurrentLanguage;
+      if (currentLanguage.value === 'en') {
+        messages.value = enMessages;
+      } else {
+        messages.value = esMessages;
+      }
   });
+
+  });
+
 
   watchEffect(() => {
   if (isAnyFilterChecked()) {
