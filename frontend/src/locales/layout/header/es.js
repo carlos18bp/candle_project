@@ -1,6 +1,6 @@
 export default {
     shop: 'CATÁLOGO',
-    about: 'CONOCENOS',
+    about: 'CONÓCENOS',
     blog: 'BLOG',
     language: {
                 language: 'LENGUAJE',

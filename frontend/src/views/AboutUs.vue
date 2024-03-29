@@ -1,18 +1,16 @@
 <template>
   <Header></Header>
   <!--Content block-->
-  <div class="bg-primary_p xl:h-96">
+  <div class="bg-primary_p relative">
     <div class="grid xl:grid-cols-2 gap-6">
       <div class="p-8 md:p-16">
         <h1 class="font-semibold text-5xl md:text-7xl text-second_p">
-          Let it cool completely to maximizing the life of your candle.
+          {{ $t('main_title') }}
         </h1>
       </div>
       <div class="xl:w-3/4 px-8 md:px-16 xl:px-0 pb-16 flex items-end">
         <p class="text-second_p font-regular text-2xl md:text-4xl">
-          More than 10 times experiments were carried out to find the fragance
-          in accordance with nature to the point of having to stay overnight in
-          the dark.
+          {{ $t('main_description') }}
         </p>
       </div>
     </div>
@@ -48,7 +46,7 @@
 
   <!--Content-->
   <div class="relative mt-20 p-8 md:p-20">
-    <h2 class="font-bold text-2xl tracking-widest text-black_p">OUR PRODUCT</h2>
+    <h2 class="font-bold text-2xl tracking-widest text-black_p">{{ $t('our_product') }}</h2>
     <div class="relative grid xl:grid-cols-3 gap-4 mt-16 items-center">
       <div class="flex items-center justify-center xl:hidden">
         <img
@@ -60,18 +58,15 @@
 
       <div>
         <div class="xl:w-3/4">
-          <h3 class="text-2xl font-bold text-black_p">Nature</h3>
+          <h3 class="text-2xl font-bold text-black_p">{{ $t('nature_title') }}</h3>
           <p class="text-xl font-medium text-gray_p mt-5">
-            We are nature lovers, that's why we use environmentally friendly
-            materials so that wax waste doesn't damage the environment
+            {{ $t('nature_description') }}
           </p>
         </div>
         <div class="xl:w-3/4 mt-10">
-          <h3 class="text-2xl font-bold text-black_p">Premium</h3>
+          <h3 class="text-2xl font-bold text-black_p">{{ $t('premium_title') }}</h3>
           <p class="text-xl font-medium text-gray_p mt-5">
-            Affordable prices, even so we still prioritize quality so that at
-            low prices you still get quality products that hace been tested by
-            our team
+            {{ $t('premium_description') }}
           </p>
         </div>
       </div>
@@ -85,20 +80,21 @@
       </div>
 
       <div>
-        <div class="xl:w-3/4">
-          <h3 class="text-2xl font-bold text-black_p">Unique</h3>
-          <p class="text-xl font-medium text-gray_p mt-5">
-            Different from most other candles, we present a wide variety of
-            scents and have done field research by our team to get a realistic
-            scent
-          </p>
+        <div class="flex justify-end">
+          <div class="xl:w-3/4">
+            <h3 class="text-2xl text-end font-bold text-black_p">{{ $t('unique_title') }}</h3>
+            <p class="text-xl text-end font-medium text-gray_p mt-5">
+              {{ $t('unique_description') }}
+            </p>
+          </div>
         </div>
-        <div class="xl:w-3/4 mt-10">
-          <h3 class="text-2xl font-bold text-black_p">Economical</h3>
-          <p class="text-xl font-medium text-gray_p mt-5">
-            Our candles have a long shelf life and last for 6 months from the
-            moment you start using them so you can save on your budget
-          </p>
+        <div class="flex justify-end">
+          <div class="xl:w-3/4 mt-10">
+            <h3 class="text-2xl text-end font-bold text-black_p">{{ $t('economical_title') }}</h3>
+            <p class="text-xl text-end font-medium text-gray_p mt-5">
+              {{ $t('economical_description') }}
+            </p>
+          </div>
         </div>
       </div>
     </div>
@@ -106,7 +102,9 @@
 
   <!--Video Content-->
   <div class="relative xl:p-20 flex justify-center">
-    <img class="w-full" src="@/assets/images/aboutUs/videPic.jpg" alt="..." />
+    <video class="w-full h-auto" autoplay muted loop>
+        <source src="@/assets/videos/about_us/presentation.mp4" type="video/mp4">
+      </video>
   </div>
 
   <!--Content-->
@@ -117,18 +115,15 @@
 
     <div class="grid grid-cols-1 gap-16">
       <div class="px-8 md:px-0 md:w-3/4 h-auto">
-        <h2 class="font-bold text-2xl text-black_p">Plant-based ingredients</h2>
+        <h2 class="font-bold text-2xl text-black_p">{{ $t('why_senses') }}</h2>
         <p class="font-semibold text-xl text-gray_p">
-          A scented candle made with natural ingredients is a candle that uses
-          plant-based waxes, such as soy or beeswax, and essential oils to
-          create its scent.
+          {{ $t('why_description') }}
         </p>
       </div>
       <div class="px-8 md:px-0 md:w-3/4 h-auto">
-        <h2 class="font-bold text-2xl text-black_p">Parfume</h2>
+        <h2 class="font-bold text-2xl text-black_p">{{ $t('mission') }}</h2>
         <p class="font-semibold text-xl text-gray_p">
-          Provides a more natural, soothing aroma compared to candles made with
-          synthetic fragances and chemicals.
+          {{ $t('mission_description') }}
         </p>
       </div>
     </div>
@@ -138,8 +133,8 @@
   <div class="relative p-16 flex justify-center items-center bg-primary_p">
     <div class="inline-block">
       <h1 class="inline-block text-second_p tracking-wider">
-        <span class="font-semibold text-4xl">Can safely enjoy your </span
-        ><span class="font-special text-5xl">candle</span>
+        <span class="font-semibold text-4xl">{{ $t('candle_banner').first }}</span
+        ><span class="font-special text-5xl">{{ $t('candle_banner').second }}</span>
       </h1>
       <div class="flex justify-end">
         <img src="@/assets/images/aboutUs/lineCurved.png" alt="..." />
@@ -213,16 +208,31 @@
   import "swiper/css/pagination";
   import "swiper/css/navigation";
   import { Autoplay, Pagination, Navigation } from "swiper/modules";
-  import { onMounted, ref } from "vue";
+  import { onMounted, ref, watchEffect } from "vue";
   import Header from "@/components/layouts/Header.vue";
   import Footer from "@/components/layouts/Footer.vue";
   import { useReviewStore } from "@/stores/review";
+  import { useAppStore } from '@/stores/language.js';
+  import enMessages from '@/locales/about_us/en.js';
+  import esMessages from '@/locales/about_us/es.js';
 
+  const messages = ref(enMessages);
+  const $t = (key) => messages.value[key];
+  const appStore = useAppStore();
+  const currentLanguage = ref('');
   const reviewtStore = useReviewStore();
   const reviews = ref([]);
   const modules = [Autoplay, Pagination, Navigation];
 
   onMounted(async () => {
+    watchEffect(() => {
+      currentLanguage.value = appStore.getCurrentLanguage;
+      if (currentLanguage.value === 'en') {
+        messages.value = enMessages;
+      } else {
+        messages.value = esMessages;
+      }
+    });
     await reviewtStore.fetchReviewsData();
     reviews.value = reviewtStore.reviews;
   });

@@ -1,11 +1,13 @@
 <template>
-  <div class="absolute w-full">
+  <div class="absolute w-full z-30">
     <Header></Header>
   </div>
 
   <div class="grid lg:flex pt-24 lg:pt-0 pb-12">
     <div class="hidden lg:block lg:w-2/5">
-      <img src="@/assets/images/home/banner_1.jpg" class="w-full h-auto" />
+      <video class="w-full h-auto" autoplay muted loop>
+        <source src="@/assets/videos/home/presentation.mp4" type="video/mp4">
+      </video>
     </div>
     <div
       class="w-full lg:w-3/5 bg-second_p flex flex-col justify-center lg:px-32"
@@ -42,7 +44,9 @@
       </div>
     </div>
     <div class="lg:hidden w-full mt-10">
-      <img src="@/assets/images/home/banner_1.jpg" class="w-full h-auto" />
+      <video class="w-full h-auto" autoplay muted loop>
+        <source src="@/assets/videos/home/presentation.mp4" type="video/mp4">
+      </video>
     </div>
   </div>
 
@@ -61,7 +65,9 @@
   </div>
 
   <div class="mx-auto relative flex flex-col items-center justify-center pb-12">
-    <img src="@/assets/images/home/banner_2.jpg" class="w-full h-auto pb-8" />
+    <video class="w-full h-auto pb-8" autoplay muted loop>
+        <source src="@/assets/videos/home/banner.mp4" type="video/mp4">
+      </video>
     <RouterLink
       :to="{ name: 'blogs' }"
       class="font-regular rounded-full bg-white py-4 px-16 text-xl text-black_p shadow-sm ring-1 ring-inset ring-primary_p hover:bg-black_p hover:text-second_p hover:ring-transparent uppercase"
@@ -118,14 +124,14 @@
   <div class="mx-auto relative px-8 py-12 bg-primary_p">
     <div class="relative z-10">
       <img
-        src="@/assets/images/home/banner_8.png"
+        src="@/assets/images/home/banner_8.jpg"
         class="max-w-lg md:max-w-7xl mx-auto h-auto relative z-20 object-cover object-center"
       />
       <h1
         class="absolute w-full text-center top-40 font-bold text-second_p text-6xl md:text-8xl tracking-wider"
       >
         <span class="relative z-30">{{ $t('fragance_room').first }}</span>
-        <span class="relative z-30 md:z-0">{{ $t('fragance_room').second }}</span>
+        <span class="relative z-30">{{ $t('fragance_room').second }}</span>
         <span class="relative z-30">{{ $t('fragance_room').third }}</span>
       </h1>
       <div class="absolute bottom-14 left-1/2 -translate-x-1/2 z-30">
