@@ -142,28 +142,34 @@
 </template>
 
 <script setup>
-  import { ref } from 'vue'
+  import { ref, onMounted } from 'vue'
   import { RouterLink } from 'vue-router';
   import { Dialog, DialogPanel } from '@headlessui/vue'
   import { Bars3Icon, XMarkIcon } from '@heroicons/vue/24/outline'
   import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/vue'
   import { ChevronDownIcon } from '@heroicons/vue/20/solid'
+  import { useAppStore } from '@/stores/language.js';
   import enMessages from '@/locales/layout/header/en.js';
   import esMessages from '@/locales/layout/header/es.js';
 
-
+  const appStore = useAppStore();
   const currentLanguage = ref();
-  const messages = ref();
+  const messages = ref(enMessages);
+  const $t = (key) => messages.value[key];
+  const mobileMenuOpen = ref(false)
 
   const handleLanguage = (key) => {
-    currentLanguage.value = key;
+    appStore.setCurrentLanguage(key);
+    currentLanguage.value = appStore.getCurrentLanguage;
     messages.value = currentLanguage.value === 'en' ? enMessages : esMessages;
   }
 
+  onMounted(() => {
+    currentLanguage.value = appStore.getCurrentLanguage;
+    messages.value = currentLanguage.value === 'en' ? enMessages : esMessages;
+  });
 
-  const $t = (key) => messages.value[key];
 
-  const mobileMenuOpen = ref(false)
 
   // Enlaces para dispositivos móviles
   const mobileLinks = [
@@ -180,7 +186,5 @@
     // Por ejemplo, podrías comparar el nombre del enlace con el nombre de la ruta actual
     return false // Cambia esto según tu lógica
   }
-
-  handleLanguage('en');
 
 </script>

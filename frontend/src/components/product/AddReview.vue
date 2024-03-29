@@ -124,6 +124,7 @@
               ></textarea>
             </div>
           </div>
+          
           <button
             data-modal-hide="add-review-modal"
             type="submit"
@@ -139,29 +140,30 @@
 
 <script setup>
   import { submitHandler } from "@/shared/submit_handler";
-  import { reactive } from "vue";
+  import { reactive, onMounted } from "vue";
+  
+  let geetest = '';
 
   const props = defineProps({
-  productId: Number,
+    productId: Number,
   });
-
+  
   const reviewFormData = reactive({
-  fullName: "",
-  birthday: "",
-  email: "",
-  rate: "",
-  description: "",
-  productId: props.productId,
+    fullName: "",
+    birthday: "",
+    email: "",
+    rate: "",
+    description: "",
+    productId: props.productId,
   });
-
+  
   /**
    * Submit event.
    */
   const onSubmit = () => {
-  submitHandler(reviewFormData, "New review was created!");
-  cleanForm();
+    geetest.showBox()
   };
-
+  
   /**
    * Clean review form
    */
@@ -171,5 +173,30 @@
   reviewFormData.email = "";
   reviewFormData.rate = "";
   reviewFormData.description = "";
-  };
+};
+
+onMounted ( () => {
+  initGeetest4(
+{
+
+  product: "bind",
+  captchaId: "8b442b4da2d1abbb82c72549543bfc4d",
+    },
+    function (captchaObj) {
+      geetest = captchaObj;
+      captchaObj
+        .onReady(function () {
+        })
+        .onSuccess(function () {
+          submitHandler(reviewFormData, "New review was created!");
+          cleanForm();
+        })
+        .onError(function () {
+        });
+    }
+  );
+})
 </script>
+
+
+

@@ -5,8 +5,8 @@
     <div
       class="rounded-3xl relative xl:absolute bg-second_p flex flex-col w-3/4 xl:w-1/4 p-8 xl:top-28 xl:left-28"
     >
-      <h2 class="font-bold text-center text-4xl pb-8">Get In Touch</h2>
-      <h2 class="font-bold pb-6 text-4xl">Contact</h2>
+      <h2 class="font-bold text-center text-4xl pb-8">{{ $t('contact_title') }}</h2>
+      <h2 class="font-bold pb-6 text-4xl">{{ $t('contact') }}</h2>
       <div class="pb-8">
         <div class="flex items-center pb-4">
           <div class="flex items-center w-8">
@@ -61,6 +61,25 @@
   import { GoogleMap, Marker } from "vue3-google-map";
   import Header from "@/components/layouts/Header.vue";
   import Footer from "@/components/layouts/Footer.vue";
+  import { useAppStore } from '@/stores/language.js';
+  import enMessages from '@/locales/contact/en.js';
+  import esMessages from '@/locales/contact/es.js';
+  import { onMounted, watchEffect , ref } from "vue";
 
+  const messages = ref('');
+  const $t = (key) => messages.value[key];
+  const appStore = useAppStore();
+  const currentLanguage = ref('');
   const center = { lat: 35.22709, lng: -80.84313 };
+
+  onMounted(() => {
+    watchEffect(() => {
+      currentLanguage.value = appStore.getCurrentLanguage;
+      if (currentLanguage.value === 'en') {
+        messages.value = enMessages;
+      } else {
+        messages.value = esMessages;
+      }
+    });
+  })
 </script>

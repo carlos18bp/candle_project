@@ -5,8 +5,7 @@
       <div class="xl:grid xl:grid-cols-3 xl:gap-8">
         <div class="space-y-8">
           <img src="@/assets/images/logo.png" class="w-auto h-20">
-          <p class="text-sm leading-6 text-second_p font-regular">Making the world a better place through constructing
-            elegant hierarchies.</p>
+          <p class="text-sm leading-6 text-second_p font-regular">{{ $t('text') }}</p>
           <div class="flex space-x-6">
             <a v-for="item in navigation.social" :key="item.name" :href="item.href"
               class="text-second_p hover:text-primary_p">
@@ -19,18 +18,18 @@
 
           <div class="md:grid md:grid-cols-2 md:gap-8">
             <div>
-              <h3 class="text-sm font-semibold leading-6 text-second_p">Company</h3>
+              <h3 class="text-sm font-semibold leading-6 text-second_p">{{ $t('company').company }}</h3>
               <ul role="list" class="mt-6 space-y-4">
-                <li v-for="item in navigation.company" :key="item.name">
+                <li v-for="item in company" :key="item.name">
                   <a :href="item.href" class="text-sm font-regular leading-6 text-second_p hover:text-primary_p">{{
               item.name }}</a>
                 </li>
               </ul>
             </div>
             <div class="mt-10 md:mt-0">
-              <h3 class="text-sm font-semibold leading-6 text-second_p">Legal</h3>
+              <h3 class="text-sm font-semibold leading-6 text-second_p">{{ $t('legal').legal }}</h3>
               <ul role="list" class="mt-6 space-y-4">
-                <li v-for="item in navigation.legal" :key="item.name">
+                <li v-for="item in legal" :key="item.name">
                   <a :href="item.href" class="text-sm font-regular leading-6 text-second_p hover:text-primary_p">{{
                     item.name }}</a>
                 </li>
@@ -40,9 +39,9 @@
         </div>
       </div>
       <div class="mt-16 border-t border-gray_p pt-8 sm:mt-20 lg:mt-24 grid grid-cols-2 gap-4">
-        <p class="text-xs leading-5 text-second_p ">&copy; 2024 Senses Candles By Kate, Inc. All rights reserved.</p>
+        <p class="text-xs leading-5 text-second_p ">{{ $t('rights').candle }}</p>
         <div class="grid grid-cols-2 gap-2">
-          <p class="text-xs leading-5 text-second_p">&copy; Designed And Development By Páginas Webs Colombia.</p>
+          <p class="text-xs leading-5 text-second_p">{{ $t('rights').design }}</p>
           <img class="w-auto h-10" src="@/assets/images/logo_pwc.png"
             alt="Logo o icono o presentación de Páginas Webs Colombia Oficial.">
         </div>
@@ -52,20 +51,28 @@
 </template>
 
 <script setup>
-  import { defineComponent, h } from 'vue'
+  import { defineComponent, h, ref, onMounted, watchEffect } from 'vue'
+  import { useAppStore } from '@/stores/language.js';
+  import enMessages from '@/locales/layout/footer/en.js';
+  import esMessages from '@/locales/layout/footer/es.js';
 
+  const messages = ref(enMessages);
+  const $t = (key) => messages.value[key];
+  const appStore = useAppStore();
+  const currentLanguage = ref('');
+
+  const company = ref([
+      { name: $t('company').shop, href: '#' },
+      { name: $t('company').about, href: '#' },
+      { name: $t('company').blog, href: '#' },
+      { name: $t('company').contact, href: '#' },
+  ])
+  const legal = ref([
+      { name: $t('legal').claim, href: '#' },
+      { name: $t('legal').privacity, href: '#' },
+      { name: $t('legal').terms, href: '#' },
+  ])
   const navigation = {
-    company: [
-      { name: 'SHOP', href: '#' },
-      { name: 'ABOUT', href: '#' },
-      { name: 'BLOG', href: '#' },
-      { name: 'CONTACT', href: '#' },
-    ],
-    legal: [
-      { name: 'CLAIM', href: '#' },
-      { name: 'PRIVACY', href: '#' },
-      { name: 'TERMS', href: '#' },
-    ],
 
     social: [
       {
@@ -110,4 +117,26 @@
       },
     ],
   }
+
+  onMounted(() => {
+    watchEffect(() => {
+      currentLanguage.value = appStore.getCurrentLanguage;
+      if (currentLanguage.value === 'en') {
+        messages.value = enMessages;
+      } else {
+        messages.value = esMessages;
+      }
+      company.value = [
+      { name: $t('company').shop, href: '#' },
+      { name: $t('company').about, href: '#' },
+      { name: $t('company').blog, href: '#' },
+      { name: $t('company').contact, href: '#' },
+      ]
+      legal.value = [
+      { name: $t('legal').claim, href: '#' },
+      { name: $t('legal').privacity, href: '#' },
+      { name: $t('legal').terms, href: '#' },
+      ]
+    });
+  });
 </script>

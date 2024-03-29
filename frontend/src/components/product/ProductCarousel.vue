@@ -7,7 +7,7 @@
           </div>
           <div class="mt-4 flex justify-between">
             <div>
-              <h3 class="text-lg font-semibold text-black_p">
+              <h2 v-if="currentLanguage === 'en'" class="text-lg font-semibold text-black_p">
                 <RouterLink
                     v-if="product.id"       
                     :to="{ name: 'product', 
@@ -15,7 +15,16 @@
                     <span aria-hidden="true" class="absolute inset-0" />
                     {{ product.title }}
                 </RouterLink>
-              </h3>
+              </h2>
+              <h2 v-else class="text-lg font-semibold text-black_p">
+                <RouterLink
+                    v-if="product.id"       
+                    :to="{ name: 'product', 
+                    params: { product_id: product.id } }">
+                    <span aria-hidden="true" class="absolute inset-0" />
+                    {{ product.titulo }}
+                </RouterLink>
+              </h2>
             </div>
             <p class="text-sm font-medium text-black_p">$ {{ product.price }}</p>
           </div>
@@ -25,9 +34,12 @@
 </template>
 
 <script setup>
-  import { onMounted, ref } from "vue";
+  import { onMounted, ref, watchEffect } from "vue";
   import { useProductStore } from '@/stores/product';
+  import { useAppStore } from '@/stores/language.js';
 
+  const appStore = useAppStore();
+  const currentLanguage = ref('');
   const props = defineProps({
       top: Number,
   });
@@ -36,6 +48,9 @@
   const topProducts = ref([]); 
 
   onMounted(async () => {
+      watchEffect(() => {
+        currentLanguage.value = appStore.getCurrentLanguage;
+      })
       await productStore.fetchProductsData();
       topProducts.value = productStore.products.slice(0, props.top);
   });
