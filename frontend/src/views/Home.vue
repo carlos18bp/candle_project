@@ -121,14 +121,14 @@
     </div>
   </div>
 
-  <div class="mx-auto relative px-8 py-12 bg-primary_p">
+  <div class="mx-auto relative md:px-8 md:py-12 bg-primary_p">
     <div class="relative z-10">
       <img
         src="@/assets/images/home/banner_8.jpg"
-        class="max-w-lg md:max-w-7xl mx-auto h-auto relative z-20 object-cover object-center"
+        class="w-full md:max-w-7xl mx-auto h-auto relative z-20 object-cover object-center"
       />
       <h1
-        class="absolute w-full text-center top-40 font-bold text-second_p text-6xl md:text-8xl tracking-wider"
+        class="hidden w-full text-center top-40 font-bold text-second_p text-6xl md:text-8xl md:absolute tracking-wider"
       >
         <span class="relative z-30">{{ $t('fragance_room').first }}</span>
         <span class="relative z-30">{{ $t('fragance_room').second }}</span>

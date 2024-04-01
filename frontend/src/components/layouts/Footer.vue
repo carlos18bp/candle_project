@@ -29,12 +29,41 @@
             <div class="mt-10 md:mt-0">
               <h3 class="text-sm font-semibold leading-6 text-second_p">{{ $t('legal').legal }}</h3>
               <ul role="list" class="mt-6 space-y-4">
-                <li v-for="item in legal" :key="item.name">
-                  <a :href="item.href" class="text-sm font-regular leading-6 text-second_p hover:text-primary_p">{{
+                <li class="cursor-pointer" v-for="item in legal" :key="item.name">
+                  <a @click="openTerms()" class="text-sm font-regular leading-6 text-second_p hover:text-primary_p">{{
                     item.name }}</a>
                 </li>
               </ul>
             </div>
+            <TransitionRoot as="template" :show="open">
+              <Dialog as="div" class="relative z-10" @close="open = false">
+                <TransitionChild as="template" enter="ease-out duration-300" enter-from="opacity-0" enter-to="opacity-100" leave="ease-in duration-200" leave-from="opacity-100" leave-to="opacity-0">
+                  <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" />
+                </TransitionChild>
+
+                <div class="fixed inset-0 z-10 w-screen overflow-y-auto">
+                  <div class="flex h-full w-full items-end justify-start p-8 text-center sm:items-center">
+                    <TransitionChild as="template" enter="ease-out duration-300" enter-from="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95" enter-to="opacity-100 translate-y-0 sm:scale-100" leave="ease-in duration-200" leave-from="opacity-100 translate-y-0 sm:scale-100" leave-to="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95">
+                      <DialogPanel class="relative w-full h-full overflow-y-auto transform overflow-hidden rounded-lg bg-white px-4 pb-4 pt-5 text-left shadow-xl transition-all sm:my-8 sm:p-6">
+                        <div class="bg-white flex z-30 justify-end">
+                          <XCircleIcon class="h-8 w-8  text-black hover:text-primary_p" @click="openTerms()" aria-hidden="true" />
+                        </div>
+                        <div>
+                          <div class="mt-3 text-center sm:mt-5">
+                            <div class="mt-2" v-html="$t('legal').text">
+                             
+                            </div>
+                          </div>
+                        </div>
+                        <div class="mt-5 sm:mt-6">
+                          <button type="button" class="inline-flex w-full justify-center rounded-md bg-primary_p px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-terciary_p focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600" @click="open = false">Go Back</button>
+                        </div>
+                      </DialogPanel>
+                    </TransitionChild>
+                  </div>
+                </div>
+              </Dialog>
+            </TransitionRoot>
           </div>
         </div>
       </div>
@@ -55,7 +84,10 @@
   import { useAppStore } from '@/stores/language.js';
   import enMessages from '@/locales/layout/footer/en.js';
   import esMessages from '@/locales/layout/footer/es.js';
+  import { Dialog, DialogPanel, DialogTitle, TransitionChild, TransitionRoot } from '@headlessui/vue'
+  import { XCircleIcon } from '@heroicons/vue/24/outline'
 
+  const open = ref(false)
   const messages = ref(enMessages);
   const $t = (key) => messages.value[key];
   const appStore = useAppStore();
@@ -72,6 +104,7 @@
       { name: $t('legal').privacity, href: '#' },
       { name: $t('legal').terms, href: '#' },
   ])
+
   const navigation = {
 
     social: [
@@ -133,10 +166,11 @@
       { name: $t('company').contact, href: '#' },
       ]
       legal.value = [
-      { name: $t('legal').claim, href: '#' },
-      { name: $t('legal').privacity, href: '#' },
       { name: $t('legal').terms, href: '#' },
       ]
     });
   });
+  const openTerms = () => {
+    open.value = !open.value
+  }
 </script>
