@@ -29,8 +29,10 @@
             <div class="mt-10 md:mt-0">
               <h3 class="text-sm font-semibold leading-6 text-second_p">{{ $t('legal').legal }}</h3>
               <ul role="list" class="mt-6 space-y-4">
+
                 <li class="cursor-pointer" v-for="item in legal" :key="item.name">
                   <a @click="openTerms()" class="text-sm font-regular leading-6 text-second_p hover:text-primary_p">{{
+
                     item.name }}</a>
                 </li>
               </ul>
@@ -84,6 +86,7 @@
   import { useAppStore } from '@/stores/language.js';
   import enMessages from '@/locales/layout/footer/en.js';
   import esMessages from '@/locales/layout/footer/es.js';
+
   import { Dialog, DialogPanel, DialogTitle, TransitionChild, TransitionRoot } from '@headlessui/vue'
   import { XCircleIcon } from '@heroicons/vue/24/outline'
 
@@ -105,6 +108,24 @@
       { name: $t('legal').terms, href: '#' },
   ])
 
+
+
+  const messages = ref(enMessages);
+  const $t = (key) => messages.value[key];
+  const appStore = useAppStore();
+  const currentLanguage = ref('');
+
+  const company = ref([
+      { name: $t('company').shop, href: '#' },
+      { name: $t('company').about, href: '#' },
+      { name: $t('company').blog, href: '#' },
+      { name: $t('company').contact, href: '#' },
+  ])
+  const legal = ref([
+      { name: $t('legal').claim, href: '#' },
+      { name: $t('legal').privacity, href: '#' },
+      { name: $t('legal').terms, href: '#' },
+  ])
   const navigation = {
 
     social: [
