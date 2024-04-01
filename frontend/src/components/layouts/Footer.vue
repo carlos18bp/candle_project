@@ -96,24 +96,6 @@
   const appStore = useAppStore();
   const currentLanguage = ref('');
 
-  const company = ref([
-      { name: $t('company').shop, href: '#' },
-      { name: $t('company').about, href: '#' },
-      { name: $t('company').blog, href: '#' },
-      { name: $t('company').contact, href: '#' },
-  ])
-  const legal = ref([
-      { name: $t('legal').claim, href: '#' },
-      { name: $t('legal').privacity, href: '#' },
-      { name: $t('legal').terms, href: '#' },
-  ])
-
-
-
-  const messages = ref(enMessages);
-  const $t = (key) => messages.value[key];
-  const appStore = useAppStore();
-  const currentLanguage = ref('');
 
   const company = ref([
       { name: $t('company').shop, href: '#' },
