@@ -225,6 +225,7 @@
   const modules = [Autoplay, Pagination, Navigation];
 
   onMounted(async () => {
+    window.scrollTo({ top: 0 });
     watchEffect(() => {
       currentLanguage.value = appStore.getCurrentLanguage;
       if (currentLanguage.value === 'en') {

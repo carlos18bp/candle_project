@@ -216,6 +216,7 @@
   }
 
   onMounted(async () => {
+  window.scrollTo({ top: 0 });
   
   await productStore.fetchProductsData();
   products.value = productStore.products;

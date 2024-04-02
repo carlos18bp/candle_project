@@ -102,6 +102,7 @@ export const useProductStore = defineStore("product", {
           name: subCategory,
           checked: false,
         })),
+
       }));
 
       console.log("categories");

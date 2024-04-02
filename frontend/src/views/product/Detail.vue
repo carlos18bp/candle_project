@@ -191,6 +191,7 @@
   const averageRate = ref(0);
 
   onMounted(async () => {
+      window.scrollTo({ top: 0 });
       watchEffect(() => {
         currentLanguage.value = appStore.getCurrentLanguage;
         if (currentLanguage.value === 'en') {

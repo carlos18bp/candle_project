@@ -65,11 +65,11 @@
   </div>
 
   <div class="mx-auto relative flex flex-col items-center justify-center pb-12">
-    <video class="w-full h-auto pb-8" autoplay muted loop>
+    <video class="w-full h-auto pb-12" autoplay muted loop>
         <source src="@/assets/videos/home/banner.mp4" type="video/mp4">
       </video>
     <RouterLink
-      :to="{ name: 'blogs' }"
+      :to="{ name: 'products' }"
       class="font-regular rounded-full bg-white py-4 px-16 text-xl text-black_p shadow-sm ring-1 ring-inset ring-primary_p hover:bg-black_p hover:text-second_p hover:ring-transparent uppercase"
     >
       {{ $t('show_more_button') }}
@@ -129,20 +129,21 @@
         class="w-full md:max-w-7xl mx-auto h-auto relative z-20 object-cover object-center"
 
       />
-      <h1
-        class="hidden w-full text-center top-40 font-bold text-second_p text-6xl md:text-8xl md:absolute tracking-wider"
-      >
-        <span class="relative z-30">{{ $t('fragance_room').first }}</span>
-        <span class="relative z-30">{{ $t('fragance_room').second }}</span>
-        <span class="relative z-30">{{ $t('fragance_room').third }}</span>
-      </h1>
+        <h1
+          class="hidden w-full text-center top-60 font-bold text-second_p text-6xl md:text-8xl xl:absolute xl:inline-block tracking-wider"
+        >
+          <span class="relative z-30">{{ $t('fragance_room').first }}</span>
+          <span class="relative z-30">{{ $t('fragance_room').second }}</span>
+          <span class="relative z-30">{{ $t('fragance_room').third }}</span>
+        </h1>
       <div class="absolute bottom-14 left-1/2 -translate-x-1/2 z-30">
-        <button
+        <RouterLink
+          :to="{ name: 'products' }"
           type="button"
           class="font-regular tracking-wider rounded-full bg-black_p py-3 px-14 text-sm text-second_p shadow-sm hover:bg-second_p hover:text-black_p uppercase"
         >
           {{ $t('find_button') }}
-        </button>
+        </RouterLink>
       </div>
     </div>
 
@@ -170,6 +171,7 @@
   const currentLanguage = ref('');
 
   onMounted(() => {
+    window.scrollTo({ top: 0 });
     watchEffect(() => {
       currentLanguage.value = appStore.getCurrentLanguage;
       if (currentLanguage.value === 'en') {
