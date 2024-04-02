@@ -2,7 +2,7 @@ export default {
     text: 'Making the world a better place through constructing elegant hierarchies.',
     rights: {
         candle: '© 2024 Senses Candles By Kate, Inc. All rights reserved.',
-        design: '© Designed And Development By Páginas Webs Colombia.'
+        design: '© Designed And Development By Páginas Webs Colombia. Visit Us Here'
     },
     company: {
         company: 'COMPANY',

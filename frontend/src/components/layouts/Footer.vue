@@ -72,7 +72,7 @@
       <div class="mt-16 border-t border-gray_p pt-8 sm:mt-20 lg:mt-24 grid grid-cols-2 gap-4">
         <p class="text-xs leading-5 text-second_p ">{{ $t('rights').candle }}</p>
         <div class="grid grid-cols-2 gap-2">
-          <p class="text-xs leading-5 text-second_p">{{ $t('rights').design }}</p>
+          <a href="https://www.paginaswebscolombia.com.co/" target="_blank" class="decoration-none"><p class="text-xs leading-5 text-second_p">{{ $t('rights').design }}</p></a>
           <img class="w-auto h-10" src="@/assets/images/logo_pwc.png"
             alt="Logo o icono o presentación de Páginas Webs Colombia Oficial.">
         </div>
@@ -98,15 +98,13 @@
 
 
   const company = ref([
-      { name: $t('company').shop, href: '#' },
-      { name: $t('company').about, href: '#' },
-      { name: $t('company').blog, href: '#' },
-      { name: $t('company').contact, href: '#' },
+      { name: $t('company').shop, href: '/products' },
+      { name: $t('company').about, href: '/about_us' },
+      { name: $t('company').blog, href: '/blogs' },
+      { name: $t('company').contact, href: '/contact' },
   ])
   const legal = ref([
-      { name: $t('legal').claim, href: '#' },
-      { name: $t('legal').privacity, href: '#' },
-      { name: $t('legal').terms, href: '#' },
+      { name: $t('legal').terms },
   ])
   const navigation = {
 
@@ -163,13 +161,13 @@
         messages.value = esMessages;
       }
       company.value = [
-      { name: $t('company').shop, href: '#' },
-      { name: $t('company').about, href: '#' },
-      { name: $t('company').blog, href: '#' },
-      { name: $t('company').contact, href: '#' },
+      { name: $t('company').shop, href: '/products' },
+      { name: $t('company').about, href: '/about_us' },
+      { name: $t('company').blog, href: '/blogs' },
+      { name: $t('company').contact, href: '/contact' },
       ]
       legal.value = [
-      { name: $t('legal').terms, href: '#' },
+      { name: $t('legal').terms },
       ]
     });
   });

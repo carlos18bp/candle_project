@@ -73,6 +73,7 @@
   const center = { lat: 35.22709, lng: -80.84313 };
 
   onMounted(() => {
+    window.scrollTo({ top: 0 });
     watchEffect(() => {
       currentLanguage.value = appStore.getCurrentLanguage;
       if (currentLanguage.value === 'en') {
