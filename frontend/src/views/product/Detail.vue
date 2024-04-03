@@ -44,7 +44,7 @@
                   <div v-if="!selectedImage" class="mt-10 px-4 sm:mt-16 sm:px-0 lg:mt-0">
 
                     <div class="mt-3 flex justify-between">
-                        <h1 v-if="currentLanguage === 'en' " class="inline-block text-3xl font-semibold tracking-tight text-black_p">{{ product.title }}</h1>
+                        <h1 v-if="currentLanguage === 'en'" class="inline-block text-3xl font-semibold tracking-tight text-black_p">{{ product.title }}</h1>
                         <h1 v-else class="inline-block text-3xl font-semibold tracking-tight text-black_p">{{ product.titulo }}</h1>
                         <h2 class="sr-only">Product information</h2>
                         <p  class="inline-block text-3xl tracking-tight font-regular text-black_p">$ {{ product.price }}</p>

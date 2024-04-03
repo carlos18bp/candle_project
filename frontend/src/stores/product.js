@@ -5,6 +5,7 @@ export const useProductStore = defineStore("product", {
   state: () => ({
     products: [],
     categories: [],
+    categorias: [],
     areUpdateProducts: false,
     requestStatus: "",
   }),
@@ -39,6 +40,24 @@ export const useProductStore = defineStore("product", {
             (subCategory) =>
               isCheckedSubCategory(subCategory) &&
               product.subCategory === subCategory.name
+          )
+        )
+      );
+    },
+    /**
+     * Get product by sub-categoria.
+     * @param {object} state - State.
+     * @returns {array} - Product by sub-categoria occurrence.
+     */
+    productBySubCategoria: (state) => {
+      const isCheckedSubCategoria = (subCategoria) => subCategoria.checked;
+
+      return state.products.filter((product) =>
+        state.categorias.some((categoria) =>
+          categoria.subCategorias.some(
+            (subCategoria) =>
+              isCheckedSubCategoria(subCategoria) &&
+              product.subCategoria === subCategoria.name
           )
         )
       );
@@ -82,6 +101,7 @@ export const useProductStore = defineStore("product", {
       if (!this.areUpdateProducts) this.fetchProductsData();
 
       const uniqueCategories = [];
+      const uniqueCategorias = [];
 
       this.products.forEach((product) => {
         const category = product.category;
@@ -94,6 +114,17 @@ export const useProductStore = defineStore("product", {
         if (!uniqueCategories[category].includes(subCategory)) {
           uniqueCategories[category].push(subCategory);
         }
+
+        const categoria = product.categoria;
+        const subCategoria = product.subCategoria;
+
+        if (!uniqueCategorias[categoria]) {
+          uniqueCategorias[categoria] = [];
+        }
+
+        if (!uniqueCategorias[categoria].includes(subCategoria)) {
+          uniqueCategorias[categoria].push(subCategoria);
+        }
       });
 
       this.categories = Object.keys(uniqueCategories).map((category) => ({
@@ -102,11 +133,16 @@ export const useProductStore = defineStore("product", {
           name: subCategory,
           checked: false,
         })),
-
       }));
 
-      console.log("categories");
-      console.log(this.categories);
+      this.categorias = Object.keys(uniqueCategorias).map((categoria) => ({
+        name: categoria,
+        subCategorias: uniqueCategorias[categoria].map((subCategoria) => ({
+          name: subCategoria,
+          checked: false,
+        })),
+      }));
+
     },
     /**
      * Call creation user and review request.
