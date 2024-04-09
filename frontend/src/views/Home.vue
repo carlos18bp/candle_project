@@ -65,7 +65,7 @@
   </div>
 
   <div class="mx-auto relative flex flex-col items-center justify-center pb-12">
-    <video class="w-full h-auto pb-12" autoplay muted loop>
+      <video class="w-full h-auto p-20 pb-12" autoplay muted loop>
         <source src="@/assets/videos/home/banner.mp4" type="video/mp4">
       </video>
     <RouterLink
@@ -121,12 +121,12 @@
     </div>
   </div>
 
-  <div class="mx-auto relative md:px-8 md:py-12 bg-primary_p">
+  <div class="mx-auto relative">
     <div class="relative z-10">
       <img
         src="@/assets/images/home/banner_8.jpg"
 
-        class="w-full md:max-w-7xl mx-auto h-auto relative z-20 object-cover object-center"
+        class="w-full  mx-auto h-auto relative z-20 object-cover object-center"
 
       />
         <h1
