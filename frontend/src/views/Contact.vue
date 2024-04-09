@@ -12,13 +12,13 @@
           <div class="flex items-center w-8">
             <img src="@/assets/images/icons/phone_call.png" class="size-6" />
           </div>
-          <p class="font-regular text-2xl pl-2">+1 (252) 591-6930</p>
+          <a href="tel:+17049005171" class="font-regular text-2xl pl-2">+1 (704) 900-5171</a>
         </div>
         <div class="flex items-center pb-4">
           <div class="flex items-center w-8">
             <img src="@/assets/images/icons/sharp_email.png" class="size-6" />
           </div>
-          <p class="font-regular text-2xl pl-2">info@hello.com</p>
+          <a href="mailto:sensescandlesbykate@gmail.com" class="font-regular text-2xl pl-2">sensescandlesbykate@gmail.com</a>
         </div>
         <div class="flex items-center">
           <div class="flex items-center w-8">
@@ -39,18 +39,15 @@
         </GoogleMap>
       </div>
       <div class="flex justify-evenly pt-8">
-        <img
-          src="@/assets/images/icons/social_media/facebook.png"
-          class="size-9"
-        />
-        <img
-          src="@/assets/images/icons/social_media/instagram.png"
-          class="size-9"
-        />
-        <img
-          src="@/assets/images/icons/social_media/twitter.png"
-          class="size-9"
-        />
+        <a href="https://wa.me/17049005171" target="_blank">
+          <i class="bi bi-whatsapp text-4xl"></i>
+        </a>
+        <a href="https://www.tiktok.com/@sensescandlesbykate?_t=8lCy5sMMc1a&_r=1" target="_blank">
+          <i class="bi bi-tiktok text-4xl"></i>
+        </a>
+        <a href="https://www.instagram.com/sensescandlesbykate?igsh=YnhsMmZrbXh2amMy&utm_source=qr" target="_blank">
+          <i class="bi bi-instagram text-4xl"></i>
+        </a>
       </div>
     </div>
   </div>

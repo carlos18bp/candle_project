@@ -74,7 +74,7 @@
                         <button type="submit" class="flex justify-center max-w-xs flex-1 items-center rounded-md border border-transparent bg-primary_p px-2 py-3 text-base font-medium text-white hover:bg-terciary_p focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-terciary_p sm:w-full">
                           <div>
                             <i class="bi bi-whatsapp text-2xl me-2.5"></i>
-                            <a class="text-2xl ms-2.5">{{ $t('order') }}</a>
+                            <a href="https://wa.me/17049005171" target="_blank" class="text-2xl ms-2.5">{{ $t('order') }}</a>
                           </div>
                         </button>
                         </div>
