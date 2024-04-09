@@ -3,7 +3,7 @@
   <div class="mx-auto relative flex flex-col items-center">
     <img src="@/assets/images/contact/banner_1.jpg" class="w-full h-full" />
     <div
-      class="rounded-3xl relative xl:absolute bg-second_p flex flex-col w-3/4 xl:w-1/4 p-8 xl:top-28 xl:left-28"
+      class="rounded-3xl relative xl:absolute bg-second_p flex flex-col w-auto p-8 xl:top-28 xl:left-28"
     >
       <h2 class="font-bold text-center text-4xl pb-8">{{ $t('contact_title') }}</h2>
       <h2 class="font-bold pb-6 text-4xl">{{ $t('contact') }}</h2>
