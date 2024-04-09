@@ -45,7 +45,7 @@
                       class="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 aspect-none group-hover:opacity-75 h-80 mb-4"
                     >
                       <img
-                        :src="`/api/${product.images[0].image_url}`"
+                        :src="`${product.images[0].image_url}`"
                         class="object-cover object-center h-full w-full"
                       />
                     </div>

@@ -19,9 +19,10 @@ from django.urls import path
 from candle.views import blog, product, review, empty_response
 from django.conf import settings
 from django.conf.urls.static import static
+from django.views.generic import TemplateView
 
 urlpatterns = [
-    path('', empty_response.empty_response, name='empty_response'),
+    path('', TemplateView.as_view(template_name='index.html')),
     path('admin/', admin.site.urls),
     path('blogs/', blog.index, name='products'),
     path('products/', product.index, name='products'),

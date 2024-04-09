@@ -5,7 +5,7 @@
       <div class="w-full md:w-1/2 mt-4 -m-8 md:-m-0 md:mt-0">
         <img
           v-if="firstBlog && firstBlog.image_url"
-          :src="`/api/${firstBlog.image_url}`"
+          :src="`${firstBlog.image_url}`"
           class="w-full md:h-96 object-cover"
         />
       </div>

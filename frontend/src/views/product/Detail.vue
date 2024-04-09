@@ -13,7 +13,7 @@
                               <Tab v-for="image in product.images" :key="image.id" class="relative flex h-24 cursor-pointer items-center justify-center rounded-md bg-white text-sm font-medium uppercase text-black_p hover:bg-gray-50 focus:outline-none focus:ring focus:ring-opacity-50 focus:ring-offset-4 transition-transform duration-300 transform hover:scale-110">
                                   <span class="sr-only"> ----- </span>
                                   <span class="absolute inset-0 overflow-hidden rounded-md">
-                                      <img :src="`/api${image.image_url}`" alt="" class="h-full w-full object-cover object-center" />
+                                      <img :src="`${image.image_url}`" alt="" class="h-full w-full object-cover object-center" />
                                   </span>
                                   <span :class="[selected ? 'ring-primary_p' : 'ring-transparent', 'pointer-events-none absolute inset-0 rounded-md ring-2 ring-offset-2']" aria-hidden="true" />
                               </Tab>
@@ -22,7 +22,7 @@
 
                       <TabPanels class="aspect-h-1 aspect-w-1 w-full">
                           <TabPanel v-for="image in product.images" :key="image.id">
-                              <img :src="`/api${image.image_url}`" alt=" ----- " class="h-full w-full object-cover object-center sm:rounded-lg" @mousemove="handleMouseMove" @mouseenter="handleMouseEnter(image)" @mouseleave="handleMouseLeave"/>
+                              <img :src="`${image.image_url}`" alt=" ----- " class="h-full w-full object-cover object-center sm:rounded-lg" @mousemove="handleMouseMove" @mouseenter="handleMouseEnter(image)" @mouseleave="handleMouseLeave"/>
                           </TabPanel>
                       </TabPanels>
                   </TabGroup>
@@ -33,7 +33,7 @@
                   <div v-if="selectedImage" class="mt-10 px-4 sm:mt-16 sm:px-0 lg:mt-0">
                     <div class="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-lg">
                       <img
-                                :src="`/api${selectedImage ? selectedImage.image_url : image.image_url}`"
+                                :src="`${selectedImage ? selectedImage.image_url : image.image_url}`"
                                 alt=" ---- "
                                 class="h-full w-full object-cover"
                                 :style="{ transform: `scale(${4}) translate(${mouseX}px, ${mouseY}px)` }"
