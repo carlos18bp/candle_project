@@ -174,10 +174,10 @@
   // Enlaces para dispositivos móviles
   const mobileLinks = [
     { name: 'home', href: '/' },
-    { name: 'shop', href: 'products' },
-    { name: 'about', href: 'about_us' },
-    { name: 'blog', href: 'blogs' },
-    { name: 'contact', href: 'contact' }
+    { name: 'shop', href: '/catalog' },
+    { name: 'about', href: '/about_us' },
+    { name: 'blog', href: '/blog' },
+    { name: 'contact', href: '/contact' }
   ]
 
   // Función para determinar si un enlace está activo
