@@ -98,9 +98,9 @@
 
 
   const company = ref([
-      { name: $t('company').shop, href: '/products' },
+      { name: $t('company').shop, href: '/catalog' },
       { name: $t('company').about, href: '/about_us' },
-      { name: $t('company').blog, href: '/blogs' },
+      { name: $t('company').blog, href: '/blog' },
       { name: $t('company').contact, href: '/contact' },
   ])
   const legal = ref([
@@ -161,9 +161,9 @@
         messages.value = esMessages;
       }
       company.value = [
-      { name: $t('company').shop, href: '/products' },
+      { name: $t('company').shop, href: '/catalog' },
       { name: $t('company').about, href: '/about_us' },
-      { name: $t('company').blog, href: '/blogs' },
+      { name: $t('company').blog, href: '/blog' },
       { name: $t('company').contact, href: '/contact' },
       ]
       legal.value = [
