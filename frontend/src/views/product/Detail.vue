@@ -59,7 +59,7 @@
                               </div>
                               <p class="sr-only">{{ product.reviews }} out of 5 stars</p>
                               <div class="ms-3">
-                                <p class="font-medium">12 {{ $t('reviews_1') }}</p>
+                                <p class="font-medium"> {{ reviewsLength }} {{ $t('reviews_1') }}</p>
                               </div>
                         </div>
 
@@ -120,7 +120,7 @@
           <h3 class="text-lg font-medium text-black_p">{{ $t('reviews_subtitle') }}</h3>
           <p class="mt-1 text-sm text-gray-600">{{ $t('reviews_text') }}</p>
 
-          <a href="#"
+          <a
              data-modal-toggle="add-review-modal" data-modal-target="add-review-modal"
              class="mt-6 inline-flex w-full items-center justify-center rounded-md border border-gray-300 bg-white px-8 py-2 text-sm font-medium text-black_p hover:bg-gray-50 sm:w-auto lg:w-full">
                 {{ $t('reviews_button') }}
@@ -189,6 +189,7 @@
   const product = reactive({});
   const reviews = ref([]);
   const averageRate = ref(0);
+  const reviewsLength = ref();
 
   onMounted(async () => {
       window.scrollTo({ top: 0 });
@@ -215,7 +216,7 @@
     productId.value = parseInt(route.params.product_id);
     if (productId.value) Object.assign(product, productStore.productById(productId.value));
     reviews.value = await product.reviews
-    
+    reviewsLength.value = reviews.value.length;
     averageRate.value = calculateAverageRate();
   });
 
