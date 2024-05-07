@@ -1,4 +1,5 @@
 <template>
+  <Banner></Banner>
   <Header></Header>
   <div class="mx-auto relative flex flex-col items-center">
     <img src="@/assets/images/contact/banner_1.jpg" class="w-full h-full" />
@@ -55,6 +56,7 @@
 </template>
 
 <script setup>
+  import Banner from "@/components/layouts/Banner.vue";
   import { GoogleMap, Marker } from "vue3-google-map";
   import Header from "@/components/layouts/Header.vue";
   import Footer from "@/components/layouts/Footer.vue";
