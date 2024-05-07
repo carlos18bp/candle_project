@@ -1,4 +1,5 @@
 <template>
+  <Banner></Banner>
   <Header></Header>
   <div v-if="blog" class="mx-auto flex flex-col px-16">
     <div class="relative flex pb-8">
@@ -31,6 +32,7 @@
 </template>
 
 <script setup>
+  import Banner from "@/components/layouts/Banner.vue";
   import { onMounted, reactive, ref, watchEffect } from "vue";
   import { useRoute } from "vue-router";
   import { useBlogStore } from "@/stores/blog";

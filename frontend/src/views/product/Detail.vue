@@ -1,4 +1,5 @@
 <template>  
+    <Banner></Banner>
     <Header></Header>
 
     <div v-if="product" class="relative isolate px-6 lg:px-8">
@@ -159,6 +160,7 @@
 </template>
 
 <script setup>
+  import Banner from "@/components/layouts/Banner.vue";
   import Header from "@/components/layouts/Header.vue";
   import Footer from "@/components/layouts/Footer.vue";
   import AddReview from "@/components/product/AddReview.vue";
@@ -177,7 +179,7 @@
   import { useAppStore } from '@/stores/language.js';
   import enMessages from '@/locales/product/detail/en.js';
   import esMessages from '@/locales/product/detail/es.js';
-
+  
   const messages = ref('');
   const $t = (key) => messages.value[key];
   const appStore = useAppStore();
@@ -202,7 +204,8 @@
         }
       });
       await productStore.fetchProductsData();
-      initModals();     
+      initModals();
+      
   });
 
   const calculateAverageRate = () => {

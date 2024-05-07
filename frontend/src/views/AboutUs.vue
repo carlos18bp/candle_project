@@ -1,4 +1,5 @@
 <template>
+  <Banner></Banner>
   <Header></Header>
   <!--Content block-->
   <div class="bg-primary_p relative">
@@ -203,6 +204,7 @@
 </template>
 
 <script setup>
+  import Banner from "@/components/layouts/Banner.vue";
   import { Swiper, SwiperSlide } from "swiper/vue";
   import "swiper/css";
   import "swiper/css/pagination";

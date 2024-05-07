@@ -1,4 +1,5 @@
 <template>
+  <Banner></Banner>
   <Header></Header>
 
   <div class="relative px-8">
@@ -147,6 +148,7 @@
 </template>
 
 <script setup>
+  import Banner from "@/components/layouts/Banner.vue";
   import Header from "@/components/layouts/Header.vue";
   import Footer from "@/components/layouts/Footer.vue";
   import CategoryFilter from "@/components/product/CategoryFilter.vue";

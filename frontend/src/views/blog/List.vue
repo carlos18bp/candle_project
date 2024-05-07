@@ -1,4 +1,5 @@
 <template>
+  <Banner></Banner>
   <Header></Header>
   <div class="md:mx-auto flex flex-col mx-8 md:px-16">
     <div class="flex pb-12">
@@ -117,6 +118,7 @@
 </template>
 
 <script setup>
+  import Banner from "@/components/layouts/Banner.vue";
   import { computed, reactive, ref, onMounted, watchEffect } from "vue";
   import Header from "@/components/layouts/Header.vue";
   import Footer from "@/components/layouts/Footer.vue";

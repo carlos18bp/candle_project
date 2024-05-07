@@ -1,4 +1,5 @@
 <template>
+  <Banner></Banner>
   <div class="absolute w-full z-30">
     <Header></Header>
   </div>
@@ -156,6 +157,7 @@
 </template>
 
 <script setup>
+  import Banner from "@/components/layouts/Banner.vue";
   import Header from "@/components/layouts/Header.vue";
   import Footer from "@/components/layouts/Footer.vue";
   import ProductCarousel from "@/components/product/ProductCarousel.vue";
