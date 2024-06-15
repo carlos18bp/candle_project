@@ -52,7 +52,7 @@ class Product(models.Model):
     how_to_feel = models.TextField()
 
     price = models.IntegerField()
-    color = models.ManyToManyField(Color, related_name='products')
+    colors = models.ManyToManyField(Color, related_name='products')
     gallery = GalleryField(related_name='products_with_attachment', on_delete=models.CASCADE)
 
     # Fields to language toggle purpose.

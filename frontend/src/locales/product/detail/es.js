@@ -9,4 +9,9 @@ export default {
     reviews_subtitle: 'Comparte tu opinión',
     reviews_text: 'Si has usado este producto, comparte tu opinión con otros compradores.',
     reviews_button: 'Escribe una reseña',
+    add_to_cart: 'Agregar al carrito',
+    description: 'Descripción',
+    ingredients: 'Ingredientes',
+    how_to_use: 'Como usarlo?',
+    how_to_feel: 'Como te hace sentir?',
 }

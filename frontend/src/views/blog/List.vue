@@ -5,8 +5,8 @@
     <div class="flex pb-12">
       <div class="w-full md:w-1/2 mt-4 -m-8 md:-m-0 md:mt-0">
         <img
-          v-if="firstBlog && firstBlog.image_url"
-          :src="`/api/${firstBlog.image_url}`"
+          v-if="firstBlog && firstBlog.image"
+          :src="`${firstBlog.image}`"
           class="w-full md:h-96 object-cover"
         />
       </div>
@@ -155,43 +155,43 @@
   });
 
   if (window.innerWidth >= 1024) {
-  blogsPerPage = 6;
+    blogsPerPage = 6;
   } else if (window.innerWidth < 1024 && 760 <= window.innerWidth) {
-  blogsPerPage = 4;
+    blogsPerPage = 4;
   } else if (window.innerWidth < 760) {
-  blogsPerPage = 2;
+    blogsPerPage = 2;
   }
 
   /**
    * Fetch and update blogs data.
    */
   async function fetchBlogs() {
-  await blogStore.fetchBlogsData();
-  blogs.value = blogStore.blogs;
+    await blogStore.fetchBlogsData();
+    blogs.value = blogStore.blogs;
 
-  isBlogsLoaded.value = true;
+    isBlogsLoaded.value = true;
 
-  if (blogStore.blogs.length > 0) {
+    if (blogStore.blogs.length > 0) {
       Object.assign(firstBlog, blogStore.blogs[0]);
-  }
+    }
   }
 
   // Calculate the total number of pages
   const totalPages = computed(() => {
-  if (isBlogsLoaded.value) {
-      return Math.ceil(blogs.value.length / blogsPerPage);
-  }
-  return 0;
+    if (isBlogsLoaded.value) {
+        return Math.ceil(blogs.value.length / blogsPerPage);
+    }
+    return 0;
   });
 
   // Calculate the blogs to display on the current page
   const paginatedBlogs = computed(() => {
-  if (isBlogsLoaded.value) {
-      const start = (currentPage.value - 1) * blogsPerPage;
-      const end = start + blogsPerPage;
-      return blogs.value.slice(start, end);
-  }
-  return [];
+    if (isBlogsLoaded.value) {
+        const start = (currentPage.value - 1) * blogsPerPage;
+        const end = start + blogsPerPage;
+        return blogs.value.slice(start, end);
+    }
+    return [];
   });
 
   // Property to store the scroll position
@@ -199,14 +199,14 @@
 
   // Function to go to a specific page
   const goToPage = (page) => {
-  if (isBlogsLoaded.value && page >= 1 && page <= totalPages.value) {
-      // Save current scroll position
-      scrollPosition.value = window.scrollY;
-      currentPage.value = page;
+    if (isBlogsLoaded.value && page >= 1 && page <= totalPages.value) {
+        // Save current scroll position
+        scrollPosition.value = window.scrollY;
+        currentPage.value = page;
 
-      setTimeout(() => {
-      window.scrollTo(0, scrollPosition.value);
-      }, 0);
-  }
+        setTimeout(() => {
+        window.scrollTo(0, scrollPosition.value);
+        }, 0);
+    }
   };
 </script>

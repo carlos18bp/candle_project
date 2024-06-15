@@ -10,5 +10,5 @@ def product_list(request):
     List all products.
     """
     products = Product.objects.all()
-    serializer = ProductSerializer(products, many=True)
+    serializer = ProductSerializer(products, many=True, context={'request': request})
     return Response(serializer.data, status=status.HTTP_200_OK)

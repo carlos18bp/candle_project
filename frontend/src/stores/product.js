@@ -1,82 +1,79 @@
 import { defineStore } from "pinia";
-import { create_request, get_request } from "./services/request_http";
+import { get_request } from "./services/request_http";
 
 export const useProductStore = defineStore("product", {
+  /**
+   * Store state.
+   * @returns {object} State object.
+   */
   state: () => ({
-    products: [],
-    categories: [],
+    cartProducts: [],
     categorias: [],
-    areUpdateProducts: false,
-    requestStatus: "",
+    categories: [],
+    dataLoaded: false,
+    filteredProducts: [],
+    products: [],
   }),
+
   getters: {
     /**
-     *
+     * Get product by ID.
      * @param {object} state - State.
-     * @returns {number} - status request.
+     * @returns {function} - Function to find product by ID.
      */
-    getRequestStatus: (state) => {
-      return state.requestStatus;
-    },
-    /**
-     * Get product by id.
-     * @param {object} state - State.
-     * @returns {array} - Product by id occurrence.
-     */
-    productById: (state) => (productId) => {
-      return state.products.find((product) => product.id === productId);
-    },
-    /**
-     * Get product by sub-category.
-     * @param {object} state - State.
-     * @returns {array} - Product by sub-category occurrence.
-     */
-    productBySubCategory: (state) => {
-      const isCheckedSubCategory = (subCategory) => subCategory.checked;
+    productById: (state) => (productId) =>
+      state.products.find((product) => product.id === productId),
 
-      return state.products.filter((product) =>
-        state.categories.some((category) =>
-          category.subCategories.some(
-            (subCategory) =>
-              isCheckedSubCategory(subCategory) &&
-              product.subCategory === subCategory.name
-          )
-        )
-      );
-    },
     /**
-     * Get product by sub-categoria.
+     * Calculate total number of products in the cart.
      * @param {object} state - State.
-     * @returns {array} - Product by sub-categoria occurrence.
+     * @returns {number} - Total number of products in the cart.
      */
-    productBySubCategoria: (state) => {
-      const isCheckedSubCategoria = (subCategoria) => subCategoria.checked;
+    totalCartProducts: (state) =>
+      state.cartProducts.reduce(
+        (total, product) => total + product.quantity,
+        0
+      ),
 
-      return state.products.filter((product) =>
-        state.categorias.some((categoria) =>
-          categoria.subCategorias.some(
-            (subCategoria) =>
-              isCheckedSubCategoria(subCategoria) &&
-              product.subCategoria === subCategoria.name
-          )
-        )
-      );
-    },
+    /**
+     * Calculate total price of products in the cart.
+     * @param {object} state - State.
+     * @returns {number} - Total price of products in the cart.
+     */
+    totalCartPrice: (state) =>
+      state.cartProducts.reduce(
+        (total, product) =>
+          total + parseFloat(product.price) * product.quantity,
+        0
+      ),
   },
+
   actions: {
     /**
-     * Fetch data from backend.
+     * Add a product to the cart.
+     * @param {object} addProduct - Product to add.
+     * @param {number} quantity - Quantity to add.
+     * @param {string} colorSelected - Selected color of the product.
      */
-    async init() {
-      if (!this.areUpdateProducts) this.fetchProductsData();
+    addProductToCart(addProduct, quantity, colorSelected) {
+      const existingProduct = this.cartProducts.find(
+        (product) => product === addProduct
+      );
+
+      if (existingProduct) {
+        existingProduct.quantity += quantity;
+      } else {
+        this.cartProducts.push({ ...addProduct, quantity, colorSelected });
+      }
     },
+
     /**
-     * Fetch products from backend.
+     * Fetch products data from backend.
      */
     async fetchProductsData() {
-      if (this.areUpdateProducts) return;
+      if (this.dataLoaded) return;
 
-      let response = await get_request("products/");
+      let response = await get_request("products-data/");
       let jsonData = response.data;
 
       if (jsonData && typeof jsonData === "string") {
@@ -89,73 +86,123 @@ export const useProductStore = defineStore("product", {
       }
 
       this.products = jsonData ?? [];
-      console.log("Source: products, count: " + this.products.length);
-      console.log(this.products);
-
-      this.areUpdateProducts = true;
+      this.dataLoaded = true;
+      this.filteredProducts = this.products;
+      this.fetchUniqueCategoriesAndSubCategories();
     },
+
     /**
-     * Get unique categories and subCategories.
+     * Fetch unique categories and subCategories from products.
      */
     async fetchUniqueCategoriesAndSubCategories() {
-      if (!this.areUpdateProducts) this.fetchProductsData();
+      if (!this.dataLoaded) await this.fetchProductsData();
 
-      const uniqueCategories = [];
-      const uniqueCategorias = [];
+      const categoryMap = new Map();
+      const categoriaMap = new Map();
 
       this.products.forEach((product) => {
-        const category = product.category;
-        const subCategory = product.subCategory;
-
-        if (!uniqueCategories[category]) {
-          uniqueCategories[category] = [];
+        // Process English categories and sub-categories
+        if (!categoryMap.has(product.category)) {
+          categoryMap.set(product.category, {
+            name: product.category,
+            subCategories: [],
+          });
         }
+        categoryMap
+          .get(product.category)
+          .subCategories.push({ name: product.sub_category, checked: false });
 
-        if (!uniqueCategories[category].includes(subCategory)) {
-          uniqueCategories[category].push(subCategory);
+        // Process Spanish categories and sub-categories
+        if (!categoriaMap.has(product.categoria)) {
+          categoriaMap.set(product.categoria, {
+            name: product.categoria,
+            subCategorias: [],
+          });
         }
-
-        const categoria = product.categoria;
-        const subCategoria = product.subCategoria;
-
-        if (!uniqueCategorias[categoria]) {
-          uniqueCategorias[categoria] = [];
-        }
-
-        if (!uniqueCategorias[categoria].includes(subCategoria)) {
-          uniqueCategorias[categoria].push(subCategoria);
-        }
+        categoriaMap
+          .get(product.categoria)
+          .subCategorias.push({ name: product.sub_categoria, checked: false });
       });
 
-      this.categories = Object.keys(uniqueCategories).map((category) => ({
-        name: category,
-        subCategories: uniqueCategories[category].map((subCategory) => ({
-          name: subCategory,
-          checked: false,
-        })),
+      // Convert maps to arrays and remove duplicates
+      this.categories = Array.from(categoryMap.values()).map((category) => ({
+        ...category,
+        subCategories: Array.from(
+          new Set(category.subCategories.map((sub) => JSON.stringify(sub)))
+        ).map((sub) => JSON.parse(sub)),
       }));
 
-      this.categorias = Object.keys(uniqueCategorias).map((categoria) => ({
-        name: categoria,
-        subCategorias: uniqueCategorias[categoria].map((subCategoria) => ({
-          name: subCategoria,
-          checked: false,
-        })),
+      this.categorias = Array.from(categoriaMap.values()).map((categoria) => ({
+        ...categoria,
+        subCategorias: Array.from(
+          new Set(categoria.subCategorias.map((sub) => JSON.stringify(sub)))
+        ).map((sub) => JSON.parse(sub)),
       }));
-
     },
+
     /**
-     * Call creation user and review request.
-     * @param {object} formData - Form data.
+     * Initialize store by fetching data if not already loaded.
      */
-    async createRequest(formData) {
-      let response = await create_request(
-        "/api/create_review/",
-        JSON.stringify(formData)
+    async init() {
+      if (!this.dataLoaded) await this.fetchProductsData();
+    },
+
+    /**
+     * Filter products by sub-category.
+     */
+    productBySubCategory() {
+      const isChecked = (subCategory) => subCategory.checked;
+
+      this.filteredProducts = this.products.filter((product) => {
+        return this.categories.some((category) =>
+          category.subCategories.some(
+            (subCategory) =>
+              isChecked(subCategory) &&
+              product.sub_category === subCategory.name
+          )
+        );
+      });
+
+      if (this.filteredProducts.length === 0)
+        this.filteredProducts = this.products;
+    },
+
+    /**
+     * Filter products by sub-categoria.
+     */
+    productBySubCategoria() {
+      const isChecked = (subCategoria) => subCategoria.checked;
+
+      this.filteredProducts = this.products.filter((product) => {
+        return this.categorias.some((categoria) =>
+          categoria.subCategorias.some(
+            (subCategoria) =>
+              isChecked(subCategoria) &&
+              product.sub_categoria === subCategoria.name
+          )
+        );
+      });
+
+      if (this.filteredProducts.length === 0)
+        this.filteredProducts = this.products;
+    },
+
+    /**
+     * Remove a product from the cart.
+     * @param {number} removeProductId - ID of the product to remove.
+     */
+    removeProductFromCart(removeProductId) {
+      const removeProduct = this.cartProducts.find(
+        (product) => product.id === removeProductId
       );
-      this.requestStatus = response.status;
-      this.areUpdateProducts = false;
-      this.fetchProductsData();
+
+      if (removeProduct.quantity > 1) {
+        removeProduct.quantity -= 1;
+      } else {
+        this.cartProducts = this.cartProducts.filter(
+          (product) => product !== removeProduct
+        );
+      }
     },
   },
 });

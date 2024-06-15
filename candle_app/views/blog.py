@@ -10,5 +10,5 @@ def blog_list(request):
     List all blogs.
     """
     blogs = Blog.objects.all()
-    serializer = BlogSerializer(blogs, many=True)
+    serializer = BlogSerializer(blogs, many=True, context={'request': request})
     return Response(serializer.data, status=status.HTTP_200_OK)

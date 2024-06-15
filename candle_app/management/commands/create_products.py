@@ -60,7 +60,7 @@ class Command(BaseCommand):
             ]  
         }
 
-        predefined_colors = ['Red', 'Blue', 'Yellow', 'Green', 'Orange', 'Violet', 'Black', 'White', 'Pink', 'Rose']
+        predefined_colors = ['red', 'blue', 'yellow', 'green', 'orange', 'violet', 'black', 'white', 'pink', 'rose']
 
         for _ in range(number_of_products):
             category = random.choice(categories)
@@ -106,7 +106,7 @@ class Command(BaseCommand):
             )
 
             # Add the selected colors to the product
-            new_product.color.add(*color_objects)
+            new_product.colors.add(*color_objects)
 
             self.stdout.write(self.style.SUCCESS(f'Product "{new_product}" created with gallery "{gallery}" and colors "{selected_colors}"'))
 
