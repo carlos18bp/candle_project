@@ -58,7 +58,7 @@ export const useReviewStore = defineStore("review", {
      */
     async createReview(formData) {
       let response = await create_request(
-        "create-review/",
+        'create-review/',
         JSON.stringify(formData)
       );
 

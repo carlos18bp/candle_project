@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Blog, User, Product, Review
+from .models import Blog, User, Product, Review, Sale, SoldProduct
 from .forms import ProductForm
 from django_attachments.admin import AttachmentsAdminMixin
 
@@ -18,3 +18,5 @@ admin.site.register(Blog)
 admin.site.register(User)
 admin.site.register(Product, ProductAdmin)
 admin.site.register(Review)
+admin.site.register(Sale)
+admin.site.register(SoldProduct)

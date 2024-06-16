@@ -1,5 +1,5 @@
 import { defineStore } from "pinia";
-import { get_request } from "./services/request_http";
+import { create_request, get_request } from "./services/request_http";
 
 export const useProductStore = defineStore("product", {
   /**
@@ -65,6 +65,7 @@ export const useProductStore = defineStore("product", {
       } else {
         this.cartProducts.push({ ...addProduct, quantity, colorSelected });
       }
+      localStorage.setItem('cartProducts', JSON.stringify(this.cartProducts));
     },
 
     /**
@@ -203,6 +204,23 @@ export const useProductStore = defineStore("product", {
           (product) => product !== removeProduct
         );
       }
+      localStorage.setItem('cartProducts', JSON.stringify(this.cartProducts));
     },
+    async createSale(form) {
+        try {
+          const response = await create_request('create-sale/', {
+            email: form.email,
+            address: form.address,
+            city: form.city,
+            state: form.state,
+            postal_code: form.postalCode,
+            sold_products: form.soldProducts,
+          });
+
+          return response.status;
+        } catch (error) {
+          console.error('Error creating sale:', error);
+        }
+      },
   },
 });

@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from candle_app.models import Review
-from candle_app.serializers import ProductSerializer, UserSerializer
+from candle_app.serializers import UserSerializer
 
 class ReviewSerializer(serializers.ModelSerializer):
     """

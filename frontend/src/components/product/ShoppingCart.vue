@@ -26,9 +26,11 @@
                     <span class="text-lg font-semibold">Total</span>
                     <span class="text-lg font-semibold">$ {{ cartTotalPrice }}</span>
                 </div>
-                <button class="bg-primary_p text-white w-full py-2 rounded hover:bg-yellow-600">
-                    {{ $t('checkout') }}
-                </button>
+                <router-link to="/checkout">
+                    <button class="bg-primary_p text-white w-full py-2 rounded hover:bg-yellow-600">
+                        {{ $t('checkout') }}
+                    </button>
+                </router-link>
                 <div class="text-center mt-4">
                     <RouterLink :to="{ name: 'catalog' }" class="cursor-pointer text-primary_p hover:underline">
                         {{ $t('continue_shopping') }}

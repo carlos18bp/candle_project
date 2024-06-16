@@ -4,7 +4,8 @@
         <img :src="product.gallery_urls[0]" alt="Product Image" class="w-20 h-20 rounded" />
         <div class="flex-1 ml-4">
             <!-- Product Title -->
-            <h3 class="font-semibold">{{ product.title }}</h3>
+            <h3 class="font-semibold" v-if="currentLanguage === 'en'">{{ product.title }}</h3>
+            <h3 class="font-semibold" v-else>{{ product.titulo }}</h3>
             <!-- Selected Color -->
             <p class="text-sm text-gray-500">{{ product.colorSelected }}</p>
             <!-- Quantity -->
