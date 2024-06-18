@@ -1,10 +1,10 @@
 import { defineStore } from "pinia";
-import { get_request } from "./services/request_http";
+import { create_request, get_request } from "./services/request_http";
 
 export const useReviewStore = defineStore("review", {
   state: () => ({
     reviews: [],
-    areUpdateReviews: false,
+    dataLoaded: false,
   }),
   getters: {
     /**
@@ -15,21 +15,29 @@ export const useReviewStore = defineStore("review", {
     reviewById: (state) => (reviewId) => {
       return state.reviews.find((review) => review.id === reviewId);
     },
+    /**
+     * Get reviews by product id.
+     * @param {object} state - State.
+     * @returns {array} - Reviews by product id occurrence.
+     */
+    reviewsByProductId: (state) => (productId) => {
+      return state.reviews.filter((review) => review.product === productId);
+    },
   },
   actions: {
     /**
      * Fetch data from backend.
      */
     async init() {
-      if (!this.areUpdateReviews) this.fetchReviewsData();
+      if (!this.dataLoaded) this.fetchReviewsData();
     },
     /**
      * Fetch reviews from backend.
      */
     async fetchReviewsData() {
-      if (this.areUpdateReviews) return;
+      if (this.dataLoaded) return;
 
-      let response = await get_request("reviews/");
+      let response = await get_request("reviews-data/");
       let jsonData = response.data;
 
       if (jsonData && typeof jsonData === "string") {
@@ -42,10 +50,21 @@ export const useReviewStore = defineStore("review", {
       }
 
       this.reviews = jsonData ?? [];
-      console.log("Source: reviews, count: " + this.reviews.length);
-      console.log(this.reviews);
+      this.dataLoaded = true;
+    },
+    /**
+     * Call creation user and review request.
+     * @param {object} formData - Form data.
+     */
+    async createReview(formData) {
+      let response = await create_request(
+        'create-review/',
+        JSON.stringify(formData)
+      );
 
-      this.areUpdateReviews = true;
+      this.dataLoaded = false;
+      this.fetchReviewsData();
+      return response.status;
     },
   },
 });

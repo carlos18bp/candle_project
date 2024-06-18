@@ -9,4 +9,9 @@ export default {
     reviews_subtitle: 'Share your thoughts',
     reviews_text: 'If you’ve used this product, share your thoughts with other customers.',
     reviews_button: 'Write a review',
+    add_to_cart: 'Add to cart',
+    description: 'Description',
+    ingredients: 'Ingredients',
+    how_to_use: 'How To Use?',
+    how_to_feel: 'How To Feel?',
 }

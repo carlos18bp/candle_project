@@ -2,34 +2,41 @@ import { defineStore } from "pinia";
 import { get_request } from "./services/request_http";
 
 export const useBlogStore = defineStore("blog", {
+  /**
+   * Store state.
+   * @returns {object} State object.
+   */
   state: () => ({
     blogs: [],
-    areUpdateBlogs: false,
+    dataLoaded: false,
   }),
+
   getters: {
     /**
-     * Get blog by id.
+     * Get blog by ID.
      * @param {object} state - State.
-     * @returns {array} - blog by id occurrence.
+     * @returns {function} - Function to find blog by ID.
      */
     blogById: (state) => (blogId) => {
       return state.blogs.find((blog) => blog.id === blogId);
     },
   },
+
   actions: {
     /**
-     * Fetch data from backend.
+     * Initialize store by fetching data if not already loaded.
      */
     async init() {
-      if (!this.areUpdateBlogs) this.fetchBlogsData();
+      if (!this.dataLoaded) await this.fetchBlogsData();
     },
+
     /**
-     * Fetch blogs from backend.
+     * Fetch blogs data from backend.
      */
     async fetchBlogsData() {
-      if (this.areUpdateBlogs) return;
+      if (this.dataLoaded) return;
 
-      let response = await get_request("blogs/");
+      let response = await get_request("blogs-data/");
       let jsonData = response.data;
 
       if (jsonData && typeof jsonData === "string") {
@@ -42,10 +49,7 @@ export const useBlogStore = defineStore("blog", {
       }
 
       this.blogs = jsonData ?? [];
-      console.log("Source: blogs, count: " + this.blogs.length);
-      console.log(this.blogs);
-
-      this.areUpdateBlogs = true;
+      this.dataLoaded = true;
     },
   },
 });

@@ -1,9 +1,4 @@
 import axios from "axios";
-axios.defaults.withCredentials = true;
-axios.defaults.xsrfCookieName = "csrftoken";
-axios.defaults.xsrfHeaderName = "X-CSRFToken";
-
-const route = "http://127.0.0.1:8000/";
 
 /**
  * Request endpoint
@@ -22,10 +17,10 @@ async function makeRequest(method, url, params = {}) {
 
     switch (method) {
       case "GET":
-        response = await axios.get(`${route}${url}`, { headers });
+        response = await axios.get(`/api/${url}`, { headers });
         break;
       case "POST":
-        response = await axios.post(url, params, { headers });
+        response = await axios.post(`/api/${url}`, params, { headers });
         break;
       default:
         throw new Error(`Unsupported method: ${method}`);
