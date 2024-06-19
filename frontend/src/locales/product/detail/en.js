@@ -15,4 +15,6 @@ export default {
     ingredients: 'Ingredients',
     how_to_use: 'How To Use?',
     how_to_feel: 'How To Feel?',
+    trending_tag: 'Trending',
+    carousel_subtitle: 'Shop our popular candle products',
 }

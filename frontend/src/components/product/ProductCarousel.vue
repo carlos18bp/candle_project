@@ -41,6 +41,7 @@
     const appStore = useAppStore();
     const currentLanguage = computed(() => appStore.getCurrentLanguage);
     const topProducts = ref([]);
+    const productStore = useProductStore();
 
     // Props definition
     const props = defineProps({
@@ -49,7 +50,7 @@
 
     // On mounted lifecycle hook
     onMounted(async () => {
-        const productStore = useProductStore();
+        await productStore.fetchProductsData();
         topProducts.value = productStore.products.slice(0, props.top);
     });
 </script>

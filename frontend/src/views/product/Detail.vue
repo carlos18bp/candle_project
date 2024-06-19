@@ -214,6 +214,17 @@
         </div>
     </div>
 
+    <!-- Trending Products Carousel -->
+    <div class="mx-auto flex flex-col items-center justify-center max-w-7xl px-8 py-12">
+        <h2 class="uppercase pb-4 font-regular tracking-widest text-gray_p text-center text-2xl">
+            {{ $t('trending_tag') }}
+        </h2>
+        <h2 class="pb-4 font-semibold text-center text-4xl">
+            {{ $t('carousel_subtitle') }}
+        </h2>
+        <ProductCarousel :top="4"></ProductCarousel>
+    </div>
+
     <!-- Trending Section -->
     <div class="container mx-auto mt-16 grid text-center xl:text-start xl:grid-cols-2 gap-4">
         <div class="grid content-center">
@@ -292,11 +303,12 @@
         Disclosure, DisclosureButton, DisclosurePanel,
         Tab, TabGroup, TabList, TabPanel, TabPanels,
     } from '@headlessui/vue';
-    import { ChevronUpIcon, StarIcon } from '@heroicons/vue/20/solid';
+    import { StarIcon } from '@heroicons/vue/20/solid';
     import { MinusSmallIcon, PlusSmallIcon } from '@heroicons/vue/24/outline';
     import Banner from "@/components/layouts/Banner.vue";
     import Footer from "@/components/layouts/Footer.vue";
     import Header from "@/components/layouts/Header.vue";
+    import ProductCarousel from "@/components/product/ProductCarousel.vue";
     import AddReview from "@/components/product/AddReview.vue";
     import { useAppStore } from '@/stores/language.js';
     import { useProductStore } from '@/stores/product';

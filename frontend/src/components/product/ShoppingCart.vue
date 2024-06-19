@@ -21,12 +21,15 @@
                     @addProduct="addProduct(product)" 
                     @removeProduct="removeProduct(product.id)" />
             </div>
-            <div v-else>
-                <p class="p-4">{{ $t("no_products") }}</p>
+            <div v-else class="text-lg font-regular ps-10">
+                <p>{{ $t("no_products") }}</p>
+                <RouterLink :to="{ name: 'catalog' }" class="cursor-pointer">
+                    <span class="text-primary_p">{{ $t("continue_shopping") }}</span>
+                </RouterLink>
             </div>
 
             <!-- Cart Footer -->
-            <div class="border-t p-4">
+            <div v-if="cartProduct.length" class="border-t p-4">
                 <div class="flex justify-between items-center mb-4">
                     <div>
                         <h3 class="text-2xl font-semibold">Subtotal</h3>
@@ -42,10 +45,9 @@
                         {{ $t("checkout") }}
                     </button>
                 </router-link>
-                <div class="text-center mt-4">
+                <div class="text-center mt-4 font-regular text-lg">
                     <RouterLink :to="{ name: 'catalog' }" class="cursor-pointer">
-                        <span class="text-black_p">{{ $t("or") }}</span>
-                        <span class="text-primary_p">{{ $t("continue_shopping") }}</span>
+                        <span class="text-black_p">{{ $t("or") }}</span> <span class="text-primary_p">{{ $t("continue_shopping") }}</span>
                     </RouterLink>
                 </div>
             </div>

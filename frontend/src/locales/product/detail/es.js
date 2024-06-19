@@ -15,4 +15,6 @@ export default {
     ingredients: 'Ingredientes',
     how_to_use: 'Como usarlo?',
     how_to_feel: 'Como te hace sentir?',
+    trending_tag: 'Tendencia',
+    carousel_subtitle: 'Nuestras velas populares',
 }
