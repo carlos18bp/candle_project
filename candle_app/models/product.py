@@ -21,6 +21,8 @@ class Product(models.Model):
     :vartype how_to_use: str
     :ivar how_to_feel: description of how the product makes you feel.
     :vartype how_to_feel: str
+    :ivar short_description: short description of product.
+    :vartype short_description: str
     :ivar price: price of the product.
     :vartype price: int
     :ivar color: color associated with the product.
@@ -41,6 +43,8 @@ class Product(models.Model):
     :vartype como_usarlo: str
     :ivar como_se_siente: description of how the product makes you feel in Spanish.
     :vartype como_se_siente: str
+    :ivar description_corta: short description of product in Spanish.
+    :vartype description_corta: str
     """
 
     category = models.CharField(max_length=40)
@@ -50,6 +54,7 @@ class Product(models.Model):
     ingredients = models.TextField()
     how_to_use = models.TextField()
     how_to_feel = models.TextField()
+    short_description = models.CharField(max_length=80)
 
     price = models.IntegerField()
     colors = models.ManyToManyField(Color, related_name='products')
@@ -63,6 +68,7 @@ class Product(models.Model):
     ingredientes = models.TextField()
     como_usarlo = models.TextField()
     como_se_siente = models.TextField()
+    descripcion_corta = models.CharField(max_length=60)
 
     def __str__(self):
         return self.title

@@ -79,7 +79,12 @@
 
                         <!-- Introductory phrase of the product -->
                         <div class="mt-8">
-                            <p class="font-medium text-lg ">Like the scent of the mountains</p>
+                            <p class="font-medium text-lg ">
+                                <span v-if="currentLanguage === 'en'">
+                                    {{ product.short_description }}
+                                </span>
+                                <span v-else>{{ product.descripcion_corta }}</span>
+                            </p>
                         </div>
 
                         <!-- Color Options -->
