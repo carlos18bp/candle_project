@@ -28,13 +28,13 @@
           <img src="@/assets/images/logo.png" class="w-auto h-14">
         </RouterLink>
         <div class="hidden lg:flex lg:flex-1 justify-end">
-          <div class="flex cursor-pointer">
-            <ShoppingBagIcon class="size-5 text-black m-2" @click="toggleShoppingCart" />
-            <span v-if="totalCartProducts > 0" class="bg-gray-300 text-white rounded-full text-xs size-5 flex items-center justify-center shadow-lg m-2 ml-0">
-              ({{ totalCartProducts }})
+          <div class="relative cursor-pointer">
+            <ShoppingBagIcon class="size-5 text-black m-2" @click="showShoppingCart = true" />
+            <span @click="showShoppingCart = true" v-if="totalCartProducts > 0" class="absolute top-0 left-1/2 bg-primary_p text-white rounded-full text-xs size-5 flex items-center justify-center shadow-lg m-2 ml-0">
+              {{ totalCartProducts }}
             </span>
           </div>
-          <ShoppingCart :shoppingCartToggle="shoppingCartToggle" @toggle-cart="toggleShoppingCart" />
+          <ShoppingCart :visible="showShoppingCart" @update:visible="showShoppingCart = $event" />
           <!-- Language menu -->
           <Menu as="div" class="relative inline-block text-left pr-4 uppercase">
             <div>
@@ -130,17 +130,12 @@
     const currentLanguage = computed(() => appStore.getCurrentLanguage);
     const messages = ref(enMessages);
     const mobileMenuOpen = ref(false);
-    const shoppingCartToggle = ref(false);
+    const showShoppingCart = ref(false);
     const productStore = useProductStore();
     const totalCartProducts = computed(() => productStore.totalCartProducts);
   
     // Translation function
     const $t = (key) => messages.value[key];
-  
-    // Toggle the shopping cart
-    const toggleShoppingCart = () => {
-      shoppingCartToggle.value = !shoppingCartToggle.value;
-    };
   
     // Handle language change
     const handleLanguage = (key) => {

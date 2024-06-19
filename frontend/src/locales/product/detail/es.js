@@ -1,5 +1,6 @@
 export default {
-    reviews_1: 'Reseñas',
+    reviews_1: 'Reseñas.',
+    write_review: 'Dejanos una reseña',
     order: 'Comprar',
     trending: 'SIENDO TENDENCIA AHORA',
     text: 'Senses Candles de Kate ha logrado un gran avance. Como artistas y fabricantes de velas, nos esforzamos por mejorar nuestro oficio y nuestras velas todos los días. Pensamos, investigamos y experimentamos constantemente con nuevos métodos, combinaciones y materiales para ofrecer velas lujosas y de alta calidad.',

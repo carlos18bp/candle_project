@@ -45,7 +45,7 @@
                         </div>
                     </div>
 
-                    <div v-if="!selectedImage" class="mt-10 px-4 sm:mt-16 sm:px-0 lg:mt-0 space-y-4">
+                    <div v-if="!selectedImage" class="mt-10 px-4 sm:mt-16 sm:px-0 lg:mt-0">
 
                         <!-- Product Title and Price -->
                         <div class="mt-3 flex justify-between">
@@ -61,7 +61,7 @@
                         </div>
 
                         <!-- Reviews -->
-                        <div class="mt-3">
+                        <div class="mt-4">
                             <h3 class="sr-only">Reviews</h3>
                             <div class="flex items-center">
                                 <div class="flex items-center">
@@ -71,13 +71,19 @@
                                 </div>
                                 <p class="sr-only">{{ product.reviews }} out of 5 stars</p>
                                 <div class="ms-3">
-                                    <p class="font-medium"> {{ reviewsLength }} {{ $t('reviews_1') }}</p>
+                                    <p class="font-medium inline-block"> {{ reviewsLength }} {{ $t('reviews_1') }}</p>
+                                    <a data-modal-toggle="add-review-modal" data-modal-target="add-review-modal" class="ms-2 text-terciary_p font-medium inline-block cursor-pointer">{{ $t('write_review') }}</a>
                                 </div>
                             </div>
                         </div>
 
+                        <!-- Introductory phrase of the product -->
+                        <div class="mt-8">
+                            <p class="font-medium text-lg ">Like the scent of the mountains</p>
+                        </div>
+
                         <!-- Color Options -->
-                        <div class="mb-12">
+                        <div class="mt-3">
                             <h3 class="text-md font-medium text-gray-700">Color</h3>
                             <div class="flex space-x-2 mt-2">
                                 
@@ -101,32 +107,33 @@
                         </div>
 
                         <!-- Quantity Selector and Add to Cart Button -->
-                        <div class="flex items-center space-x-4">
-                            <div class="flex items-center border rounded-full h-12">
+                        <div class="flex items-center gap-4 mt-12">
+                            <div class="flex items-center border border-primary_p rounded-full h-12">
                                 <button
-                                    class="px-3 py-2 text-gray-600 hover:text-gray-800 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-gray-600"
+                                    class="px-3 py-2 hover:text-gray-800 focus:outline-none"
                                     @click="decrementQuantity">
-                                    &minus;
+                                    <MinusSmallIcon class="h-6 w-6 text-black_p" aria-hidden="true" />
                                 </button>
-                                <span class="px-4 py-2 text-gray-800">{{ productQuantity }}</span>
+                                <span class="px-4 py-2 text-black_p font-semibold">{{ productQuantity }}</span>
                                 <button
-                                    class="px-3 py-2 text-gray-600 hover:text-gray-800 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-gray-600"
+                                    class="px-3 py-2 hover:text-gray-800 focus:outline-none"
                                     @click="productQuantity++">
-                                    &plus;
+                                    <PlusSmallIcon class="w-6 h-6 text-black_p"/>
                                 </button>
+                                
                             </div>
 
                             <button v-if="colorSelected !== 'rainbow'" @click="addToCart"
-                                class="px-8 py-2 bg-black text-white rounded-full hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-black w-full h-12">
+                                class="px-8 py-2 w-full h-12 bg-black text-white rounded-full hover:bg-primary_p focus:outline-none font-regular tracking-wide text-md">
                                 <span class="uppercase">{{ $t('add_to_cart') }}</span>
                             </button>
 
                             <form v-if="colorSelected === 'rainbow'" class="w-full">
                                 <button type="submit"
-                                    class="bg-primary_p border border-transparent focus:outline-none font-medium hover:bg-terciary_p justify-center py-2 rounded-full text-white w-full">
+                                    class="px-8 py-2 w-full h-12 bg-black_p border border-transparent focus:outline-none font-regular tracking-wide hover:bg-primary_p justify-center rounded-full text-white">
                                     <div>
-                                        <i class="bi bi-whatsapp text-2xl me-2.5"></i>
-                                        <a href="https://wa.me/17049005171" target="_blank" class="text-2xl ms-2.5">
+                                        <i class="bi bi-whatsapp text-md me-2.5"></i>
+                                        <a href="https://wa.me/17049005171" target="_blank" class="text-md ms-2.5 uppercase">
                                             {{ $t('order') }}
                                         </a>
                                     </div>
@@ -135,16 +142,16 @@
                         </div>
 
                         <!-- Description, Ingredients, How To Use, and How To Feel Collapses -->
-                        <div class="space-y-2 font-regular">
+                        <div class="space-y-6 font-regular mt-12">
                             <Disclosure>
                                 <template #default="{ open }">
                                     <DisclosureButton
-                                        class="flex justify-between w-full px-4 py-2 text-sm font-medium text-gray-700 rounded-lg hover:bg-gray-100 border-b">
-                                        <span class="font-bold text-lg">{{ $t('description') }}</span>
-                                        <ChevronUpIcon class="w-5 h-5 text-gray-500"
-                                            :class="{ 'transform rotate-180': open }" />
+                                        class="flex justify-between w-full px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-100 border-b border-b-primary_p">
+                                        <span class="font-bold text-xl">{{ $t('description') }}</span>
+                                        <PlusSmallIcon v-if="!open" class="w-8 h-8 text-primary_p"/>
+                                        <MinusSmallIcon v-else class="h-8 w-8 text-primary_p" aria-hidden="true" />
                                     </DisclosureButton>
-                                    <DisclosurePanel class="px-4 pt-4 pb-2 text-sm text-gray-700">
+                                    <DisclosurePanel class="px-4 pt-4 pb-2 text-md text-gray-700 font-medium">
                                         <p v-if="currentLanguage === 'en'">{{ product.description }}</p>
                                         <p v-else>{{ product.descripcion }}</p>
                                     </DisclosurePanel>
@@ -154,12 +161,12 @@
                             <Disclosure>
                                 <template #default="{ open }">
                                     <DisclosureButton
-                                        class="flex justify-between w-full px-4 py-2 text-sm font-medium text-gray-700 rounded-lg hover:bg-gray-100 border-b">
-                                        <span class="font-bold text-lg">{{ $t('ingredients') }}</span>
-                                        <ChevronUpIcon class="w-5 h-5 text-gray-500"
-                                            :class="{ 'transform rotate-180': open }" />
+                                        class="flex justify-between w-full px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-100 border-b border-b-primary_p">
+                                        <span class="font-bold text-xl">{{ $t('ingredients') }}</span>
+                                        <PlusSmallIcon v-if="!open" class="w-8 h-8 text-primary_p"/>
+                                         <MinusSmallIcon v-else class="h-8 w-8 text-primary_p" aria-hidden="true" />
                                     </DisclosureButton>
-                                    <DisclosurePanel class="px-4 pt-4 pb-2 text-sm text-gray-700">
+                                    <DisclosurePanel class="px-4 pt-4 pb-2 text-md text-gray-700 font-medium">
                                         <p v-if="currentLanguage === 'en'">{{ product.ingredients }}</p>
                                         <p v-else>{{ product.ingredientes }}</p>
                                     </DisclosurePanel>
@@ -169,12 +176,12 @@
                             <Disclosure>
                                 <template #default="{ open }">
                                     <DisclosureButton
-                                        class="flex justify-between w-full px-4 py-2 text-sm font-medium text-gray-700 rounded-lg hover:bg-gray-100 border-b">
-                                        <span class="font-bold text-lg">{{ $t('how_to_use') }}</span>
-                                        <ChevronUpIcon class="w-5 h-5 text-gray-500"
-                                            :class="{ 'transform rotate-180': open }" />
+                                        class="flex justify-between w-full px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-100 border-b border-b-primary_p">
+                                        <span class="font-bold text-xl">{{ $t('how_to_use') }}</span>
+                                        <PlusSmallIcon v-if="!open" class="w-8 h-8 text-primary_p"/>
+                                         <MinusSmallIcon v-else class="h-8 w-8 text-primary_p" aria-hidden="true" />
                                     </DisclosureButton>
-                                    <DisclosurePanel class="px-4 pt-4 pb-2 text-sm text-gray-700">
+                                    <DisclosurePanel class="px-4 pt-4 pb-2 text-md text-gray-700 font-medium">
                                         <p v-if="currentLanguage === 'en'">{{ product.how_to_use }}</p>
                                         <p v-else>{{ product.como_usarlo }}</p>
                                     </DisclosurePanel>
@@ -184,12 +191,12 @@
                             <Disclosure>
                                 <template #default="{ open }">
                                     <DisclosureButton
-                                        class="flex justify-between w-full px-4 py-2 text-sm font-medium text-gray-700 rounded-lg hover:bg-gray-100 border-b">
-                                        <span class="font-bold text-lg">{{ $t('how_to_feel') }}</span>
-                                        <ChevronUpIcon class="w-5 h-5 text-gray-500"
-                                            :class="{ 'transform rotate-180': open }" />
+                                        class="flex justify-between w-full px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-100 border-b border-b-primary_p">
+                                        <span class="font-bold text-xl">{{ $t('how_to_feel') }}</span>
+                                        <PlusSmallIcon v-if="!open" class="w-8 h-8 text-primary_p"/>
+                                         <MinusSmallIcon v-else class="h-8 w-8 text-primary_p" aria-hidden="true" />
                                     </DisclosureButton>
-                                    <DisclosurePanel class="px-4 pt-4 pb-2 text-sm text-gray-700">
+                                    <DisclosurePanel class="px-4 pt-4 pb-2 text-md text-gray-700 font-medium">
                                         <p v-if="currentLanguage === 'en'">{{ product.how_to_feel }}</p>
                                         <p v-else>{{ product.como_se_siente }}</p>
                                     </DisclosurePanel>
@@ -278,9 +285,10 @@
     import Swal from 'sweetalert2';
     import {
         Disclosure, DisclosureButton, DisclosurePanel,
-        Tab, TabGroup, TabList, TabPanel, TabPanels
+        Tab, TabGroup, TabList, TabPanel, TabPanels,
     } from '@headlessui/vue';
     import { ChevronUpIcon, StarIcon } from '@heroicons/vue/20/solid';
+    import { MinusSmallIcon, PlusSmallIcon } from '@heroicons/vue/24/outline';
     import Banner from "@/components/layouts/Banner.vue";
     import Footer from "@/components/layouts/Footer.vue";
     import Header from "@/components/layouts/Header.vue";
@@ -342,7 +350,7 @@
      * Decrease the product quantity by 1.
      */
     const decrementQuantity = () => {
-        if (productQuantity.value > 0) {
+        if (productQuantity.value > 1) {
             productQuantity.value--;
         }
     };

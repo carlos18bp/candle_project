@@ -27,6 +27,7 @@ export default {
         primary_p: '#CEAD95',
         second_p: '#F9F5EA',
         terciary_p: '#C9A489',
+        brown: '#765D4A',
       },
       fontFamily: {
         'regular': ['Zilla-slab-Regular', 'sans-serif'],
