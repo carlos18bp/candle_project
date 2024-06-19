@@ -246,7 +246,7 @@
 </template>
 
 <script setup>
-import { computed, reactive, ref, watchEffect } from "vue";
+import { computed, reactive, ref, watchEffect, onMounted } from "vue";
 import Banner from "@/components/layouts/Banner.vue";
 import { LockClosedIcon } from "@heroicons/vue/24/outline";
 import { useAppStore } from "@/stores/language.js";
@@ -289,6 +289,11 @@ const form = reactive({
 watchEffect(() => {
   messages.value = currentLanguage.value === "en" ? enMessages : esMessages;
 });
+
+// It's necesary to activate overflow after Shopping Cart component
+onMounted(() => {
+  document.body.style.overflow = 'auto'
+})
 
 /**
  * Handle form submission
