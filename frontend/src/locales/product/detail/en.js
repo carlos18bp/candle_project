@@ -1,5 +1,6 @@
 export default {
-    reviews_1: 'Reviews',
+    reviews_1: 'Reviews.',
+    write_review: 'Write a review',
     order: 'Order Now',
     trending: 'TRENDING NOW',
     text: 'Senses Candles by Kate has achieved a breakthrough. As artists and candlemakers ourselves, we strive to improve our craft and our candles everyday. We are constantly thinking, researching, and experimenting with new methods, combinations, and materials to deliver luxurious, high-quality candles.',
@@ -14,4 +15,6 @@ export default {
     ingredients: 'Ingredients',
     how_to_use: 'How To Use?',
     how_to_feel: 'How To Feel?',
+    trending_tag: 'Trending',
+    carousel_subtitle: 'Shop our popular candle products',
 }

@@ -11,8 +11,8 @@
                     <div class="flex justify-between pb-2">
                       <span class="text-2xl font-medium">{{ faq.question }}</span>
                       <span class="ml-6 flex h-7">
-                        <PlusSmallIcon v-if="!open" class="h-6 w-6" aria-hidden="true" />
-                        <MinusSmallIcon v-else class="h-6 w-6" aria-hidden="true" />
+                        <PlusSmallIcon v-if="!open" class="h-6 w-6 text-primary_p" aria-hidden="true" />
+                        <MinusSmallIcon v-else class="h-6 w-6 text-primary_p" aria-hidden="true" />
                       </span>
                     </div>
                     <div class="w-auto h-px bg-primary_p"></div>

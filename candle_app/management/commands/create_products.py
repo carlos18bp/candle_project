@@ -94,6 +94,7 @@ class Command(BaseCommand):
                 ingredients=fake.text(max_nb_chars=100) + ' (EN)',
                 how_to_use=fake.text(max_nb_chars=100) + ' (EN)',
                 how_to_feel=fake.text(max_nb_chars=100) + ' (EN)',
+                short_description=fake.text(max_nb_chars=60) + ' (EN)',
                 price=fake.random_int(min=100, max=190),
                 gallery=gallery,
                 categoria=category + ' (ES)',
@@ -103,6 +104,7 @@ class Command(BaseCommand):
                 ingredientes=fake.text(max_nb_chars=100) + ' (ES)',
                 como_usarlo=fake.text(max_nb_chars=100) + ' (ES)',
                 como_se_siente=fake.text(max_nb_chars=100) + ' (ES)',
+                descripcion_corta=fake.text(max_nb_chars=60) + ' (ES)',
             )
 
             # Add the selected colors to the product
