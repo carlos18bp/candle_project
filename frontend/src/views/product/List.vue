@@ -98,7 +98,7 @@
 </template>
 
 <script setup>
-    import { computed, onMounted, ref, watchEffect } from "vue";
+    import { computed, onMounted, ref, watch, watchEffect } from "vue";
     import { ArrowLongLeftIcon, ArrowLongRightIcon } from "@heroicons/vue/20/solid";
     import { useAppStore } from '@/stores/language.js';
     import { useProductStore } from "@/stores/product";
@@ -115,6 +115,7 @@
     const appStore = useAppStore();
     const currentLanguage = computed(() => appStore.getCurrentLanguage);
     const productStore = useProductStore();
+
     const filteredProducts = computed(() => productStore.filteredProducts);
     const categories = computed(() => productStore.categories);
     const categorias = computed(() => productStore.categorias);
@@ -144,6 +145,14 @@
     // Watch for changes in current language and update messages accordingly
     watchEffect(() => {
         messages.value = currentLanguage.value === 'en' ? enMessages : esMessages;
+    });
+
+    /**
+     * Watcher for changes in filteredProducts
+     * Returns to page number one
+     */
+    watch(filteredProducts, (newfilteredProducts) => {
+        goToPage(1);
     });
 
     /**

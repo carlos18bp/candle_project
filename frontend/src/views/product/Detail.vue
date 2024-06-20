@@ -31,7 +31,8 @@
                         <TabPanels class="aspect-h-1 aspect-w-1 w-full">
                             <TabPanel v-for="image in product.gallery_urls" :key="image">
                                 <img :src="image" alt="" class="h-full w-full object-cover object-center sm:rounded-lg"
-                                    @mousemove="handleMouseMove" @mouseenter="handleMouseEnter(image)"
+                                    @mousemove="handleMouseMove" 
+                                    @mouseenter="handleMouseEnter(image)"
                                     @mouseleave="handleMouseLeave" />
                             </TabPanel>
                         </TabPanels>
@@ -296,7 +297,7 @@
 </template>
 
 <script setup>
-    import { computed, onMounted, ref, watchEffect } from 'vue';
+    import { computed, onMounted, ref, watch, watchEffect } from 'vue';
     import { useRoute } from 'vue-router';
     import Swal from 'sweetalert2';
     import {
@@ -324,6 +325,7 @@
     const currentLanguage = computed(() => appStore.getCurrentLanguage);
     const messages = ref('');
     const $t = (key) => messages.value[key];
+
     const colorSelected = ref('');
     const productQuantity = ref(1);
     const selected = '';
@@ -361,6 +363,14 @@
             reviewsLength.value = reviews.value.length;
             averageRate.value = calculateAverageRate();
         }
+    });
+
+    /**
+     * Watcher for changes in filteredProducts
+     * Returns to page number one
+     */
+     watch(colorSelected, (newColorSelected) => {
+        productQuantity.value = 1;
     });
 
     /**

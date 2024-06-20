@@ -11,6 +11,11 @@ class ProductAdmin(AttachmentsAdminMixin, admin.ModelAdmin):
         for obj in queryset:
             obj.delete()
 
+class SaleAdmin(admin.ModelAdmin):
+    def delete_queryset(self, request, queryset):
+        for sale in queryset:
+            sale.delete()
+
 # Custom AdminSite to organize models by sections
 class CandleAdminSite(admin.AdminSite):
     site_header = 'Candle Project'
@@ -56,5 +61,5 @@ admin_site.register(Blog)
 admin_site.register(User)
 admin_site.register(Product, ProductAdmin)
 admin_site.register(Review)
-admin_site.register(Sale)
+admin_site.register(Sale, SaleAdmin)
 admin_site.register(SoldProduct)

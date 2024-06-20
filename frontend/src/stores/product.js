@@ -164,8 +164,7 @@ export const useProductStore = defineStore("product", {
         );
       });
 
-      if (this.filteredProducts.length === 0)
-        this.filteredProducts = this.products;
+      if (this.filteredProducts.length === 0) this.filteredProducts = this.products;
     },
 
     /**
@@ -190,22 +189,27 @@ export const useProductStore = defineStore("product", {
 
     /**
      * Remove a product from the cart.
-     * @param {number} removeProductId - ID of the product to remove.
+     * @param {number} removeProduct - the product to remove.
      */
-    removeProductFromCart(removeProductId) {
-      const removeProduct = this.cartProducts.find(
-        (product) => product.id === removeProductId
+    removeProductFromCart(removeProduct) {
+      const removeProductFound = this.cartProducts.find(
+        (product) => product === removeProduct
       );
 
-      if (removeProduct.quantity > 1) {
-        removeProduct.quantity -= 1;
+      if (removeProductFound.quantity > 1) {
+        removeProductFound.quantity -= 1;
       } else {
         this.cartProducts = this.cartProducts.filter(
-          (product) => product !== removeProduct
+          (product) => product !== removeProductFound
         );
       }
       localStorage.setItem('cartProducts', JSON.stringify(this.cartProducts));
     },
+    /**
+     * Create a new sale
+     * @param {Object} form - The form data for the sale
+     * @returns {Number} - The response status of the sale creation request
+     */
     async createSale(form) {
         try {
           const response = await create_request('create-sale/', {

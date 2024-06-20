@@ -19,7 +19,7 @@
                     :key="product.id" 
                     :product="product"
                     @addProduct="addProduct(product)" 
-                    @removeProduct="removeProduct(product.id)" />
+                    @removeProduct="removeProduct(product)" />
             </div>
             <div v-else class="text-lg font-regular ps-10">
                 <p>{{ $t("no_products") }}</p>
@@ -173,7 +173,7 @@
      * Remove product from cart
      * @param {Number} productId - The ID of the product to remove
      */
-    const removeProduct = (productId) => {
-        productStore.removeProductFromCart(productId);
+    const removeProduct = (product) => {
+        productStore.removeProductFromCart(product);
     };
 </script>
