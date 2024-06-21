@@ -127,109 +127,118 @@
       @close="mobileMenuOpen = false"
       :open="mobileMenuOpen"
     >
-      <div class="fixed inset-0 z-50" />
-      <Transition
-        enter-active-class="transition ease-out duration-300"
-        enter-from-class="transform opacity-0 scale-95"
-        enter-to-class="transform opacity-100 scale-100"
-        leave-active-class="transition ease-in duration-75"
-        leave-from-class="transform opacity-100 scale-100"
-        leave-to-class="transform opacity-0 scale-95"
-      >
-        <DialogPanel
-          class="fixed inset-y-0 left-0 z-50 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10"
-        >
-          <div class="flex items-center justify-between">
-            <RouterLink :to="{ name: 'home' }" class="-m-1.5 p-1.5">
-              <span class="sr-only">Senses Candles By Kate</span>
-              <img
-                class="h-8 w-auto"
-                src="@/assets/images/logo.png"
-                alt="Senses Candles By Kate"
-              />
-            </RouterLink>
-            <button
-              type="button"
-              class="-m-2.5 rounded-md p-2.5 text-gray-700"
-              @click="mobileMenuOpen = false"
-            >
-              <span class="sr-only">Close menu</span>
-              <XMarkIcon class="h-6 w-6" aria-hidden="true" />
-            </button>
-          </div>
-          <div class="mt-6 flow-root">
-            <div class="-my-6 divide-y divide-gray-500/10">
-              <!-- Mobile links -->
-              <a
-                v-for="item in mobileLinks"
-                :key="item.name"
-                :href="item.href"
-                :class="{
-                  'bg-gray-100 text-black_p': isActive(item.name),
-                  'text-gray-900': !isActive(item.name),
-                }"
-                class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 hover:bg-gray-50"
+        <DialogPanel>
+          <div 
+          @click="mobileMenuOpen = false"
+          class="absolute inset-0 bg-gray-500 bg-opacity-40 backdrop-blur-md z-30"
+          />
+          <div ref="navbarMobile" class="fixed inset-y-0 left-0 z-30 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
+            <div class="flex items-center justify-between">
+              <RouterLink :to="{ name: 'home' }" class="-m-1.5 p-1.5">
+                <span class="sr-only">Senses Candles By Kate</span>
+                <img
+                  class="h-8 w-auto"
+                  src="@/assets/images/logo.png"
+                  alt="Senses Candles By Kate"
+                />
+              </RouterLink>
+              <button
+                type="button"
+                class="-m-2.5 rounded-md p-2.5 text-gray-700"
+                @click="mobileMenuOpen = false"
               >
-                {{ $t(item.name) }}
-              </a>
-              <!-- Mobile language menu -->
-              <Menu as="div" class="-mx-3 px-3 block text-left rounded-lg">
-                <div>
-                  <MenuButton
-                    class="inline-flex w-full justify-start items-center rounded-md py-2 text-base font-semibold text-gray-900"
-                  >
-                    <span>{{ $t("language").language }}</span>
-                    <ChevronDownIcon
-                      class="ml-1 h-4 w-4 text-black"
-                      aria-hidden="true"
-                    />
-                  </MenuButton>
-                </div>
-                <transition
-                  enter-active-class="transition ease-out duration-300"
-                  enter-from-class="transform opacity-0 scale-95"
-                  enter-to-class="transform opacity-100 scale-100"
-                  leave-active-class="transition ease-in duration-75"
-                  leave-from-class="transform opacity-100 scale-100"
-                  leave-to-class="transform opacity-0 scale-95"
+                <span class="sr-only">Close menu</span>
+                <XMarkIcon class="h-6 w-6" aria-hidden="true" />
+              </button>
+            </div>
+            <div class="mt-6 flow-root">
+              <div class="-my-6 divide-y divide-gray-500/10">
+                <!-- Mobile links -->
+                <a
+                  v-for="item in mobileLinks"
+                  :key="item.name"
+                  :href="item.href"
+                  class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-black_p hover:bg-gray-50"
                 >
-                  <MenuItems
-                    class="font-medium absolute left-6 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
+                  {{ $t(item.name) }}
+                </a>
+                <!-- Mobile Shopping Cart -->
+                <div class="cursor-pointer">
+                  <a 
+                  @click="showShoppingCart = true" 
+                  class="inline-block justify-start items-center rounded-md py-2 text-base font-semibold text-black_p">
+                    SHOPPING CART
+                  </a>
+                  <span
+                    @click="showShoppingCart = true"
+                    v-if="totalCartProducts > 0"
+                    class="px-1 ml-2 bg-primary_p text-white rounded-full text-xs"
                   >
-                    <div class="py-1">
-                      <MenuItem v-slot="{ active }">
-                        <a
-                          @click="handleLanguage('en')"
-                          :class="[
-                            active
-                              ? 'bg-gray-100 text-black_p'
-                              : 'text-gray-700',
-                            'block px-4 py-2 text-sm cursor-pointer',
-                          ]"
-                          >{{ $t("language").english }}</a
-                        >
-                      </MenuItem>
-                      <MenuItem v-slot="{ active }">
-                        <a
-                          @click="handleLanguage('es')"
-                          :class="[
-                            active
-                              ? 'bg-gray-100 text-black_p'
-                              : 'text-gray-700',
-                            'block px-4 py-2 text-sm cursor-pointer',
-                          ]"
-                          >{{ $t("language").spanish }}</a
-                        >
-                      </MenuItem>
-                    </div>
-                  </MenuItems>
-                </transition>
-              </Menu>
+                    {{ totalCartProducts }}
+                  </span>
+                </div>
+                <!-- Mobile language menu -->
+                <Menu as="div" class="-mx-3 px-3 block text-left rounded-lg">
+                  <div>
+                    <MenuButton
+                      class="inline-flex w-full justify-start items-center rounded-md py-2 text-base font-semibold text-black_p"
+                    >
+                      <span>{{ $t("language").language }}</span>
+                      <ChevronDownIcon
+                        class="ml-1 h-4 w-4 text-black_p"
+                        aria-hidden="true"
+                      />
+                    </MenuButton>
+                  </div>
+                  <transition
+                    enter-active-class="transition ease-out duration-300"
+                    enter-from-class="transform opacity-0 scale-95"
+                    enter-to-class="transform opacity-100 scale-100"
+                    leave-active-class="transition ease-in duration-75"
+                    leave-from-class="transform opacity-100 scale-100"
+                    leave-to-class="transform opacity-0 scale-95"
+                  >
+                    <MenuItems
+                      class="font-medium absolute left-6 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
+                    >
+                      <div class="py-1">
+                        <MenuItem v-slot="{ active }">
+                          <a
+                            @click="handleLanguage('en')"
+                            :class="[
+                              active
+                                ? 'bg-gray-100 text-black_p'
+                                : 'text-gray-700',
+                              'block px-4 py-2 text-sm cursor-pointer',
+                            ]"
+                            >{{ $t("language").english }}</a
+                          >
+                        </MenuItem>
+                        <MenuItem v-slot="{ active }">
+                          <a
+                            @click="handleLanguage('es')"
+                            :class="[
+                              active
+                                ? 'bg-gray-100 text-black_p'
+                                : 'text-gray-700',
+                              'block px-4 py-2 text-sm cursor-pointer',
+                            ]"
+                            >{{ $t("language").spanish }}</a
+                          >
+                        </MenuItem>
+                      </div>
+                    </MenuItems>
+                  </transition>
+                </Menu>
+              </div>
             </div>
           </div>
+          <ShoppingCart
+            :visible="showShoppingCart"
+            @update:visible="showShoppingCart = $event"
+          />
         </DialogPanel>
-      </Transition>
-    </Dialog>
+      </Dialog>
   </header>
 </template>
 
@@ -249,6 +258,10 @@ import { useAppStore } from "@/stores/language.js";
 import { useProductStore } from "@/stores/product";
 import enMessages from "@/locales/layout/header/en.js";
 import esMessages from "@/locales/layout/header/es.js";
+import gsap from "gsap";
+
+// Animation references
+const navbarMobile = ref(null)
 
 // Reactive references
 const appStore = useAppStore();
@@ -270,6 +283,20 @@ const handleLanguage = (key) => {
 
 watchEffect(() => {
   messages.value = currentLanguage.value === "en" ? enMessages : esMessages;
+  if (mobileMenuOpen) {
+    if (navbarMobile.value) {
+      gsap.fromTo(navbarMobile.value,
+      {
+        x: -navbarMobile.value.offsetWidth,
+      },
+      {
+        x: 0,
+        duration: 1,
+        ease: "power3.inOut"
+      }
+      )
+    }
+  }
 });
 
 // Mobile links
