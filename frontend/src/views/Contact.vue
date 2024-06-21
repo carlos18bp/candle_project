@@ -1,5 +1,4 @@
 <template>
-    <Banner></Banner>
     <Header></Header>
     <div class="mx-auto relative flex flex-col items-center">
         <!-- Contact Banner Image -->
@@ -66,7 +65,6 @@
 <script setup>
     import { GoogleMap, Marker } from "vue3-google-map";
     import { computed, onMounted, ref, watchEffect } from "vue";
-    import Banner from "@/components/layouts/Banner.vue";
     import Footer from "@/components/layouts/Footer.vue";
     import Header from "@/components/layouts/Header.vue";
     import enMessages from '@/locales/contact/en.js';

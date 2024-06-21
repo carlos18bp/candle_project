@@ -1,5 +1,4 @@
 <template>
-    <Banner></Banner>
     <Header></Header>
     
     <!--Content block-->
@@ -180,7 +179,6 @@
     import "swiper/css";
     import "swiper/css/navigation";
     import "swiper/css/pagination";
-    import Banner from "@/components/layouts/Banner.vue";
     import Footer from "@/components/layouts/Footer.vue";
     import Header from "@/components/layouts/Header.vue";
     import { useAppStore } from '@/stores/language.js';

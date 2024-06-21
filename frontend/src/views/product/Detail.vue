@@ -1,6 +1,4 @@
 <template>
-    <!-- Banner Component -->
-    <Banner></Banner>
     <!-- Header Component -->
     <Header></Header>
 
@@ -306,7 +304,6 @@
     } from '@headlessui/vue';
     import { StarIcon } from '@heroicons/vue/20/solid';
     import { MinusSmallIcon, PlusSmallIcon } from '@heroicons/vue/24/outline';
-    import Banner from "@/components/layouts/Banner.vue";
     import Footer from "@/components/layouts/Footer.vue";
     import Header from "@/components/layouts/Header.vue";
     import ProductCarousel from "@/components/product/ProductCarousel.vue";

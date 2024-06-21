@@ -26,12 +26,12 @@
                 <div class="flex gap-2">
                     <!-- Add Product Button -->
                     <a @click="$emit('addProduct', product)" 
-                        class="text-terciary_p font-medium text-md">
+                        class="text-terciary_p font-medium text-md cursor-pointer">
                         {{ $t('add') }}
                     </a>
                     <!-- Remove Product Button -->
                     <a @click="$emit('removeProduct', product.id)" 
-                        class="text-gray-500 font-medium text-md">
+                        class="text-gray-500 font-medium text-md cursor-pointer">
                         {{ $t('remove') }}
                     </a>
                 </div>

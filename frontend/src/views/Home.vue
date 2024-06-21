@@ -1,5 +1,4 @@
 <template>
-    <Banner></Banner>
     <div class="absolute w-full z-30">
         <Header></Header>
     </div>
@@ -130,7 +129,6 @@
 
 <script setup>
     import { computed, onMounted, ref, watchEffect } from "vue";
-    import Banner from "@/components/layouts/Banner.vue";
     import FAQS from "@/components/home/FAQS.vue";
     import Footer from "@/components/layouts/Footer.vue";
     import Header from "@/components/layouts/Header.vue";

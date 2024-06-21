@@ -1,180 +1,75 @@
 <template>
-    <!-- Banner Component -->
-    <Banner></Banner>
-    <!-- Header Component -->
     <Header></Header>
-    <!-- Main Blog Section -->
-    <div class="md:mx-auto flex flex-col mx-8 md:px-16">
-        <div class="flex pb-12">
-            <div class="w-full md:w-1/2 mt-4 -m-8 md:-m-0 md:mt-0">
-                <img v-if="firstBlog && firstBlog.image" :src="firstBlog.image" class="w-full md:h-96 object-cover"
-                    alt="Blog Image" />
+
+    <!-- Blog Detail content -->
+    <div v-if="blog" class="mx-auto flex flex-col px-16">
+        <div class="relative flex pb-8">
+            <div class="w-full max-h-96 flex items-center justify-center">
+                <img :src="blog.image" class="object-cover w-full h-full" />
             </div>
-            <div class="w-full md:w-1/2 flex flex-col justify-center pl-10 md:px-8">
-                <!-- Blog Category -->
-                <p v-if="currentLanguage === 'en'"
-                    class="font-regular tracking-widest text-lg md:text-xl text-gray_p uppercase pb-2">
-                    {{ firstBlog.category }}
-                </p>
-                <p v-else class="font-regular tracking-widest text-lg md:text-xl text-gray_p uppercase pb-2">
-                    {{ firstBlog.categoria }}
-                </p>
-                <!-- Blog Title -->
-                <h1 v-if="currentLanguage === 'en'" class="py-3">
-                    <RouterLink v-if="firstBlog.id" :to="{ name: 'blog', params: { blog_id: firstBlog.id } }"
-                        class="font-bold text-3xl md:text-5xl tracking-wider break-all">
-                        {{ firstBlog.title }}
-                    </RouterLink>
-                </h1>
-                <h1 v-else class="py-3">
-                    <RouterLink v-if="firstBlog.id" :to="{ name: 'blog', params: { blog_id: firstBlog.id } }"
-                        class="font-bold text-3xl md:text-5xl tracking-wider break-all">
-                        {{ firstBlog.titulo }}
-                    </RouterLink>
-                </h1>
-                <!-- Blog Description -->
-                <p v-if="currentLanguage === 'en'" class="font-regular text-2xl line-clamp-3 tracking-wider pt-4">
-                    {{ firstBlog.description }}
-                </p>
-                <p v-else class="font-regular text-2xl line-clamp-3 tracking-wider pt-4">
-                    {{ firstBlog.descripcion }}
-                </p>
+
+            <div class="bg-background_p absolute bottom-0 -left-px p-8 pt-4 flex flex-col">
+                <h1 v-if="currentLanguage === 'en'" class="font-bold text-4xl tracking-wider">{{ blog.title }}</h1>
+                <h1 v-else class="font-bold text-4xl tracking-wider">{{ blog.titulo }}</h1>
             </div>
         </div>
-
-        <!-- Blog List Section -->
-        <div class="mb-16">
-            <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-12 pb-8">
-                <BlogPresentation v-for="blog in paginatedBlogs" :key="blog.id" :blog="blog"></BlogPresentation>
-            </div>
-            <nav class="flex items-center justify-between border-t border-gray-200 px-4 sm:px-0">
-                <!-- Previous page button -->
-                <a href="#"
-                    class="inline-flex items-center border-t-2 border-transparent pr-1 pt-4 text-sm font-medium text-gray-500 hover:border-terciary_p hover:text-terciary_p"
-                    @click.prevent="goToPage(currentPage - 1)" :disabled="currentPage === 1">
-                    <ArrowLongLeftIcon class="mr-3 h-5 w-5 text-terciary_p" aria-hidden="true" />
-                    {{ $t('previous') }}
-                </a>
-
-                <!-- Show page numbers -->
-                <div class="hidden md:block">
-                    <template v-for="page in totalPages" :key="page">
-                        <a href="#"
-                            class="inline-flex items-center border-t-2 border-transparent px-4 pt-4 text-sm font-medium"
-                            :class="{
-                    'border-primary_p text-primary_p': currentPage === page,
-                    'text-gray-500 hover:text-terciary_p hover:border-terciary_p': currentPage !== page,
-                }" @click.prevent="goToPage(page)">
-                            {{ page }}
-                        </a>
-                    </template>
-                </div>
-
-                <!-- Next page button -->
-                <a href="#"
-                    class="inline-flex items-center border-t-2 border-transparent pl-1 pt-4 text-sm font-medium text-gray-500 hover:border-terciary_p hover:text-terciary_p"
-                    @click.prevent="goToPage(currentPage + 1)" :disabled="currentPage === totalPages">
-                    {{ $t('next') }}
-                    <ArrowLongRightIcon class="ml-3 h-5 w-5 text-terciary_p" aria-hidden="true" />
-                </a>
-            </nav>
+        <div class="flex justify-center">
+            <p v-if="currentLanguage === 'en'" class="max-w-7xl font-regular text-xl tracking-wider">
+                {{ blog.description }}
+            </p>
+            <p v-else class="max-w-7xl font-regular text-xl tracking-wider">
+                {{ blog.descripcion }}
+            </p>
         </div>
     </div>
+
+    <!-- Blog Carousel Component -->
+    <BlogCarousel :top="{ top_blog }" class="mb-16"> </BlogCarousel>
+
     <!-- Footer Component -->
     <Footer></Footer>
 </template>
 
 <script setup>
-    import { computed, onMounted, reactive, ref, watchEffect } from "vue";
-    import { RouterLink } from "vue-router";
-    import { useAppStore } from '@/stores/language.js';
+    import { onMounted, reactive, ref, watchEffect } from "vue";
+    import { useRoute } from "vue-router";
     import { useBlogStore } from "@/stores/blog";
-    import { ArrowLongLeftIcon, ArrowLongRightIcon } from "@heroicons/vue/20/solid";
-    import Banner from "@/components/layouts/Banner.vue";
-    import BlogPresentation from "@/components/blog/BlogPresentation.vue";
-    import Footer from "@/components/layouts/Footer.vue";
     import Header from "@/components/layouts/Header.vue";
-    import enMessages from '@/locales/product/list/en.js';
-    import esMessages from '@/locales/product/list/es.js';
+    import Footer from "@/components/layouts/Footer.vue";
+    import BlogCarousel from "@/components/blog/BlogCarousel.vue";
+    import { useAppStore } from '@/stores/language.js';
 
-    // Reactive references
+    const route = useRoute();
     const appStore = useAppStore();
+    const currentLanguage = ref('');
+    
     const blogStore = useBlogStore();
-    const currentLanguage = computed(() => appStore.getCurrentLanguage);
-    const currentPage = ref(1);
-    const blogs = ref([]);
-    const firstBlog = reactive({});
-    const isBlogsLoaded = ref(false);
-    const messages = ref('');
-    let blogsPerPage;
+    const blog_id = ref(0);
+    const blog = reactive({});
+    const top_blog = ref(null);
 
-    // Determine the number of blogs per page based on window width
     if (window.innerWidth >= 1024) {
-        blogsPerPage = 6;
-    } else if (window.innerWidth < 1024 && window.innerWidth >= 760) {
-        blogsPerPage = 4;
-    } else {
-        blogsPerPage = 2;
+        top_blog.value = 3;
+    } else if (window.innerWidth < 1024 && 760 <= window.innerWidth) {
+        top_blog.value = 2;
+    } else if (window.innerWidth < 760) {
+        top_blog.value = 1;
     }
 
-    // On mounted lifecycle hook
     onMounted(async () => {
         window.scrollTo({ top: 0 });
-
-        await fetchBlogs();
-    });
-
-    watchEffect(() => {
-        messages.value = currentLanguage.value === 'en' ? enMessages : esMessages;
-    });
-
-    /**
-     * Fetch and update blogs data.
-     */
-    async function fetchBlogs() {
+        watchEffect(() => {
+            currentLanguage.value = appStore.getCurrentLanguage;
+        });
         await blogStore.fetchBlogsData();
-        blogs.value = blogStore.blogs;
-
-        isBlogsLoaded.value = true;
-
-        if (blogStore.blogs.length > 0) {
-            Object.assign(firstBlog, blogStore.blogs[0]);
-        }
-    }
-
-    // Calculate the total number of pages
-    const totalPages = computed(() => {
-        if (isBlogsLoaded.value) {
-            return Math.ceil(blogs.value.length / blogsPerPage);
-        }
-        return 0;
     });
 
-    // Calculate the blogs to display on the current page
-    const paginatedBlogs = computed(() => {
-        if (isBlogsLoaded.value) {
-            const start = (currentPage.value - 1) * blogsPerPage;
-            return blogs.value.slice(start, start + blogsPerPage);
-        }
-        return [];
+    watchEffect(async () => {
+        blog_id.value = parseInt(route.params.blog_id);
+        if (blog_id.value) Object.assign(blog, blogStore.blogById(blog_id.value));
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth",
+        });
     });
-
-    // Property to store the scroll position
-    const scrollPosition = ref(0);
-
-    /**
-     * Function to go to a specific page.
-     * @param {number} page - Page number to go to.
-     */
-    const goToPage = (page) => {
-        if (isBlogsLoaded.value && page >= 1 && page <= totalPages.value) {
-            // Save current scroll position
-            scrollPosition.value = window.scrollY;
-            currentPage.value = page;
-
-            setTimeout(() => {
-                window.scrollTo(0, scrollPosition.value);
-            }, 0);
-        }
-    };
 </script>

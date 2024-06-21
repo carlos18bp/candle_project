@@ -1,5 +1,4 @@
 <template>
-    <Banner></Banner>
     <Header></Header>
     <div class="md:mx-auto flex flex-col mx-8 md:px-16">
         <div class="flex pb-12">
@@ -8,35 +7,31 @@
                     class="w-full md:h-96 object-cover" />
             </div>
             <div class="w-full md:w-1/2 flex flex-col justify-center pl-10 md:px-8">
-                <p v-if="currentLanguage === 'en'"
-                    class="font-regular tracking-widest text-lg md:text-xl text-gray_p uppercase pb-2">
-                    {{ firstBlog.category }}
-                </p>
-                <p v-else class="font-regular tracking-widest text-lg md:text-xl text-gray_p uppercase pb-2">
-                    {{ firstBlog.categoria }}
-                </p>
-                <h1 v-if="currentLanguage === 'en'" class="py-3">
-                    <RouterLink v-if="firstBlog.id" :to="{
-                    name: 'blog',
-                    params: { blog_id: firstBlog.id },
-                }" class="font-bold text-3xl md:text-5xl tracking-wider break-all">
+                <RouterLink v-if="firstBlog.id" 
+                    :to="{
+                        name: 'blog',
+                        params: { blog_id: firstBlog.id },
+                    }">
+                    <p v-if="currentLanguage === 'en'"
+                        class="font-regular tracking-widest text-lg md:text-xl text-gray_p uppercase pb-2">
+                        {{ firstBlog.category }}
+                    </p>
+                    <p v-else class="font-regular tracking-widest text-lg md:text-xl text-gray_p uppercase pb-2">
+                        {{ firstBlog.categoria }}
+                    </p>
+                    <h1 v-if="currentLanguage === 'en'" class="py-3 font-bold text-3xl md:text-5xl tracking-wider break-all">
                         {{ firstBlog.title }}
-                    </RouterLink>
-                </h1>
-                <h1 v-else class="py-3">
-                    <RouterLink v-if="firstBlog.id" :to="{
-                    name: 'blog',
-                    params: { blog_id: firstBlog.id },
-                }" class="font-bold text-3xl md:text-5xl tracking-wider break-all">
+                    </h1>
+                    <h1 v-else class="py-3 font-bold text-3xl md:text-5xl tracking-wider break-all">
                         {{ firstBlog.titulo }}
-                    </RouterLink>
-                </h1>
-                <p v-if="currentLanguage === 'en'" class="font-regular text-2xl line-clamp-3 tracking-wider pt-4">
-                    {{ firstBlog.description }}
-                </p>
-                <p v-else class="font-regular text-2xl line-clamp-3 tracking-wider pt-4">
-                    {{ firstBlog.descripcion }}
-                </p>
+                    </h1>
+                    <p v-if="currentLanguage === 'en'" class="font-regular text-2xl line-clamp-3 tracking-wider pt-4">
+                        {{ firstBlog.description }}
+                    </p>
+                    <p v-else class="font-regular text-2xl line-clamp-3 tracking-wider pt-4">
+                        {{ firstBlog.descripcion }}
+                    </p>
+                </RouterLink>
             </div>
         </div>
 
@@ -46,8 +41,7 @@
             </div>
             <nav class="flex items-center justify-between border-t border-gray-200 px-4 sm:px-0">
                 <!-- Previous page button -->
-                <a href="#"
-                    class="inline-flex items-center border-t-2 border-transparent pr-1 pt-4 text-sm font-medium text-gray-500 hover:border-terciary_p hover:text-terciary_p"
+                <a class="cursor-pointer inline-flex items-center border-t-2 border-transparent pr-1 pt-4 text-sm font-medium text-gray-500 hover:border-terciary_p hover:text-terciary_p"
                     @click="goToPage(currentPage - 1)" :disabled="currentPage === 1">
                     <ArrowLongLeftIcon class="mr-3 h-5 w-5 text-terciary_p" aria-hidden="true" />
                     {{ $t('previous') }}
@@ -56,21 +50,19 @@
                 <!-- Show page numbers -->
                 <div class="hidden md:block">
                     <template v-for="page in totalPages" :key="page">
-                        <a href="#"
-                            class="inline-flex items-center border-t-2 border-transparent px-4 pt-4 text-sm font-medium"
+                        <a class="cursor-pointer inline-flex items-center border-t-2 border-transparent px-4 pt-4 text-sm font-medium"
                             :class="{
-                    'border-primary_p text-primary_p': currentPage === page,
-                    'text-gray-500 hover:text-terciary_p hover:border-terciary_p':
-                        currentPage !== page,
-                }" @click="goToPage(page)">
+                                'border-primary_p text-primary_p': currentPage === page,
+                                'text-gray-500 hover:text-terciary_p hover:border-terciary_p':
+                                    currentPage !== page,
+                            }" @click="goToPage(page)">
                             {{ page }}
                         </a>
                     </template>
                 </div>
 
                 <!-- Next page button -->
-                <a href="#"
-                    class="inline-flex items-center border-t-2 border-transparent pl-1 pt-4 text-sm font-medium text-gray-500 hover:border-terciary_p hover:text-terciary_p"
+                <a class="cursor-pointer inline-flex items-center border-t-2 border-transparent pl-1 pt-4 text-sm font-medium text-gray-500 hover:border-terciary_p hover:text-terciary_p"
                     @click="goToPage(currentPage + 1)" :disabled="currentPage === totalPages">
                     {{ $t('next') }}
                     <ArrowLongRightIcon class="ml-3 h-5 w-5 text-terciary_p" aria-hidden="true" />
@@ -82,11 +74,9 @@
 </template>
 
 <script setup>
-    import Banner from "@/components/layouts/Banner.vue";
     import { computed, reactive, ref, onMounted, watchEffect } from "vue";
     import Header from "@/components/layouts/Header.vue";
     import Footer from "@/components/layouts/Footer.vue";
-    import { RouterLink } from "vue-router";
     import { useBlogStore } from "@/stores/blog";
     import BlogPresentation from "@/components/blog/BlogPresentation.vue";
     import { ArrowLongLeftIcon, ArrowLongRightIcon } from "@heroicons/vue/20/solid";
@@ -158,19 +148,27 @@
         return [];
     });
 
-    // Property to store the scroll position
-    const scrollPosition = ref(0);
-
     // Function to go to a specific page
     const goToPage = (page) => {
         if (isBlogsLoaded.value && page >= 1 && page <= totalPages.value) {
             // Save current scroll position
-            scrollPosition.value = window.scrollY;
             currentPage.value = page;
-
-            setTimeout(() => {
-                window.scrollTo(0, scrollPosition.value);
-            }, 0);
+            scrollToTop();
         }
+    };
+
+    /**
+     * Smoothly scrolls to the top of the page.
+     */
+     const scrollToTop = () => {
+        const scrollDuration = 1500; // Duration in milliseconds
+        const scrollStep = -window.scrollY / (scrollDuration / 15);
+        const scrollInterval = setInterval(() => {
+            if (window.scrollY !== 0) {
+                window.scrollBy(0, scrollStep);
+            } else {
+                clearInterval(scrollInterval);
+            }
+        }, 13);
     };
 </script>

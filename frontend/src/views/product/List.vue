@@ -1,5 +1,4 @@
 <template>
-    <Banner></Banner>
     <Header></Header>
 
     <div class="relative px-8">
@@ -102,7 +101,6 @@
     import { ArrowLongLeftIcon, ArrowLongRightIcon } from "@heroicons/vue/20/solid";
     import { useAppStore } from '@/stores/language.js';
     import { useProductStore } from "@/stores/product";
-    import Banner from "@/components/layouts/Banner.vue";
     import CategoryFilter from "@/components/product/CategoryFilter.vue";
     import Footer from "@/components/layouts/Footer.vue";
     import Header from "@/components/layouts/Header.vue";
