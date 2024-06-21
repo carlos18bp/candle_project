@@ -7,7 +7,7 @@
                 <img src="@/assets/images/logo.png" alt="Caropa Couture Logo" class="h-20 cursor-pointer" />
             </router-link>
 
-            <div class="flex items-center space-x-4">
+            <div class="hidden lg:flex items-center space-x-4">
                 <LockClosedIcon class="text-black_p w-6 h-6"></LockClosedIcon>
                 <div class="flex items-center space-x-2">
                     <span class="text-black_p text-lg font-bold">{{
@@ -19,15 +19,17 @@
                         EN
                     </span>
                     <span class="font-bold">|</span>
-                    <span class="cursor-pointer font-bold"> ES </span>
+                    <span class="cursor-pointer font-bold" @click="handleLanguage('es')">
+                        ES 
+                    </span>
                 </div>
             </div>
         </header>
 
         <!-- Main Content -->
-        <div class="w-full grid grid-cols-2">
+        <div class="w-full grid lg:grid-cols-2 min-h-screen">
             <!-- Left Column -->
-            <div class="relative w-full">
+            <div class="relative w-full order-2 lg:order-1">
                 <form @submit.prevent="handleSubmit" class="sticky top-0 py-8 px-8">
                     <h2 class="text-3xl font-semibold">
                         {{ $t("contact_information") }}
@@ -52,8 +54,8 @@
                             class="w-full p-3 font-regular border border-gray-500 rounded-lg bg-transparent focus:ring-0 focus:ring-transparent focus:outline-none focus:border-black_p"
                             required />
                     </div>
-                    <div class="mt-4 flex space-x-5">
-                        <div class="w-1/2">
+                    <div class="mt-4 grid grid-cols-4 gap-4">
+                        <div class="col-span-3">
                             <label class="block text-gray-500 mb-2 font-semibold text-lg">{{
                         $t("expiration_date")
                     }}</label>
@@ -61,7 +63,7 @@
                                 class="w-full p-3 font-regular border border-gray-500 rounded-lg bg-transparent focus:ring-0 focus:ring-transparent focus:outline-none focus:border-black_p"
                                 required />
                         </div>
-                        <div class="w-1/2">
+                        <div class="col-span-1">
                             <label class="block text-gray-500 mb-2 font-semibold text-lg">CVC</label>
                             <input type="text" v-model="form.cvc"
                                 class="w-full p-3 font-regular border border-gray-500 rounded-lg bg-transparent focus:ring-0 focus:ring-transparent focus:outline-none focus:border-black_p"
@@ -80,8 +82,8 @@
                             class="w-full p-3 font-regular border border-gray-500 rounded-lg bg-transparent focus:ring-0 focus:ring-transparent focus:outline-none focus:border-black_p"
                             required />
                     </div>
-                    <div class="mt-4 flex space-x-5">
-                        <div class="w-1/3">
+                    <div class="mt-4 grid grid-cols-2 lg:flex gap-4">
+                        <div class="col-span-2">
                             <label class="block text-gray-500 mb-2 font-semibold text-lg">{{
                         $t("city")
                     }}</label>
@@ -89,7 +91,7 @@
                                 class="w-full p-3 font-regular border border-gray-500 rounded-lg bg-transparent focus:ring-0 focus:ring-transparent focus:outline-none focus:border-black_p"
                                 required />
                         </div>
-                        <div class="w-1/3">
+                        <div>
                             <label class="block text-gray-500 mb-2 font-semibold text-lg">{{
                         $t("state_province")
                     }}</label>
@@ -97,7 +99,7 @@
                                 class="w-full p-3 font-regular border border-gray-500 rounded-lg bg-transparent focus:ring-0 focus:ring-transparent focus:outline-none focus:border-black_p"
                                 required />
                         </div>
-                        <div class="w-1/3">
+                        <div>
                             <label class="block text-gray-500 mb-2 font-semibold text-lg">{{
                         $t("postal_code")
                     }}</label>
@@ -117,18 +119,18 @@
             </div>
 
             <!-- Right Column -->
-            <div class="w-full bg-terciary_p px-16 py-8">
+            <div class="w-full bg-terciary_p px-8 lg:px-16 py-8 order-1 lg:order-2">
                 <h2 class="text-2xl font-semibold text-brown">
                     {{ $t("amount_due") }}
                 </h2>
                 <h2 class="font-semibold text-4xl text-white -mt-2">
                     $ {{ productStore.totalCartPrice }}
                 </h2>
-                <div class="mt-8 ps-12 divide-y-2 divide-brown overflow-auto">
+                <div class="mt-8 lg:ps-12 divide-y-2 divide-brown overflow-auto">
                     <div v-for="product in cartProducts" :key="product.id"
-                        class="flex justify-between h-40 py-4 box-content">
+                        class="flex items-center justify-between h-40 py-4 box-content">
                         <!-- Product Image -->
-                        <img :src="product.gallery_urls[0]" alt="Product Image" class="w-40 h-full rounded" />
+                        <img :src="product.gallery_urls[0]" alt="Product Image" class="w-28 lg:w-40 lg:h-full rounded" />
                         <div class="h-full relative flex-1 pl-4">
                             <div>
                                 <!-- Product Title -->

@@ -5,7 +5,7 @@
             @click="closeCart()" 
             class="absolute inset-0 bg-gray-500 bg-opacity-40 backdrop-blur-md">
         </div>
-        <div ref="cart" class="relative bg-white h-full w-2/5 shadow-lg flex flex-col z-60">
+        <div ref="cart" class="relative bg-white h-full w-full lg:w-2/5 shadow-lg flex flex-col z-60">
             <!-- Cart Header -->
             <div class="flex justify-between items-center p-10">
                 <h2 class="text-2xl font-semibold">{{ $t("shopping_cart") }}</h2>
