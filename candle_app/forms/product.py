@@ -1,6 +1,6 @@
 from django import forms
 from django_attachments.models import Library
-from .models import Product
+from candle_app.models import Product
 
 class ProductForm(forms.ModelForm):
 	def __init__(self, *args, **kwargs):

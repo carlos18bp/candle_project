@@ -47,9 +47,9 @@ class Product(models.Model):
     :vartype description_corta: str
     """
 
-    category = models.CharField(max_length=40)
-    sub_category = models.CharField(max_length=40)
     title = models.CharField(max_length=40)
+    category = models.CharField(max_length=40)
+    sub_category = models.CharField(max_length=40)    
     description = models.TextField()
     ingredients = models.TextField()
     how_to_use = models.TextField()
