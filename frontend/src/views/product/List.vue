@@ -9,7 +9,7 @@
                         
                         <!-- Filters -->
                         <div class="col-span-4 md:col-span-1">
-                            <h1 class="text-2xl font-bold tracking-tight text-gray-900 py-8">
+                            <h1 class="text-2xl font-bold tracking-tight text-gray-900 py-8 test-filter_title">
                                 {{ $t('filter_title') }}
                             </h1>
 
@@ -22,7 +22,7 @@
                         <!-- Product grid -->
                         <div class="col-span-4 md:col-span-3">
                             <div class="mx-auto pt-8 pb-16 max-w-7xl">
-                                <h2 class="text-2xl font-bold tracking-tight text-gray-900">
+                                <h2 class="text-2xl font-bold tracking-tight text-gray-900 test-candles">
                                     {{ $t('candles') }}
                                 </h2>
 
@@ -59,7 +59,7 @@
 
                                 <nav class="flex items-center justify-between border-t border-gray-200 px-4 mt-8">
                                     <!-- Previous page button -->
-                                    <a class="cursor-pointer inline-flex items-center border-t-2 border-transparent pr-1 pt-4 text-sm font-medium text-gray-500 hover:border-terciary_p hover:text-terciary_p"
+                                    <a class="cursor-pointer inline-flex items-center border-t-2 border-transparent pr-1 pt-4 text-sm font-medium text-gray-500 hover:border-terciary_p hover:text-terciary_p test-previous"
                                         @click="goToPage(currentPage - 1)" :disabled="currentPage === 1">
                                         <ArrowLongLeftIcon class="mr-3 h-5 w-5 text-primary_p" aria-hidden="true" />
                                         {{ $t('previous') }}
@@ -79,7 +79,7 @@
                                     </div>
 
                                     <!-- Next page button -->
-                                    <a class="cursor-pointer inline-flex items-center border-t-2 border-transparent pl-1 pt-4 text-sm font-medium text-gray-500 hover:border-terciary_p hover:text-terciary_p"
+                                    <a class="cursor-pointer inline-flex items-center border-t-2 border-transparent pl-1 pt-4 text-sm font-medium text-gray-500 hover:border-terciary_p hover:text-terciary_p test-next"
                                         @click="goToPage(currentPage + 1)" :disabled="currentPage === totalPages">
                                         {{ $t('next') }}
                                         <ArrowLongRightIcon class="ml-3 h-5 w-5 text-primary_p" aria-hidden="true" />

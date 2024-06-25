@@ -21,8 +21,8 @@ export const useAppStore = defineStore({
      * Get the current language.
      * @returns {string} - Current language code.
      */
-    getCurrentLanguage() {
-      return this.currentLanguage;
+    getCurrentLanguage: (state) => {
+      return state.currentLanguage;
     },
   },
 });

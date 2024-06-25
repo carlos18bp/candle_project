@@ -36,20 +36,26 @@ export const useBlogStore = defineStore("blog", {
     async fetchBlogsData() {
       if (this.dataLoaded) return;
 
-      let response = await get_request("blogs-data/");
-      let jsonData = response.data;
+      try {
+        let response = await get_request("blogs-data/");
+        let jsonData = response.data;
 
-      if (jsonData && typeof jsonData === "string") {
-        try {
-          jsonData = JSON.parse(jsonData);
-        } catch (error) {
-          console.error(error.message);
-          jsonData = [];
+        if (jsonData && typeof jsonData === "string") {
+          try {
+            jsonData = JSON.parse(jsonData);
+          } catch (error) {
+            console.error("JSON parse error:", error.message);
+            jsonData = [];
+          }
         }
-      }
 
-      this.blogs = jsonData ?? [];
-      this.dataLoaded = true;
+        this.blogs = jsonData ?? [];
+        this.dataLoaded = true;
+      } catch (error) {
+        console.error("Error fetching blogs data:", error.message);
+        this.blogs = [];
+        this.dataLoaded = false;
+      }
     },
   },
 });

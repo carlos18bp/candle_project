@@ -49,14 +49,13 @@
                         <!-- Product Title and Price -->
                         <div class="mt-3 flex justify-between">
                             <h1 v-if="currentLanguage === 'en'"
-                                class="inline-block text-3xl font-semibold tracking-tight text-black_p">
+                                class="inline-block text-3xl font-semibold tracking-tight text-black_p test-title">
                                 {{ product.title }}
                             </h1>
-                            <h1 v-else class="inline-block text-3xl font-semibold tracking-tight text-black_p">
+                            <h1 v-else class="inline-block text-3xl font-semibold tracking-tight text-black_p test-titulo">
                                 {{ product.titulo }}
                             </h1>
-                            <p class="inline-block text-3xl tracking-tight font-regular text-black_p">$ {{ product.price
-                                }}</p>
+                            <p class="inline-block text-3xl tracking-tight font-regular text-black_p">$ {{ product.price }}</p>
                         </div>
 
                         <!-- Reviews -->
@@ -70,8 +69,12 @@
                                 </div>
                                 <p class="sr-only">{{ product.reviews }} out of 5 stars</p>
                                 <div class="ms-3">
-                                    <p class="font-medium inline-block"> {{ reviewsLength }} {{ $t('reviews_1') }}</p>
-                                    <a data-modal-toggle="add-review-modal" data-modal-target="add-review-modal" class="ms-2 text-terciary_p font-medium inline-block cursor-pointer">{{ $t('write_review') }}</a>
+                                    <p class="font-medium inline-block test-reviews_length"> {{ reviewsLength }} {{ $t('reviews_1') }}</p>
+                                    <a data-modal-toggle="add-review-modal" 
+                                        data-modal-target="add-review-modal" 
+                                        class="ms-2 text-terciary_p font-medium inline-block cursor-pointer test-write_review">
+                                        {{ $t('write_review') }}
+                                    </a>
                                 </div>
                             </div>
                         </div>
@@ -79,16 +82,16 @@
                         <!-- Introductory phrase of the product -->
                         <div class="mt-8">
                             <p class="font-medium text-lg ">
-                                <span v-if="currentLanguage === 'en'">
+                                <span v-if="currentLanguage === 'en'" class="test-short_description">
                                     {{ product.short_description }}
                                 </span>
-                                <span v-else>{{ product.descripcion_corta }}</span>
+                                <span v-else class="test-descripcion_corta">{{ product.descripcion_corta }}</span>
                             </p>
                         </div>
 
                         <!-- Color Options -->
                         <div class="mt-3">
-                            <h3 class="text-md font-medium text-gray-700">Color</h3>
+                            <h3 class="text-md font-medium text-gray-700">{{ $t('color') }}</h3>
                             <div class="flex space-x-2 mt-2">
                                 
                                 <span v-for="color in product.colors" :key="color.name"
@@ -129,7 +132,7 @@
 
                             <button v-if="colorSelected !== 'rainbow'" @click="addToCart"
                                 class="px-8 py-2 w-full h-12 bg-black text-white rounded-full hover:bg-primary_p focus:outline-none font-regular tracking-wide text-md">
-                                <span class="uppercase">{{ $t('add_to_cart') }}</span>
+                                <span class="uppercase test-add_to_cart">{{ $t('add_to_cart') }}</span>
                             </button>
 
                             <form v-if="colorSelected === 'rainbow'" class="w-full">
@@ -151,13 +154,13 @@
                                 <template #default="{ open }">
                                     <DisclosureButton
                                         class="flex justify-between w-full px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-100 border-b border-b-primary_p">
-                                        <span class="font-bold text-xl">{{ $t('description') }}</span>
+                                        <span class="font-bold text-xl test-description">{{ $t('description') }}</span>
                                         <PlusSmallIcon v-if="!open" class="w-8 h-8 text-primary_p"/>
                                         <MinusSmallIcon v-else class="h-8 w-8 text-primary_p" aria-hidden="true" />
                                     </DisclosureButton>
                                     <DisclosurePanel class="px-4 pt-4 pb-2 text-md text-gray-700 font-medium">
-                                        <p v-if="currentLanguage === 'en'">{{ product.description }}</p>
-                                        <p v-else>{{ product.descripcion }}</p>
+                                        <p v-if="currentLanguage === 'en'" class="test-description">{{ product.description }}</p>
+                                        <p v-else class="test-descripcion">{{ product.descripcion }}</p>
                                     </DisclosurePanel>
                                 </template>
                             </Disclosure>
@@ -166,13 +169,13 @@
                                 <template #default="{ open }">
                                     <DisclosureButton
                                         class="flex justify-between w-full px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-100 border-b border-b-primary_p">
-                                        <span class="font-bold text-xl">{{ $t('ingredients') }}</span>
+                                        <span class="font-bold text-xl test-ingredients">{{ $t('ingredients') }}</span>
                                         <PlusSmallIcon v-if="!open" class="w-8 h-8 text-primary_p"/>
                                          <MinusSmallIcon v-else class="h-8 w-8 text-primary_p" aria-hidden="true" />
                                     </DisclosureButton>
                                     <DisclosurePanel class="px-4 pt-4 pb-2 text-md text-gray-700 font-medium">
-                                        <p v-if="currentLanguage === 'en'">{{ product.ingredients }}</p>
-                                        <p v-else>{{ product.ingredientes }}</p>
+                                        <p v-if="currentLanguage === 'en'" class="test-ingredients">{{ product.ingredients }}</p>
+                                        <p v-else class="test-ingredientes">{{ product.ingredientes }}</p>
                                     </DisclosurePanel>
                                 </template>
                             </Disclosure>
@@ -181,13 +184,13 @@
                                 <template #default="{ open }">
                                     <DisclosureButton
                                         class="flex justify-between w-full px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-100 border-b border-b-primary_p">
-                                        <span class="font-bold text-xl">{{ $t('how_to_use') }}</span>
+                                        <span class="font-bold text-xl test-how_to_use">{{ $t('how_to_use') }}</span>
                                         <PlusSmallIcon v-if="!open" class="w-8 h-8 text-primary_p"/>
                                          <MinusSmallIcon v-else class="h-8 w-8 text-primary_p" aria-hidden="true" />
                                     </DisclosureButton>
                                     <DisclosurePanel class="px-4 pt-4 pb-2 text-md text-gray-700 font-medium">
-                                        <p v-if="currentLanguage === 'en'">{{ product.how_to_use }}</p>
-                                        <p v-else>{{ product.como_usarlo }}</p>
+                                        <p v-if="currentLanguage === 'en'" class="test-how_to_use">{{ product.how_to_use }}</p>
+                                        <p v-else class="test-como_usarlo">{{ product.como_usarlo }}</p>
                                     </DisclosurePanel>
                                 </template>
                             </Disclosure>
@@ -196,13 +199,13 @@
                                 <template #default="{ open }">
                                     <DisclosureButton
                                         class="flex justify-between w-full px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-100 border-b border-b-primary_p">
-                                        <span class="font-bold text-xl">{{ $t('how_to_feel') }}</span>
+                                        <span class="font-bold text-xl test-how_to_feel">{{ $t('how_to_feel') }}</span>
                                         <PlusSmallIcon v-if="!open" class="w-8 h-8 text-primary_p"/>
                                          <MinusSmallIcon v-else class="h-8 w-8 text-primary_p" aria-hidden="true" />
                                     </DisclosureButton>
                                     <DisclosurePanel class="px-4 pt-4 pb-2 text-md text-gray-700 font-medium">
-                                        <p v-if="currentLanguage === 'en'">{{ product.how_to_feel }}</p>
-                                        <p v-else>{{ product.como_se_siente }}</p>
+                                        <p v-if="currentLanguage === 'en'" class="test-how_to_feel">{{ product.how_to_feel }}</p>
+                                        <p v-else class="test-como_se_siente">{{ product.como_se_siente }}</p>
                                     </DisclosurePanel>
                                 </template>
                             </Disclosure>
@@ -215,10 +218,10 @@
 
     <!-- Trending Products Carousel -->
     <div class="mx-auto flex flex-col items-center justify-center max-w-7xl px-8 py-12">
-        <h2 class="uppercase pb-4 font-regular tracking-widest text-gray_p text-center text-2xl">
+        <h2 class="uppercase pb-4 font-regular tracking-widest text-gray_p text-center text-2xl test-trending_tag">
             {{ $t('trending_tag') }}
         </h2>
-        <h2 class="pb-4 font-semibold text-center text-4xl">
+        <h2 class="pb-4 font-semibold text-center text-4xl test-carousel_subtitle">
             {{ $t('carousel_subtitle') }}
         </h2>
         <ProductCarousel :top="4"></ProductCarousel>
@@ -229,18 +232,16 @@
         <div class="grid content-center">
             <div>
                 <h2 class="font-regular text-2xl text-gray_p tracking-widest">{{ $t('trending') }}</h2>
-                <p class="font-medium text-2xl xl:text-4xl text-black_p mt-12 tracking-wider ">{{ $t('text') }}</p>
+                <p class="font-medium text-2xl xl:text-4xl text-black_p mt-12 tracking-wider">{{ $t('text') }}</p>
             </div>
         </div>
         <div class="relative">
-            <img src="@/assets/images/general/hazelnuts.avif" alt="..."
-                class="h-full w-full object-cover object-center sm:rounded-lg">
+            <img src="@/assets/images/general/hazelnuts.avif" alt="..." class="h-full w-full object-cover object-center sm:rounded-lg">
         </div>
     </div>
 
     <!-- Reviews Section -->
-    <div
-        class="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:grid lg:max-w-7xl lg:grid-cols-12 lg:gap-x-8 lg:px-8 lg:py-32">
+    <div class="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:grid lg:max-w-7xl lg:grid-cols-12 lg:gap-x-8 lg:px-8 lg:py-32">
         <div class="lg:col-span-4">
             <h2 class="text-2xl font-bold tracking-tight text-black_p">{{ $t('reviews_title') }}</h2>
             <div v-if="reviews" class="mt-3 flex items-center">
@@ -258,7 +259,7 @@
                 <h3 class="text-lg font-medium text-black_p">{{ $t('reviews_subtitle') }}</h3>
                 <p class="mt-1 text-sm text-gray-600">{{ $t('reviews_text') }}</p>
                 <a data-modal-toggle="add-review-modal" data-modal-target="add-review-modal"
-                    class="mt-6 inline-flex w-full items-center justify-center rounded-md border border-gray-300 bg-white px-8 py-2 text-sm font-medium text-black_p hover:bg-gray-50 sm:w-auto lg:w-full">
+                    class="mt-6 inline-flex w-full items-center justify-center rounded-md border border-gray-300 bg-white px-8 py-2 text-sm font-medium text-black_p hover:bg-gray-50 sm:w-auto lg:w-full cursor-pointer">
                     {{ $t('reviews_button') }}
                 </a>
                 <AddReview v-if="productId" :product_id="productId"></AddReview>
@@ -271,8 +272,7 @@
                 <div class="-my-12 divide-y divide-gray-200">
                     <div v-for="review in reviews" :key="review.id" class="py-12">
                         <div class="flex items-center">
-                            <img src="@/assets/images/user_avatar.jpg" :alt="`user avatar`"
-                                class="h-12 w-12 rounded-full" />
+                            <img src="@/assets/images/user_avatar.jpg" :alt="`user avatar`" class="h-12 w-12 rounded-full" />
                             <div class="ml-4">
                                 <h4 class="text-sm font-bold text-black_p">{{ review.user.full_name }}</h4>
                                 <div class="mt-1 flex items-center">
@@ -366,7 +366,7 @@
      * Watcher for changes in filteredProducts
      * Returns to page number one
      */
-     watch(colorSelected, (newColorSelected) => {
+    watch(colorSelected, (newColorSelected) => {
         productQuantity.value = 1;
     });
 

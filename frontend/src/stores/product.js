@@ -57,7 +57,7 @@ export const useProductStore = defineStore("product", {
      */
     addProductToCart(addProduct, quantity, colorSelected) {
       const existingProduct = this.cartProducts.find(
-        (product) => product === addProduct
+        (product) => product.id == addProduct.id && product.colorSelected === colorSelected
       );
 
       if (existingProduct) {
@@ -72,26 +72,32 @@ export const useProductStore = defineStore("product", {
      * Fetch products data from backend.
      */
     async fetchProductsData() {
-      if (this.dataLoaded) return;
-
+    if (this.dataLoaded) return;
+  
+    try {
       let response = await get_request("products-data/");
       let jsonData = response.data;
-
+  
       if (jsonData && typeof jsonData === "string") {
         try {
           jsonData = JSON.parse(jsonData);
         } catch (error) {
-          console.error(error.message);
+          console.error("JSON parse error:", error.message);
           jsonData = [];
         }
       }
-
+  
       this.products = jsonData ?? [];
       this.dataLoaded = true;
       this.filteredProducts = this.products;
       this.fetchUniqueCategoriesAndSubCategories();
-    },
-
+    } catch (error) {
+      console.error("Error fetching products data:", error.message);
+      this.products = [];
+      this.dataLoaded = false;
+    }
+  },
+  
     /**
      * Fetch unique categories and subCategories from products.
      */
@@ -191,9 +197,9 @@ export const useProductStore = defineStore("product", {
      * Remove a product from the cart.
      * @param {number} removeProduct - the product to remove.
      */
-    removeProductFromCart(removeProduct) {
+    removeProductFromCart(removeProductId, colorSelected) {
       const removeProductFound = this.cartProducts.find(
-        (product) => product === removeProduct
+        (product) => product.id === removeProductId && product.colorSelected === colorSelected
       );
 
       if (removeProductFound.quantity > 1) {

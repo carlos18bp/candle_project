@@ -6,8 +6,8 @@
 
         <!-- Contact Information Section -->
         <div class="rounded-3xl relative xl:absolute bg-second_p flex flex-col w-auto p-8 xl:top-28 xl:left-28">
-            <h2 class="font-bold text-center text-4xl pb-8">{{ $t('contact_title') }}</h2>
-            <h2 class="font-bold pb-6 text-4xl">{{ $t('contact') }}</h2>
+            <h2 class="font-bold text-center text-4xl pb-8 test-contact_title">{{ $t('contact_title') }}</h2>
+            <h2 class="font-bold pb-6 text-4xl test-contact">{{ $t('contact') }}</h2>
 
             <!-- Contact Details -->
             <div class="pb-8">
@@ -92,3 +92,44 @@
         messages.value = currentLanguage.value === 'en' ? enMessages : esMessages;
     });
 </script>
+
+<style>
+    ._marqueeSlider_1htck_3 {
+        overflow: hidden;
+    }
+
+    ._marqueeSliderContainer_1htck_11 {
+        width: 100%;
+        animation-name: _horizontalAnimation_1htck_1;
+        animation-timing-function: linear;
+        animation-iteration-count: infinite;
+        display: flex;
+    }
+
+    ._marqueeSliderContainerVertical_1htck_27 {
+        height: fit-content;
+        animation-name: _verticalAnimation_1htck_1;
+        animation-timing-function: linear;
+        animation-iteration-count: infinite;
+        display: flex;
+        flex-direction: column;
+    }
+
+    @keyframes _horizontalAnimation_1htck_1 {
+        0% {
+            transform: translate(0);
+        }
+        to {
+            transform: translate(-100%);
+        }
+    }
+
+    @keyframes _verticalAnimation_1htck_1 {
+        0% {
+            transform: translateY(0);
+        }
+        to {
+            transform: translateY(-100%);
+        }
+    }
+</style>

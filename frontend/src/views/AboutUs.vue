@@ -5,12 +5,12 @@
     <div class="bg-primary_p relative">
         <div class="grid xl:grid-cols-2 gap-6">
             <div class="p-8 md:p-16">
-                <h1 class="font-semibold text-5xl md:text-7xl text-second_p">
+                <h1 class="font-semibold text-5xl md:text-7xl text-second_p test-main_title">
                     {{ $t('main_title') }}
                 </h1>
             </div>
             <div class="xl:w-3/4 px-8 md:px-16 xl:px-0 pb-16 flex items-end">
-                <p class="text-second_p font-regular text-2xl md:text-4xl">
+                <p class="text-second_p font-regular text-2xl md:text-4xl test-main_description">
                     {{ $t('main_description') }}
                 </p>
             </div>
@@ -38,7 +38,7 @@
 
     <!--Content-->
     <div class="relative mt-20 p-8 md:p-20">
-        <h2 class="font-bold text-2xl tracking-widest text-black_p">{{ $t('our_product') }}</h2>
+        <h2 class="font-bold text-2xl tracking-widest text-black_p test-our_product">{{ $t('our_product') }}</h2>
         <div class="relative grid xl:grid-cols-3 gap-4 mt-16 items-center">
             <div class="flex items-center justify-center xl:hidden">
                 <img class="h-full w-auto" src="@/assets/images/aboutUs/candleJar.jpg" alt="..." />
@@ -46,14 +46,14 @@
 
             <div>
                 <div class="xl:w-3/4">
-                    <h3 class="text-2xl font-bold text-black_p">{{ $t('nature_title') }}</h3>
-                    <p class="text-xl font-medium text-gray_p mt-5">
+                    <h3 class="text-2xl font-bold text-black_p test-nature_title">{{ $t('nature_title') }}</h3>
+                    <p class="text-xl font-medium text-gray_p mt-5 test-nature_description">
                         {{ $t('nature_description') }}
                     </p>
                 </div>
                 <div class="xl:w-3/4 mt-10">
-                    <h3 class="text-2xl font-bold text-black_p">{{ $t('premium_title') }}</h3>
-                    <p class="text-xl font-medium text-gray_p mt-5">
+                    <h3 class="text-2xl font-bold text-black_p test-premium_title">{{ $t('premium_title') }}</h3>
+                    <p class="text-xl font-medium text-gray_p mt-5 test-premium_description">
                         {{ $t('premium_description') }}
                     </p>
                 </div>
@@ -66,16 +66,16 @@
             <div>
                 <div class="flex justify-end">
                     <div class="xl:w-3/4">
-                        <h3 class="text-2xl text-end font-bold text-black_p">{{ $t('unique_title') }}</h3>
-                        <p class="text-xl text-end font-medium text-gray_p mt-5">
+                        <h3 class="text-2xl text-end font-bold text-black_p test-unique_title">{{ $t('unique_title') }}</h3>
+                        <p class="text-xl text-end font-medium text-gray_p mt-5 test-unique_description">
                             {{ $t('unique_description') }}
                         </p>
                     </div>
                 </div>
                 <div class="flex justify-end">
                     <div class="xl:w-3/4 mt-10">
-                        <h3 class="text-2xl text-end font-bold text-black_p">{{ $t('economical_title') }}</h3>
-                        <p class="text-xl text-end font-medium text-gray_p mt-5">
+                        <h3 class="text-2xl text-end font-bold text-black_p test-economical_title">{{ $t('economical_title') }}</h3>
+                        <p class="text-xl text-end font-medium text-gray_p mt-5 test-economical_description">
                             {{ $t('economical_description') }}
                         </p>
                     </div>
@@ -99,14 +99,14 @@
 
         <div class="grid grid-cols-1 gap-16">
             <div class="px-8 md:px-0 md:w-3/4 h-auto">
-                <h2 class="font-bold text-2xl text-black_p">{{ $t('why_senses') }}</h2>
-                <p class="font-semibold text-xl text-gray_p">
+                <h2 class="font-bold text-2xl text-black_p test-why_senses">{{ $t('why_senses') }}</h2>
+                <p class="font-semibold text-xl text-gray_p test-why_description">
                     {{ $t('why_description') }}
                 </p>
             </div>
             <div class="px-8 md:px-0 md:w-3/4 h-auto">
-                <h2 class="font-bold text-2xl text-black_p">{{ $t('mission') }}</h2>
-                <p class="font-semibold text-xl text-gray_p">
+                <h2 class="font-bold text-2xl text-black_p test-mission">{{ $t('mission') }}</h2>
+                <p class="font-semibold text-xl text-gray_p test-mission_description">
                     {{ $t('mission_description') }}
                 </p>
             </div>
@@ -117,8 +117,8 @@
     <div class="relative p-16 flex justify-center items-center bg-primary_p">
         <div class="inline-block">
             <h1 class="inline-block text-second_p tracking-wider">
-                <span class="font-semibold text-4xl">{{ $t('candle_banner').first }}</span><span
-                    class="font-special text-5xl">{{ $t('candle_banner').second }}</span>
+                <span class="font-semibold text-4xl test-candle_banner_first">{{ $t('candle_banner').first }}</span><span
+                    class="font-special text-5xl test-candle_banner_second">{{ $t('candle_banner').second }}</span>
             </h1>
             <div class="flex justify-end">
                 <img src="@/assets/images/aboutUs/lineCurved.png" alt="..." />
