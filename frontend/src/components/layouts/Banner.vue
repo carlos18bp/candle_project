@@ -2,27 +2,27 @@
     <div v-if="currentLanguage === 'en'" class="bg-black py-2">
         <vue-marquee-slider class="text-white font-semibold tracking-wider" id="marquee-slider-text" :space="0" :speed="30000" :width="900">
             <span class="flex justify-center">
-                <div class="flex">{{ $t('reminder') }}
+                <div class="flex test-reminder">{{ $t('reminder') }}
                     <div class="p-1">
                         <!-- US flag icon -->
                         <img src="@/assets/images/icons/us.png" class="w-6">
                     </div>
                 </div>
             </span>
-            <span class="flex justify-center">{{ $t('shipping') }}</span>
+            <span class="flex justify-center test-shipping">{{ $t('shipping') }}</span>
         </vue-marquee-slider>
     </div>
     <div v-else class="bg-black py-2">
         <vue-marquee-slider class="text-white font-semibold tracking-wider" id="marquee-slider-text" :space="0" :speed="30000" :width="900">
             <span class="flex justify-center">
-                <div class="flex">{{ $t('reminder') }}
+                <div class="flex test-reminder">{{ $t('reminder') }}
                     <div class="p-1">
                         <!-- US flag icon -->
                         <img src="@/assets/images/icons/us.png" class="w-6">
                     </div>
                 </div>
             </span>
-            <span class="flex justify-center">{{ $t('shipping') }}</span>
+            <span class="flex justify-center test-shipping">{{ $t('shipping') }}</span>
         </vue-marquee-slider>
     </div>
 </template>
@@ -30,7 +30,7 @@
 <script setup>
     import { computed, ref, watchEffect } from 'vue';
     import { VueMarqueeSlider } from "vue3-marquee-slider";
-    import { useAppStore } from '@/stores/language.js';
+    import { useLanguageStore } from '@/stores/language.js';
     import enMessages from '@/locales/layout/banner/en.js';
     import esMessages from '@/locales/layout/banner/es.js';
 
@@ -41,7 +41,7 @@
     const $t = (key) => messages.value[key];
 
     // Store
-    const appStore = useAppStore();
+    const appStore = useLanguageStore();
 
     // Computed property for the current language
     const currentLanguage = computed(() => appStore.getCurrentLanguage);

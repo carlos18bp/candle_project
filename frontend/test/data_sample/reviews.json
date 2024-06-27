@@ -1,0 +1,122 @@
+[
+    {
+        "id": 1,
+        "user": {
+            "id": 1,
+            "full_name": "Cynthia",
+            "birthday_date": "2024-07-10",
+            "email": "copelandjennifer@example.com"
+        },
+        "rate": 5,
+        "description": "Mother pass consider develop. More international tough situation he wide face.\nThus high both rather.\nFeel chair receive example fund prepare mind. Send money material their commercial.\nMeeting today actually do. Effect sing just talk. Best concern really address guess decision ok sort.",
+        "product": 1
+    },
+    {
+        "id": 2,
+        "user": {
+            "id": 2,
+            "full_name": "Anthony",
+            "birthday_date": "2024-07-19",
+            "email": "kimberlytorres@example.com"
+        },
+        "rate": 1,
+        "description": "Government animal gas thousand magazine sound article. Upon need fish leave series them current vote. Type civil likely simply throw. Accept anyone down suffer.\nTable base wall exist case thing recent. Head detail girl form song care. When some technology.",
+        "product": 12
+    },
+    {
+        "id": 3,
+        "user": {
+            "id": 3,
+            "full_name": "Craig",
+            "birthday_date": "2024-07-08",
+            "email": "kellymoore@example.net"
+        },
+        "rate": 5,
+        "description": "See ten truth arm however. Financial player attorney give. Our cut responsibility art.\nPut magazine miss nice we tough able option. Make agreement much surface left ever. Instead against listen leave crime fear themselves change.\nClose husband piece her involve firm owner.",
+        "product": 9
+    },
+    {
+        "id": 4,
+        "user": {
+            "id": 4,
+            "full_name": "Kelly",
+            "birthday_date": "2024-06-25",
+            "email": "mooreheather@example.com"
+        },
+        "rate": 3,
+        "description": "Entire analysis able action focus around response. Five now among foot nice ten activity.\nCrime across station leg himself. Religious business simple different.\nTheir western director walk. Pattern everyone the let provide.\nBehind on computer student. Follow pass ago turn.",
+        "product": 12
+    },
+    {
+        "id": 5,
+        "user": {
+            "id": 5,
+            "full_name": "Bruce",
+            "birthday_date": "2024-06-29",
+            "email": "travismccarthy@example.net"
+        },
+        "rate": 4,
+        "description": "Fall what attention my water. Field education employee wind same where finally. Democratic draw every which sort lay play parent.\nAmerican back beat less rest back. Amount find decade billion start. Lead pretty office family. Past take report maintain trouble positive table.\nLose else trial of.",
+        "product": 22
+    },
+    {
+        "id": 6,
+        "user": {
+            "id": 6,
+            "full_name": "Michael",
+            "birthday_date": "2024-07-18",
+            "email": "thomasvance@example.com"
+        },
+        "rate": 5,
+        "description": "True to wait ball fact. Resource on speak trade least speak.\nDirection guess would realize. Decision party effort lawyer. Deal whatever attack stop Democrat least. Cause plan ground ground shoulder.\nIdea offer high less four. Walk arm join husband office.",
+        "product": 16
+    },
+    {
+        "id": 7,
+        "user": {
+            "id": 7,
+            "full_name": "Jimmy",
+            "birthday_date": "2024-07-13",
+            "email": "ashley33@example.org"
+        },
+        "rate": 5,
+        "description": "Himself PM water the choice natural us.\nWell run worker provide. Have floor poor person prove cause. Election hour sport town land now within bad.\nOften such population couple story grow draw. Table recent lot large drop read.",
+        "product": 30
+    },
+    {
+        "id": 8,
+        "user": {
+            "id": 8,
+            "full_name": "Amy",
+            "birthday_date": "2024-06-29",
+            "email": "melaniekemp@example.net"
+        },
+        "rate": 1,
+        "description": "Worry wish final red focus drive surface. Town race cut bag American. Own suffer life establish class.\nCatch read admit yard morning country class. Law edge situation. Move garden serve rule war.\nReality police half view around not. Happen serious ok center inside.",
+        "product": 3
+    },
+    {
+        "id": 9,
+        "user": {
+            "id": 9,
+            "full_name": "Patricia",
+            "birthday_date": "2024-07-04",
+            "email": "jpatterson@example.org"
+        },
+        "rate": 4,
+        "description": "Business everything between because trouble society easy. Exist sea rich decide blue position threat. Yes walk include main available.\nKey Republican parent really but conference. Off cold institution budget section least trial.\nValue hope or whole prevent morning. College strong sport test home.",
+        "product": 22
+    },
+    {
+        "id": 10,
+        "user": {
+            "id": 10,
+            "full_name": "Megan",
+            "birthday_date": "2024-07-09",
+            "email": "wcameron@example.net"
+        },
+        "rate": 4,
+        "description": "Not institution interest pull or weight. Option though bag network. Law just president.\nToday role someone actually art. Difficult box several special data hair. Between impact southern health do hit. Inside model fill rest million north.",
+        "product": 8
+    }
+]

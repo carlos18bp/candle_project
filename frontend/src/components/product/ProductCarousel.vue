@@ -34,11 +34,11 @@
 
 <script setup>
     import { computed, onMounted, ref } from "vue";
-    import { useAppStore } from '@/stores/language.js';
+    import { useLanguageStore } from '@/stores/language.js';
     import { useProductStore } from '@/stores/product';
 
     // Reactive references
-    const appStore = useAppStore();
+    const appStore = useLanguageStore();
     const currentLanguage = computed(() => appStore.getCurrentLanguage);
     const topProducts = ref([]);
     const productStore = useProductStore();

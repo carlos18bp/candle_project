@@ -8,7 +8,7 @@
         <div ref="cart" class="relative bg-white h-full w-full lg:w-2/5 shadow-lg flex flex-col z-60">
             <!-- Cart Header -->
             <div class="flex justify-between items-center p-10">
-                <h2 class="text-2xl font-semibold">{{ $t("shopping_cart") }}</h2>
+                <h2 class="text-2xl font-semibold test-shopping_cart">{{ $t("shopping_cart") }}</h2>
                 <XMarkIcon @click="closeCart()" class="text-gray-500 cursor-pointer w-6 h-6">
                 </XMarkIcon>
             </div>
@@ -19,12 +19,12 @@
                     :key="product.id" 
                     :product="product"
                     @addProduct="addProduct(product)" 
-                    @removeProduct="removeProduct(product)" />
+                    @removeProduct="removeProduct(product.id, product.colorSelected)" />
             </div>
             <div v-else class="text-lg font-regular ps-10">
-                <p>{{ $t("no_products") }}</p>
+                <p class="test-no_products">{{ $t("no_products") }}</p>
                 <RouterLink :to="{ name: 'catalog' }" class="cursor-pointer">
-                    <span class="text-primary_p">{{ $t("continue_shopping") }}</span>
+                    <span class="text-primary_p test-continue_shopping">{{ $t("continue_shopping") }}</span>
                 </RouterLink>
             </div>
 
@@ -41,13 +41,13 @@
                 </div>
                 <router-link to="/checkout">
                     <button
-                        class="bg-primary_p text-white w-full mt-4 py-2 rounded-lg hover:bg-terciary_p font-medium text-xl tracking-wide">
+                        class="bg-primary_p text-white w-full mt-4 py-2 rounded-lg hover:bg-terciary_p font-medium text-xl tracking-wide test-checkout">
                         {{ $t("checkout") }}
                     </button>
                 </router-link>
                 <div class="text-center mt-4 font-regular text-lg">
                     <RouterLink :to="{ name: 'catalog' }" class="cursor-pointer">
-                        <span class="text-black_p">{{ $t("or") }}</span> <span class="text-primary_p">{{ $t("continue_shopping") }}</span>
+                        <span class="text-black_p test-or">{{ $t("or") }}</span> <span class="text-primary_p test-continue_shopping">{{ $t("continue_shopping") }}</span>
                     </RouterLink>
                 </div>
             </div>
@@ -56,11 +56,11 @@
 </template>
 
 <script setup>
-    import { computed, ref, watchEffect, onMounted } from "vue";
+    import { computed, ref, watchEffect } from "vue";
     import CartProduct from "./CartProduct.vue";
     import { gsap } from "gsap";
     import { XMarkIcon } from "@heroicons/vue/24/outline";
-    import { useAppStore } from "@/stores/language.js";
+    import { useLanguageStore } from "@/stores/language.js";
     import { useProductStore } from "@/stores/product";
     import enMessages from "@/locales/product/shopping_cart/en.js";
     import esMessages from "@/locales/product/shopping_cart/es.js";
@@ -72,7 +72,7 @@
     // Reactive references for messages and language
     const messages = ref("");
     const $t = (key) => messages.value[key];
-    const appStore = useAppStore();
+    const appStore = useLanguageStore();
     const currentLanguage = computed(() => appStore.getCurrentLanguage);
 
     // Product store references
@@ -173,7 +173,7 @@
      * Remove product from cart
      * @param {Number} productId - The ID of the product to remove
      */
-    const removeProduct = (product) => {
-        productStore.removeProductFromCart(product);
+    const removeProduct = (productId, colorSelected) => {
+        productStore.removeProductFromCart(productId, colorSelected);
     };
 </script>

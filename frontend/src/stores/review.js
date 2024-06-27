@@ -37,34 +37,46 @@ export const useReviewStore = defineStore("review", {
     async fetchReviewsData() {
       if (this.dataLoaded) return;
 
-      let response = await get_request("reviews-data/");
-      let jsonData = response.data;
+      try {
+        let response = await get_request("reviews-data/");
+        let jsonData = response.data;
 
-      if (jsonData && typeof jsonData === "string") {
-        try {
-          jsonData = JSON.parse(jsonData);
-        } catch (error) {
-          console.error(error.message);
-          jsonData = [];
+        if (jsonData && typeof jsonData === "string") {
+          try {
+            jsonData = JSON.parse(jsonData);
+          } catch (error) {
+            console.error("JSON parse error:", error.message);
+            jsonData = [];
+          }
         }
-      }
 
-      this.reviews = jsonData ?? [];
-      this.dataLoaded = true;
+        this.reviews = jsonData ?? [];
+        this.dataLoaded = true;
+      } catch (error) {
+        console.error("Error fetching reviews data:", error.message);
+        this.reviews = [];
+        this.dataLoaded = false;
+      }
     },
     /**
      * Call creation user and review request.
      * @param {object} formData - Form data.
      */
     async createReview(formData) {
-      let response = await create_request(
-        'create-review/',
-        JSON.stringify(formData)
-      );
+      try {
+        let response = await create_request(
+          "create-review/",
+          JSON.stringify(formData)
+        );
 
-      this.dataLoaded = false;
-      this.fetchReviewsData();
-      return response.status;
+        this.dataLoaded = false;
+        await this.fetchReviewsData();
+
+        return response.status;
+      } catch (error) {
+        console.error("Error creating review:", error.message);
+        return null;
+      }
     },
   },
 });

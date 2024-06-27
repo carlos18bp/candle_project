@@ -8,7 +8,7 @@
 
                 <!-- Modal header -->
                 <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t">
-                    <h3 class="text-lg font-semibold text-gray-90">
+                    <h3 class="text-lg font-semibold text-gray-90 test-create_new_review">
                         {{ $t('create_new_review') }}
                     </h3>
                     <button type="button"
@@ -26,7 +26,7 @@
                 <form class="p-4 md:p-5" @submit.prevent="onSubmit">
                     <div class="grid gap-4 mb-4 grid-cols-2">
                         <div class="col-span-2">
-                            <label for="full_name" class="block mb-2 text-sm font-medium text-gray-900">Full
+                            <label for="full_name" class="block mb-2 text-sm font-medium text-gray-900 test-name">Full
                                 {{ $t('name') }}
                             </label>
                             <input v-model="reviewFormData.full_name" type="text" name="full_name" id="full_name"
@@ -40,7 +40,7 @@
                                 placeholder="Type your birthdate" required />
                         </div>
                         <div class="col-span-2">
-                            <label for="email" class="block mb-2 text-sm font-medium text-gray-900">
+                            <label for="email" class="block mb-2 text-sm font-medium text-gray-900 test-email">
                                 {{ $t('email') }}
                             </label>
                             <input v-model="reviewFormData.email" type="email" name="email" id="email"
@@ -48,7 +48,7 @@
                                 placeholder="Type your email" required />
                         </div>
                         <div class="col-span-2 sm:col-span-1">
-                            <label for="rate" class="block mb-2 text-sm font-medium text-gray-900">
+                            <label for="rate" class="block mb-2 text-sm font-medium text-gray-900 test-rate">
                                 {{ $t('rate') }}
                             </label>
                             <select v-model="reviewFormData.rate" id="rate"
@@ -63,7 +63,7 @@
                         </div>
                         <div class="col-span-2">
                             <label for="description"
-                                class="block mb-2 text-sm font-medium text-gray-900">
+                                class="block mb-2 text-sm font-medium text-gray-900 test-description">
                                 {{ $t('description') }}
                             </label>
                             <textarea v-model="reviewFormData.description" id="description" rows="4"
@@ -72,7 +72,7 @@
                         </div>
                     </div>
                     <button data-modal-hide="add-review-modal" type="submit"
-                        class="text-white inline-flex items-center bg-primary_p hover:bg-black focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
+                        class="text-white inline-flex items-center bg-primary_p hover:bg-black focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center test-add_new_review">
                         {{ $t('add_new_review') }}
                     </button>
                 </form>
@@ -84,18 +84,18 @@
 <script setup>
     import { computed, onMounted, ref, reactive, watchEffect } from "vue";
     import { submitHandler } from "@/shared/submit_handler";
-    import { useAppStore } from '@/stores/language.js';
+    import { useLanguageStore } from '@/stores/language.js';
     import enMessages from '@/locales/review/en.js';
     import esMessages from '@/locales/review/es.js';
 
     let geetest = '';
 
-    const appStore = useAppStore();
+    const appStore = useLanguageStore();
     const currentLanguage = computed(() => appStore.getCurrentLanguage);
 
     // Reactive reference for messages
     const messages = ref(enMessages);
-  
+
     // Translation function
     const $t = (key) => messages.value[key];
 
@@ -146,13 +146,18 @@
             },
             function (captchaObj) {
                 geetest = captchaObj;
-                captchaObj
-                    .onReady(() => { })
-                    .onSuccess(() => {
-                        submitHandler(reviewFormData, "New review was created!");
-                        cleanForm();
-                    })
-                    .onError(() => { });
+                captchaObj.onReady(() => {
+                    // Código a ejecutar cuando el captcha esté listo
+                });
+
+                captchaObj.onSuccess(() => {
+                    submitHandler(reviewFormData, "New review was created!");
+                    cleanForm();
+                });
+
+                captchaObj.onError(() => {
+                    // Código a ejecutar cuando el captcha falle
+                });
             }
         );
     });

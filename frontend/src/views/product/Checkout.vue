@@ -10,7 +10,7 @@
             <div class="hidden lg:flex items-center space-x-4">
                 <LockClosedIcon class="text-black_p w-6 h-6"></LockClosedIcon>
                 <div class="flex items-center space-x-2">
-                    <span class="text-black_p text-lg font-bold">{{
+                    <span class="text-black_p text-lg font-bold test-purchase_safety">{{
                         $t("purchase_safety")
                     }}</span>
                 </div>
@@ -31,11 +31,11 @@
             <!-- Left Column -->
             <div class="relative w-full order-2 lg:order-1">
                 <form @submit.prevent="handleSubmit" class="sticky top-0 py-8 px-8">
-                    <h2 class="text-3xl font-semibold">
+                    <h2 class="text-3xl font-semibold test-contact_information">
                         {{ $t("contact_information") }}
                     </h2>
                     <div class="mt-4">
-                        <label class="block text-gray-500 mb-2 font-semibold text-lg">{{
+                        <label class="block text-gray-500 mb-2 font-semibold text-lg test-email_address">{{
                         $t("email_address")
                     }}</label>
                         <input type="email" v-model="form.email"
@@ -43,11 +43,11 @@
                             required />
                     </div>
 
-                    <h2 class="text-3xl font-semibold mt-6">
+                    <h2 class="text-3xl font-semibold mt-6 test-payment_details">
                         {{ $t("payment_details") }}
                     </h2>
                     <div class="mt-4">
-                        <label class="block text-gray-500 mb-2 font-semibold text-lg">{{
+                        <label class="block text-gray-500 mb-2 font-semibold text-lg test-card_number">{{
                         $t("card_number")
                     }}</label>
                         <input type="text" v-model="form.cardNumber"
@@ -56,7 +56,7 @@
                     </div>
                     <div class="mt-4 grid grid-cols-4 gap-4">
                         <div class="col-span-3">
-                            <label class="block text-gray-500 mb-2 font-semibold text-lg">{{
+                            <label class="block text-gray-500 mb-2 font-semibold text-lg test-expiration_date">{{
                         $t("expiration_date")
                     }}</label>
                             <input type="text" v-model="form.expirationDate"
@@ -71,11 +71,11 @@
                         </div>
                     </div>
 
-                    <h2 class="text-3xl font-semibold mt-6">
+                    <h2 class="text-3xl font-semibold mt-6 test-shipping_address">
                         {{ $t("shipping_address") }}
                     </h2>
                     <div class="mt-4">
-                        <label class="block text-gray-500 mb-2 font-semibold text-lg">{{
+                        <label class="block text-gray-500 mb-2 font-semibold text-lg test-address">{{
                         $t("address")
                     }}</label>
                         <input type="text" v-model="form.address"
@@ -84,7 +84,7 @@
                     </div>
                     <div class="mt-4 grid grid-cols-2 lg:flex gap-4">
                         <div class="col-span-2">
-                            <label class="block text-gray-500 mb-2 font-semibold text-lg">{{
+                            <label class="block text-gray-500 mb-2 font-semibold text-lg test-city">{{
                         $t("city")
                     }}</label>
                             <input type="text" v-model="form.city"
@@ -92,7 +92,7 @@
                                 required />
                         </div>
                         <div>
-                            <label class="block text-gray-500 mb-2 font-semibold text-lg">{{
+                            <label class="block text-gray-500 mb-2 font-semibold text-lg test-state_province">{{
                         $t("state_province")
                     }}</label>
                             <input type="text" v-model="form.state"
@@ -100,7 +100,7 @@
                                 required />
                         </div>
                         <div>
-                            <label class="block text-gray-500 mb-2 font-semibold text-lg">{{
+                            <label class="block text-gray-500 mb-2 font-semibold text-lg test-postal_code">{{
                         $t("postal_code")
                     }}</label>
                             <input type="text" v-model="form.postalCode"
@@ -111,7 +111,7 @@
 
                     <div class="flex justify-end mt-6">
                         <button type="submit"
-                            class="w-36 bg-terciary_p text-white p-3 rounded-lg hover:bg-primary_p font-semibold text-lg tracking-wider">
+                            class="w-36 bg-terciary_p text-white p-3 rounded-lg hover:bg-primary_p font-semibold text-lg tracking-wider test-pay_now">
                             {{ $t("pay_now") }}
                         </button>
                     </div>
@@ -120,7 +120,7 @@
 
             <!-- Right Column -->
             <div class="w-full bg-terciary_p px-8 lg:px-16 py-8 order-1 lg:order-2">
-                <h2 class="text-2xl font-semibold text-brown">
+                <h2 class="text-2xl font-semibold text-brown test-amount_due">
                     {{ $t("amount_due") }}
                 </h2>
                 <h2 class="font-semibold text-4xl text-white -mt-2">
@@ -157,7 +157,7 @@
                             </p>
                             <!-- Remove Product Button -->
                             <div class="flex items-end">
-                                <a @click="removeProduct(product.id)" class="text-white font-semibold text-lg">
+                                <a @click="removeProduct(product.id, product.colorSelected)" class="text-white font-semibold text-lg test-remove">
                                     {{ $t("remove") }}
                                 </a>
                             </div>
@@ -171,16 +171,16 @@
                         <span class="text-brown font-semibold text-2xl">$ {{ productStore.totalCartPrice }}</span>
                     </div>
                     <div class="flex justify-between mt-4">
-                        <span class="text-brown font-semibold text-2xl">{{
-                            $t("shipping")
-                            }}</span>
+                        <span class="text-brown font-semibold text-2xl test-shipping">
+                            {{ $t("shipping") }}
+                        </span>
                         <span class="text-brown font-semibold text-2xl">$ {{ shippingCost }}</span>
                     </div>
                 </div>
 
                 <div class="mt-4 border-t-2 border-brown">
                     <div class="mt-4 flex justify-between font-semibold text-2xl">
-                        <span class="text-white">Total</span>
+                        <span class="text-white test-total">Total</span>
                         <span class="text-white">$ {{ total }}</span>
                     </div>
                 </div>
@@ -198,7 +198,7 @@
     import { computed, reactive, ref, watchEffect, onMounted } from "vue";
     import Banner from "@/components/layouts/Banner.vue";
     import { LockClosedIcon } from "@heroicons/vue/24/outline";
-    import { useAppStore } from "@/stores/language.js";
+    import { useLanguageStore } from "@/stores/language.js";
     import { useProductStore } from "@/stores/product";
     import enMessages from "@/locales/product/checkout/en.js";
     import esMessages from "@/locales/product/checkout/es.js";
@@ -212,7 +212,7 @@
     const total = computed(() => productStore.totalCartPrice + shippingCost.value);
 
     // Reactive references for language
-    const appStore = useAppStore();
+    const appStore = useLanguageStore();
     const currentLanguage = computed(() => appStore.getCurrentLanguage);
     const messages = ref(enMessages);
 
@@ -287,8 +287,8 @@
      * Remove product from cart
      * @param {Number} productId - The ID of the product to remove
      */
-    const removeProduct = (productId) => {
-        productStore.removeProductFromCart(productId);
+    const removeProduct = (productId, colorSelected) => {
+        productStore.removeProductFromCart(productId, colorSelected);
     };
 </script>
 

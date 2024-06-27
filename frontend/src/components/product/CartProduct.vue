@@ -6,17 +6,17 @@
             <div class="flex justify-between">
                 <div>
                     <!-- Product Title -->
-                    <h3 class="font-semibold text-xl" v-if="currentLanguage === 'en'">
+                    <h3 class="font-semibold text-xl test-title-en" v-if="currentLanguage === 'en'">
                         {{ product.title }}
                     </h3>
-                    <h3 class="font-semibold text-xl" v-else>{{ product.titulo }}</h3>
+                    <h3 class="font-semibold text-xl test-title-es" v-else>{{ product.titulo }}</h3>
                     <!-- Selected Color -->
-                    <p class="text-md font-medium text-gray-500">
+                    <p class="text-md font-medium text-gray-500 test-color">
                         {{ product.colorSelected }}
                     </p>
                 </div>
                 <!-- Total Price -->
-                <p class="text-xl font-semibold">${{ product.price * product.quantity }}</p>
+                <p class="text-xl font-semibold test-price">${{ product.price * product.quantity }}</p>
             </div>
             <div class="flex justify-between items-end">
                 <!-- Quantity -->
@@ -26,12 +26,12 @@
                 <div class="flex gap-2">
                     <!-- Add Product Button -->
                     <a @click="$emit('addProduct', product)" 
-                        class="text-terciary_p font-medium text-md cursor-pointer">
+                        class="text-terciary_p font-medium text-md cursor-pointer test-add">
                         {{ $t('add') }}
                     </a>
                     <!-- Remove Product Button -->
                     <a @click="$emit('removeProduct', product.id)" 
-                        class="text-gray-500 font-medium text-md cursor-pointer">
+                        class="text-gray-500 font-medium text-md cursor-pointer test-remove">
                         {{ $t('remove') }}
                     </a>
                 </div>
@@ -42,7 +42,7 @@
 
 <script setup>
     import { computed, ref, watchEffect } from 'vue';
-    import { useAppStore } from '@/stores/language.js';
+    import { useLanguageStore } from '@/stores/language.js';
     import enMessages from '@/locales/product/shopping_cart/en.js';
     import esMessages from '@/locales/product/shopping_cart/es.js';
 
@@ -53,7 +53,7 @@
     const $t = (key) => messages.value[key];
 
     // Store
-    const appStore = useAppStore();
+    const appStore = useLanguageStore();
 
     // Computed property for the current language
     const currentLanguage = computed(() => appStore.getCurrentLanguage);
