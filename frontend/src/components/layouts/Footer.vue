@@ -102,14 +102,14 @@
     import { computed, defineComponent, h, onMounted, ref, watchEffect } from 'vue';
     import { Dialog, DialogPanel, TransitionChild, TransitionRoot } from '@headlessui/vue';
     import { XCircleIcon } from '@heroicons/vue/24/outline';
-    import { useAppStore } from '@/stores/language.js';
+    import { useLanguageStore } from '@/stores/language.js';
     import enMessages from '@/locales/layout/footer/en.js';
     import esMessages from '@/locales/layout/footer/es.js';
 
     // Reactive references
     const open = ref(false);
     const messages = ref(enMessages);
-    const appStore = useAppStore();
+    const appStore = useLanguageStore();
 
     // Computed property for the current language
     const currentLanguage = computed(() => appStore.getCurrentLanguage);

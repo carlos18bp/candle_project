@@ -146,7 +146,7 @@
   import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/vue";
   import Banner from "@/components/layouts/Banner.vue";
   import ShoppingCart from "@/components/product/ShoppingCart.vue";
-  import { useAppStore } from "@/stores/language.js";
+  import { useLanguageStore } from "@/stores/language.js";
   import { useProductStore } from "@/stores/product";
   import enMessages from "@/locales/layout/header/en.js";
   import esMessages from "@/locales/layout/header/es.js";
@@ -156,7 +156,7 @@
   const navbarMobile = ref(null);
   
   // Reactive references
-  const appStore = useAppStore();
+  const appStore = useLanguageStore();
   const currentLanguage = computed(() => appStore.getCurrentLanguage);
   const messages = ref(enMessages);
   const mobileMenuOpen = ref(false);

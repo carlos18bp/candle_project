@@ -2,7 +2,7 @@ import { mount, RouterLinkStub } from "@vue/test-utils";
 import ShoppingCart from "@/components/product/ShoppingCart.vue";
 import CartProduct from "@/components/product/CartProduct.vue";
 import { createPinia, setActivePinia } from "pinia";
-import { useAppStore } from "@/stores/language";
+import { useLanguageStore } from "@/stores/language";
 import { useProductStore } from "@/stores/product";
 import AxiosMockAdapter from "axios-mock-adapter";
 import axios from "axios";
@@ -55,7 +55,7 @@ describe("ShoppingCart.vue", () => {
   beforeEach(async () => {
     pinia = createPinia();
     setActivePinia(pinia);
-    appStore = useAppStore();
+    appStore = useLanguageStore();
     productStore = useProductStore();
 
     // Set initial state for testing

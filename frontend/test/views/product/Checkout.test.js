@@ -2,7 +2,7 @@ import { mount } from "@vue/test-utils";
 import Checkout from "@/views/product/Checkout.vue";
 import Banner from "@/components/layouts/Banner.vue";
 import { createPinia, setActivePinia } from "pinia";
-import { useAppStore } from "@/stores/language";
+import { useLanguageStore } from "@/stores/language";
 import { useProductStore } from "@/stores/product";
 import Swal from "sweetalert2";
 import { createRouter, createWebHistory } from "vue-router";
@@ -40,7 +40,7 @@ describe("Checkout.vue", () => {
   beforeEach(async () => {
     pinia = createPinia();
     setActivePinia(pinia);
-    appStore = useAppStore();
+    appStore = useLanguageStore();
     productStore = useProductStore();
 
     appStore.setCurrentLanguage("en");

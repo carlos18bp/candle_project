@@ -99,7 +99,7 @@
 <script setup>
     import { computed, onMounted, ref, watch, watchEffect } from "vue";
     import { ArrowLongLeftIcon, ArrowLongRightIcon } from "@heroicons/vue/20/solid";
-    import { useAppStore } from '@/stores/language.js';
+    import { useLanguageStore } from '@/stores/language.js';
     import { useProductStore } from "@/stores/product";
     import CategoryFilter from "@/components/product/CategoryFilter.vue";
     import Footer from "@/components/layouts/Footer.vue";
@@ -110,7 +110,7 @@
     // State and computed properties
     const messages = ref('');
     const $t = (key) => messages.value[key];
-    const appStore = useAppStore();
+    const appStore = useLanguageStore();
     const currentLanguage = computed(() => appStore.getCurrentLanguage);
     const productStore = useProductStore();
 

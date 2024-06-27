@@ -4,7 +4,7 @@ import Header from '@/components/layouts/Header.vue';
 import Footer from '@/components/layouts/Footer.vue';
 import BlogPresentation from '@/components/blog/BlogPresentation.vue';
 import { createPinia, setActivePinia } from 'pinia';
-import { useAppStore } from '@/stores/language';
+import { useLanguageStore } from '@/stores/language';
 import { useBlogStore } from '@/stores/blog';
 import blogsData from '../../data_sample/blogs.json';
 import AxiosMockAdapter from 'axios-mock-adapter';
@@ -36,7 +36,7 @@ describe('List.vue', () => {
   beforeEach(async () => {
     pinia = createPinia();
     setActivePinia(pinia);
-    appStore = useAppStore();
+    appStore = useLanguageStore();
     blogStore = useBlogStore();
 
     jest.spyOn(blogStore, 'fetchBlogsData');

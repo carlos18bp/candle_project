@@ -33,11 +33,11 @@
     import { computed, ref, watchEffect } from 'vue';
     import { Disclosure, DisclosureButton, DisclosurePanel } from '@headlessui/vue';
     import { MinusSmallIcon, PlusSmallIcon } from '@heroicons/vue/24/outline';
-    import { useAppStore } from '@/stores/language.js';
+    import { useLanguageStore } from '@/stores/language.js';
     import enMessages from '@/locales/fqas/en.js';
     import esMessages from '@/locales/fqas/es.js';
 
-    const appStore = useAppStore();
+    const appStore = useLanguageStore();
     const currentLanguage = computed(() => appStore.getCurrentLanguage);
 
     // Reactive reference for messages

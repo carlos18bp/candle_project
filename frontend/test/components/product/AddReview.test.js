@@ -1,7 +1,7 @@
 import { mount } from '@vue/test-utils';
 import AddReview from '@/components/product/AddReview.vue';
 import { createPinia, setActivePinia } from 'pinia';
-import { useAppStore } from '@/stores/language';
+import { useLanguageStore } from '@/stores/language';
 import { useReviewStore } from '@/stores/review';
 import AxiosMockAdapter from 'axios-mock-adapter';
 import axios from 'axios';
@@ -29,7 +29,7 @@ describe('AddReview.vue', () => {
   beforeEach(() => {
     pinia = createPinia();
     setActivePinia(pinia);
-    appStore = useAppStore();
+    appStore = useLanguageStore();
     reviewStore = useReviewStore();
 
     // Set initial state for testing

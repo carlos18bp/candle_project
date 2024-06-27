@@ -1,7 +1,7 @@
 import { mount } from '@vue/test-utils';
 import SubCategoryFilter from '@/components/product/SubCategoryFilter.vue';
 import { createPinia, setActivePinia } from 'pinia';
-import { useAppStore } from '@/stores/language';
+import { useLanguageStore } from '@/stores/language';
 import { useProductStore } from '@/stores/product';
 
 describe('SubCategoryFilter.vue', () => {
@@ -12,7 +12,7 @@ describe('SubCategoryFilter.vue', () => {
   beforeEach(() => {
     pinia = createPinia();
     setActivePinia(pinia);
-    appStore = useAppStore();
+    appStore = useLanguageStore();
     productStore = useProductStore();
 
     // Set initial state for testing

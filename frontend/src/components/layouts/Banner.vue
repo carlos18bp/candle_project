@@ -30,7 +30,7 @@
 <script setup>
     import { computed, ref, watchEffect } from 'vue';
     import { VueMarqueeSlider } from "vue3-marquee-slider";
-    import { useAppStore } from '@/stores/language.js';
+    import { useLanguageStore } from '@/stores/language.js';
     import enMessages from '@/locales/layout/banner/en.js';
     import esMessages from '@/locales/layout/banner/es.js';
 
@@ -41,7 +41,7 @@
     const $t = (key) => messages.value[key];
 
     // Store
-    const appStore = useAppStore();
+    const appStore = useLanguageStore();
 
     // Computed property for the current language
     const currentLanguage = computed(() => appStore.getCurrentLanguage);

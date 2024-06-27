@@ -3,7 +3,7 @@ import Home from "@/views/Home.vue";
 import { createPinia, setActivePinia } from "pinia";
 import { createRouter, createWebHistory } from "vue-router";
 import { routes } from "@/router";
-import { useAppStore } from "@/stores/language";
+import { useLanguageStore } from "@/stores/language";
 import Header from "@/components/layouts/Header.vue";
 import Footer from "@/components/layouts/Footer.vue";
 import ProductCarousel from "@/components/product/ProductCarousel.vue";
@@ -40,7 +40,7 @@ describe("Home.vue", () => {
   beforeEach(async () => {
     pinia = createPinia();
     setActivePinia(pinia);
-    appStore = useAppStore();
+    appStore = useLanguageStore();
     appStore.setCurrentLanguage("en");
 
     router = createRouter({

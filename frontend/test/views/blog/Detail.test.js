@@ -6,7 +6,7 @@ import BlogCarousel from "@/components/blog/BlogCarousel.vue";
 import { createPinia, setActivePinia } from "pinia";
 import { createRouter, createWebHistory } from "vue-router";
 import { useBlogStore } from "@/stores/blog";
-import { useAppStore } from "@/stores/language";
+import { useLanguageStore } from "@/stores/language";
 import AxiosMockAdapter from "axios-mock-adapter";
 import axios from "axios";
 import blogsData from "../../data_sample/blogs.json";
@@ -58,7 +58,7 @@ describe("Detail.vue", () => {
     blogStore = useBlogStore();
     jest.spyOn(blogStore, "fetchBlogsData");
 
-    appStore = useAppStore();
+    appStore = useLanguageStore();
     appStore.setCurrentLanguage("en");
 
     // Initialize router

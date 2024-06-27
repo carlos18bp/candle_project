@@ -14,11 +14,11 @@
 
 <script setup>
     import { computed } from "vue";
-    import { useAppStore } from '@/stores/language.js';
+    import { useLanguageStore } from '@/stores/language.js';
     import { useProductStore } from "@/stores/product";
 
     // Store references
-    const appStore = useAppStore();
+    const appStore = useLanguageStore();
     const productStore = useProductStore();
 
     // Computed property for the current language

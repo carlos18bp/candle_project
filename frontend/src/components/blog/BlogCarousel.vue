@@ -12,7 +12,7 @@
     import BlogPresentation from "@/components/blog/BlogPresentation.vue";
     import enMessages from "@/locales/blog/detail/en.js";
     import esMessages from "@/locales/blog/detail/es.js";
-    import { useAppStore } from "@/stores/language.js";
+    import { useLanguageStore } from "@/stores/language.js";
     import { useBlogStore } from "@/stores/blog";
 
     /**
@@ -25,7 +25,7 @@
     });
 
     // Stores
-    const appStore = useAppStore();
+    const appStore = useLanguageStore();
     const blogStore = useBlogStore();
 
     // Reactive references    

@@ -1,7 +1,7 @@
 import { mount, RouterLinkStub } from "@vue/test-utils";
 import Contact from "@/views/Contact.vue";
 import { createPinia, setActivePinia } from "pinia";
-import { useAppStore } from "@/stores/language";
+import { useLanguageStore } from "@/stores/language";
 
 // Helper function to flush promises and ensure all asynchronous operations are resolved
 async function flushPromises() {
@@ -36,7 +36,7 @@ describe("Contact.vue", () => {
   beforeEach(async () => {
     pinia = createPinia();
     setActivePinia(pinia);
-    appStore = useAppStore();
+    appStore = useLanguageStore();
 
     // Set initial state for testing
     appStore.setCurrentLanguage("en");

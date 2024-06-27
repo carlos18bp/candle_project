@@ -1,7 +1,7 @@
 import { mount } from "@vue/test-utils";
 import Banner from "@/components/layouts/Banner.vue";
 import { createPinia, setActivePinia } from "pinia";
-import { useAppStore } from "@/stores/language";
+import { useLanguageStore } from "@/stores/language";
 
 // Helper function to flush promises and ensure all asynchronous operations are resolved
 async function flushPromises() {
@@ -31,7 +31,7 @@ describe("Banner.vue", () => {
   beforeEach(async () => {
     pinia = createPinia();
     setActivePinia(pinia);
-    appStore = useAppStore();
+    appStore = useLanguageStore();
 
     // Set initial state for testing
     appStore.setCurrentLanguage("en");

@@ -3,7 +3,7 @@ import Detail from "@/views/product/Detail.vue";
 import { createPinia, setActivePinia } from "pinia";
 import { createRouter, createWebHistory } from "vue-router";
 import { useProductStore } from "@/stores/product";
-import { useAppStore } from "@/stores/language";
+import { useLanguageStore } from "@/stores/language";
 import Swal from "sweetalert2";
 import AxiosMockAdapter from "axios-mock-adapter";
 import axios from "axios";
@@ -55,7 +55,7 @@ describe("Detail.vue", () => {
 
     // Initialize stores
     productStore = useProductStore();
-    appStore = useAppStore();
+    appStore = useLanguageStore();
     appStore.setCurrentLanguage("en");
 
     // Initialize router

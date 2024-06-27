@@ -181,7 +181,7 @@
     import "swiper/css/pagination";
     import Footer from "@/components/layouts/Footer.vue";
     import Header from "@/components/layouts/Header.vue";
-    import { useAppStore } from '@/stores/language.js';
+    import { useLanguageStore } from '@/stores/language.js';
     import { useReviewStore } from "@/stores/review";
     import enMessages from '@/locales/about_us/en.js';
     import esMessages from '@/locales/about_us/es.js';
@@ -189,7 +189,7 @@
     // State and computed properties
     const messages = ref(enMessages);
     const $t = (key) => messages.value[key];
-    const appStore = useAppStore();
+    const appStore = useLanguageStore();
     const currentLanguage = computed(() => appStore.getCurrentLanguage);
     const reviewStore = useReviewStore();
     const reviews = ref([]);

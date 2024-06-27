@@ -84,13 +84,13 @@
 <script setup>
     import { computed, onMounted, ref, reactive, watchEffect } from "vue";
     import { submitHandler } from "@/shared/submit_handler";
-    import { useAppStore } from '@/stores/language.js';
+    import { useLanguageStore } from '@/stores/language.js';
     import enMessages from '@/locales/review/en.js';
     import esMessages from '@/locales/review/es.js';
 
     let geetest = '';
 
-    const appStore = useAppStore();
+    const appStore = useLanguageStore();
     const currentLanguage = computed(() => appStore.getCurrentLanguage);
 
     // Reactive reference for messages

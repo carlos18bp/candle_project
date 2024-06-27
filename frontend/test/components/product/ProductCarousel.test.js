@@ -3,7 +3,7 @@ import { createPinia, setActivePinia } from "pinia";
 import { createRouter, createWebHistory } from "vue-router";
 import ProductCarousel from "@/components/product/ProductCarousel.vue";
 import { useProductStore } from "@/stores/product";
-import { useAppStore } from "@/stores/language";
+import { useLanguageStore } from "@/stores/language";
 import AxiosMockAdapter from "axios-mock-adapter";
 import axios from "axios";
 import productsData from "../../data_sample/products.json"; // Assuming this file exists
@@ -45,7 +45,7 @@ describe("ProductCarousel.vue", () => {
 
     // Initialize stores
     productStore = useProductStore();
-    appStore = useAppStore();
+    appStore = useLanguageStore();
     appStore.setCurrentLanguage("en");
 
     // Initialize router with a valid path

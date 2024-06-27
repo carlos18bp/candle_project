@@ -37,10 +37,10 @@
     import Header from "@/components/layouts/Header.vue";
     import Footer from "@/components/layouts/Footer.vue";
     import BlogCarousel from "@/components/blog/BlogCarousel.vue";
-    import { useAppStore } from '@/stores/language.js';
+    import { useLanguageStore } from '@/stores/language.js';
 
     const route = useRoute();
-    const appStore = useAppStore();
+    const appStore = useLanguageStore();
     const currentLanguage = ref('');
     
     const blogStore = useBlogStore();

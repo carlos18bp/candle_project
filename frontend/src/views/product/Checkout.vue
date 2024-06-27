@@ -198,7 +198,7 @@
     import { computed, reactive, ref, watchEffect, onMounted } from "vue";
     import Banner from "@/components/layouts/Banner.vue";
     import { LockClosedIcon } from "@heroicons/vue/24/outline";
-    import { useAppStore } from "@/stores/language.js";
+    import { useLanguageStore } from "@/stores/language.js";
     import { useProductStore } from "@/stores/product";
     import enMessages from "@/locales/product/checkout/en.js";
     import esMessages from "@/locales/product/checkout/es.js";
@@ -212,7 +212,7 @@
     const total = computed(() => productStore.totalCartPrice + shippingCost.value);
 
     // Reactive references for language
-    const appStore = useAppStore();
+    const appStore = useLanguageStore();
     const currentLanguage = computed(() => appStore.getCurrentLanguage);
     const messages = ref(enMessages);
 

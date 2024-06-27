@@ -69,12 +69,12 @@
     import Header from "@/components/layouts/Header.vue";
     import enMessages from '@/locales/contact/en.js';
     import esMessages from '@/locales/contact/es.js';
-    import { useAppStore } from '@/stores/language.js';
+    import { useLanguageStore } from '@/stores/language.js';
 
     // State for messages and current language
     const messages = ref('');
     const $t = (key) => messages.value[key];
-    const appStore = useAppStore();
+    const appStore = useLanguageStore();
     const currentLanguage = computed(() => appStore.getCurrentLanguage);
 
     // Center coordinates for Google Map

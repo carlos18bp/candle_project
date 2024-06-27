@@ -60,7 +60,7 @@
     import CartProduct from "./CartProduct.vue";
     import { gsap } from "gsap";
     import { XMarkIcon } from "@heroicons/vue/24/outline";
-    import { useAppStore } from "@/stores/language.js";
+    import { useLanguageStore } from "@/stores/language.js";
     import { useProductStore } from "@/stores/product";
     import enMessages from "@/locales/product/shopping_cart/en.js";
     import esMessages from "@/locales/product/shopping_cart/es.js";
@@ -72,7 +72,7 @@
     // Reactive references for messages and language
     const messages = ref("");
     const $t = (key) => messages.value[key];
-    const appStore = useAppStore();
+    const appStore = useLanguageStore();
     const currentLanguage = computed(() => appStore.getCurrentLanguage);
 
     // Product store references

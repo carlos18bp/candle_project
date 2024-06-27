@@ -140,14 +140,14 @@
     import ProductCarousel from "@/components/product/ProductCarousel.vue";
     import enMessages from '@/locales/home/en.js';
     import esMessages from '@/locales/home/es.js';
-    import { useAppStore } from '@/stores/language.js';
+    import { useLanguageStore } from '@/stores/language.js';
     
     /**
      * Sets up the language messages and translations.
      */
     const messages = ref(enMessages);
     const $t = (key) => messages.value[key];
-    const appStore = useAppStore();
+    const appStore = useLanguageStore();
     const currentLanguage = computed(() => appStore.getCurrentLanguage);
 
     /**

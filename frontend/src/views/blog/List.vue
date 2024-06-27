@@ -80,13 +80,13 @@
     import { useBlogStore } from "@/stores/blog";
     import BlogPresentation from "@/components/blog/BlogPresentation.vue";
     import { ArrowLongLeftIcon, ArrowLongRightIcon } from "@heroicons/vue/20/solid";
-    import { useAppStore } from '@/stores/language.js';
+    import { useLanguageStore } from '@/stores/language.js';
     import enMessages from '@/locales/product/list/en.js';
     import esMessages from '@/locales/product/list/es.js';
 
     const messages = ref('');
     const $t = (key) => messages.value[key];
-    const appStore = useAppStore();
+    const appStore = useLanguageStore();
     const currentLanguage = ref('');
     const blogStore = useBlogStore();
     const blogs = ref([]);

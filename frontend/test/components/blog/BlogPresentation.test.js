@@ -1,7 +1,7 @@
 import { mount, RouterLinkStub } from "@vue/test-utils";
 import BlogPresentation from "@/components/blog/BlogPresentation.vue";
 import { createPinia, setActivePinia } from "pinia";
-import { useAppStore } from "@/stores/language";
+import { useLanguageStore } from "@/stores/language";
 
 async function flushPromises() {
   return new Promise((resolve) => setTimeout(resolve, 0));
@@ -37,7 +37,7 @@ describe("BlogPresentation.vue", () => {
   beforeEach(async () => {
     pinia = createPinia();
     setActivePinia(pinia);
-    appStore = useAppStore();
+    appStore = useLanguageStore();
 
     // Set initial state for testing
     appStore.setCurrentLanguage("en");

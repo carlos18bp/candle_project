@@ -2,7 +2,7 @@ import { mount } from "@vue/test-utils";
 import List from "@/views/product/List.vue";
 import { createPinia, setActivePinia } from "pinia";
 import { useProductStore } from "@/stores/product";
-import { useAppStore } from "@/stores/language";
+import { useLanguageStore } from "@/stores/language";
 import productsData from "../../data_sample/products.json";
 import AxiosMockAdapter from "axios-mock-adapter";
 import axios from "axios";
@@ -29,7 +29,7 @@ describe("List.vue", () => {
     pinia = createPinia();
     setActivePinia(pinia);
     productStore = useProductStore();
-    appStore = useAppStore();
+    appStore = useLanguageStore();
     appStore.setCurrentLanguage('en');
 
     // Mock the API response for fetching products

@@ -308,7 +308,7 @@
     import Header from "@/components/layouts/Header.vue";
     import ProductCarousel from "@/components/product/ProductCarousel.vue";
     import AddReview from "@/components/product/AddReview.vue";
-    import { useAppStore } from '@/stores/language.js';
+    import { useLanguageStore } from '@/stores/language.js';
     import { useProductStore } from '@/stores/product';
     import { useReviewStore } from '@/stores/review';
     import { initModals } from 'flowbite';
@@ -316,7 +316,7 @@
     import esMessages from '@/locales/product/detail/es.js';
 
     // Initialize stores and references
-    const appStore = useAppStore();
+    const appStore = useLanguageStore();
     const productStore = useProductStore();
     const reviewStore = useReviewStore();
     const currentLanguage = computed(() => appStore.getCurrentLanguage);

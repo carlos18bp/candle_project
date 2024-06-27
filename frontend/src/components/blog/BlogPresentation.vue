@@ -22,7 +22,7 @@
 
 <script setup>
     import { computed } from "vue";
-    import { useAppStore } from '@/stores/language.js';
+    import { useLanguageStore } from '@/stores/language.js';
 
     /**
      * Props definition.
@@ -33,6 +33,6 @@
         blog: Object,
     });
 
-    const appStore = useAppStore();
+    const appStore = useLanguageStore();
     const currentLanguage = computed(() => appStore.getCurrentLanguage);
 </script>
