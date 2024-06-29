@@ -5,10 +5,16 @@
         <div>
             <main class="mx-auto xl:max-w-7xl">
                 <section aria-labelledby="products-heading">
-                    <div class="grid gap-x-8 gap-y-10 grid-cols-4">
-                        
-                        <!-- Filters -->
-                        <div class="col-span-4 md:col-span-1">
+                    <div class="grid gap-x-8 grid-cols-4 lg:gap-y-10">
+                        <!-- Filters for screens shorter than lg -->
+                        <div class="block col-span-4 lg:hidden">
+                            <h1 @click="showModalFilters = true" class="flex items-center gap-2 text-xl font-bold tracking-tight text-gray-900 cursor-pointer test-filter_title">
+                                {{ $t('filter_title') }}
+                                <PlusIcon class="w-6 h-6 text-primary_p"></PlusIcon>
+                            </h1>
+                        </div>
+                        <!-- Filters for screens larger than lg -->
+                        <div class="col-span-1 hidden lg:block">
                             <h1 class="text-2xl font-bold tracking-tight text-gray-900 py-8 test-filter_title">
                                 {{ $t('filter_title') }}
                             </h1>
@@ -93,15 +99,28 @@
         </div>
     </div>
 
+    <!-- Modal filters for mobile version -->
+    <div v-if="showModalFilters" ref="modalFilters" class="fixed z-30 top-0">
+        <ModalFilters 
+            :visible="showModalFilters" 
+            :currentLanguage="currentLanguage" 
+            :categories="categories" 
+            :categorias="categorias" 
+            @update:visible="showModalFilters = $event">
+        </ModalFilters>
+    </div>
+
+
     <Footer></Footer>
 </template>
 
 <script setup>
     import { computed, onMounted, ref, watch, watchEffect } from "vue";
-    import { ArrowLongLeftIcon, ArrowLongRightIcon } from "@heroicons/vue/20/solid";
+    import { ArrowLongLeftIcon, ArrowLongRightIcon, PlusIcon } from "@heroicons/vue/20/solid";
     import { useLanguageStore } from '@/stores/language.js';
     import { useProductStore } from "@/stores/product";
     import CategoryFilter from "@/components/product/CategoryFilter.vue";
+    import ModalFilters from "@/components/product/ModalFilters.vue";
     import Footer from "@/components/layouts/Footer.vue";
     import Header from "@/components/layouts/Header.vue";
     import enMessages from '@/locales/product/list/en.js';
@@ -119,6 +138,7 @@
     const categorias = computed(() => productStore.categorias);
     const currentPage = ref(1);
     const isProductsLoaded = ref(false);
+    const showModalFilters = ref(false)
     let productsPerPage;
 
     // Set products per page based on window width

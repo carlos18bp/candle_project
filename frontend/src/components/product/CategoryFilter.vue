@@ -12,12 +12,13 @@
                 </span>
             </DisclosureButton>
         </h3>
-
-        <!-- Sub-category filter for English language -->
-        <SubCategoryFilter v-if="currentLanguage === 'en'" :subCategories="category.subCategories" />
-        
-        <!-- Sub-category filter for other languages -->
-        <SubCategoryFilter v-else :subCategories="category.subCategorias" />
+        <div v-if="open" class="pt-6">
+            <!-- Sub-category filter for English language -->
+            <SubCategoryFilter v-if="currentLanguage === 'en'" :subCategories="category.subCategories" />
+            
+            <!-- Sub-category filter for other languages -->
+            <SubCategoryFilter v-if="currentLanguage === 'es'" :subCategories="category.subCategorias" />
+        </div>
     </Disclosure>
 </template>
 
