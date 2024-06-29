@@ -215,31 +215,7 @@
             </div>
         </div>
     </div>
-
-    <!-- Trending Products Carousel -->
-    <div class="mx-auto flex flex-col items-center justify-center max-w-7xl px-8 py-12">
-        <h2 class="uppercase pb-4 font-regular tracking-widest text-gray_p text-center text-2xl test-trending_tag">
-            {{ $t('trending_tag') }}
-        </h2>
-        <h2 class="pb-4 font-semibold text-center text-4xl test-carousel_subtitle">
-            {{ $t('carousel_subtitle') }}
-        </h2>
-        <ProductCarousel :top="4"></ProductCarousel>
-    </div>
-
-    <!-- Trending Section -->
-    <div class="container mx-auto mt-16 grid text-center xl:text-start xl:grid-cols-2 gap-4">
-        <div class="grid content-center">
-            <div>
-                <h2 class="font-regular text-2xl text-gray_p tracking-widest">{{ $t('trending') }}</h2>
-                <p class="font-medium text-2xl xl:text-4xl text-black_p mt-12 tracking-wider">{{ $t('text') }}</p>
-            </div>
-        </div>
-        <div class="relative">
-            <img src="@/assets/images/general/hazelnuts.avif" alt="..." class="h-full w-full object-cover object-center sm:rounded-lg">
-        </div>
-    </div>
-
+    
     <!-- Reviews Section -->
     <div class="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:grid lg:max-w-7xl lg:grid-cols-12 lg:gap-x-8 lg:px-8 lg:py-32">
         <div class="lg:col-span-4">
@@ -289,6 +265,31 @@
             </div>
         </div>
     </div>
+    
+    <!-- Trending Products Carousel -->
+    <div class="mx-auto flex flex-col items-center justify-center max-w-7xl px-8 py-12">
+        <h2 class="uppercase pb-4 font-regular tracking-widest text-gray_p text-center text-2xl test-trending_tag">
+            {{ $t('trending_tag') }}
+        </h2>
+        <h2 class="pb-4 font-semibold text-center text-4xl test-carousel_subtitle">
+            {{ $t('carousel_subtitle') }}
+        </h2>
+        <ProductCarousel :top="4"></ProductCarousel>
+    </div>
+
+    <!-- Trending Section -->
+    <div class="container mx-auto mt-16 grid text-center xl:text-start xl:grid-cols-2 gap-4">
+        <div class="grid content-center">
+            <div>
+                <h2 class="font-regular text-2xl text-gray_p tracking-widest">{{ $t('trending') }}</h2>
+                <p class="font-medium text-2xl xl:text-4xl text-black_p mt-12 tracking-wider">{{ $t('text') }}</p>
+            </div>
+        </div>
+        <div class="relative">
+            <img src="@/assets/images/general/hazelnuts.avif" alt="..." class="h-full w-full object-cover object-center sm:rounded-lg">
+        </div>
+    </div>
+
 
     <!-- Footer Component -->
     <Footer></Footer>
